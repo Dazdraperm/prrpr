@@ -4,6 +4,10 @@ from django.http import HttpResponse
 
 
 def index(request):
+    x = request.user.email
+    if x[::-12] == 'stud.kpfu.ru':
+        return render(request, 'index3.html')
+
     if request.user.is_authenticated:
         return render(request, 'index.html')
     else:

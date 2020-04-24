@@ -20,13 +20,11 @@ class CourseGroup(models.Model):
 class SiteUser(models.Model):
     user = models.ForeignKey(User, name='user', on_delete=models.CASCADE)
     passport = models.ForeignKey(Passport, name='passport', on_delete=models.CASCADE)
-    course_Group = models.ForeignKey(CourseGroup, name='course_Group', on_delete=models.CASCADE)
+    course_Group = models.ForeignKey(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True, null=True)
     INN = models.IntegerField()
     pFact = models.TextField()
     dateBirthday = models.TextField()
     phoneNumber = models.IntegerField()
-    name = models.TextField()  # Имя
-    last_name = models.TextField()  # Фамилия
     patronymic = models.TextField()  # Отчество
     numberInsuranceCertificate = models.TextField()  # Страховое свидетельство
     disability = models.TextField()  # Инвалидность
