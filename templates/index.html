@@ -30,7 +30,7 @@
 
                 {% elif request.user.is_anonymous %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'info' %}">
+                        <a class="nav-link" href="#">
                             <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Вход/Регистрация</button>
                         </a>
                     </li>
@@ -40,13 +40,7 @@
             </ul>
         </div>
     </nav>
-    <form action="{% url 'get_name' %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <label for="your_name">Your name: </label>
-<input id="your_name" type="text" name="your_name" maxlength="100">
-        <input type="submit" value="OK">
-</form>
+
     {% block content %}
     {% endblock %}
 </body>

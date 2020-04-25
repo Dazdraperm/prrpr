@@ -1,17 +1,157 @@
-{% extends 'index.html' %}
+{% extends 'index1.html' %}
 
 
-    {% block info %}
+    {% block content %}
 
-    <div class="card">
+     <div class="card mb-5">
         <div class="card-header">
             Для получения этого вида материальной помощи нужно:
         </div>
         <div class="card-body">
-            <p class="card-text">1) определить, к какой категории нуждаемости вы относитесь</p>
-            <p class="card-text">2) заполнить заявление в соответствии с образцом;</p>
-            <p class="card-text">3) приложить к заявлению копии документов, необходимые для подтверждения вашей категории нуждаемости (посмотреть <a class="card-link" href="{% url 'category' %}" target="_blank">здесь</a>);</p>
-            <p class="card-text">4) отнести заявление в профбюро нашего института (график работы можно найти в меню).</p>
+            <p class="card-text">1) определить, к какой категории нуждаемости вы относитесь (посмотреть <a class="card-link" href="{% url 'category' %}">здесь</a>)</p>
+            <p class="card-text">2) заполнить заявление в соответствии с образцом</p>
+            <p class="card-text">3) приложить к заявлению копии документов, необходимые для подтверждения вашей категории нуждаемости</p>
+            <p class="card-text">4) отнести заявление в профбюро нашего института (график работы можно найти в меню)</p>
+        </div>
+    </div>
+
+    <div class="m-5 row">
+        <div class="col-sm-6">
+            <form>
+
+                <div class="form-group">
+                <span class="font-weight-bolder col-3">Оказать поддержку в форме с.п.2.2.X:</span>
+                <div class="float-right">
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox1">1</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                        <label class="form-check-label" for="inlineCheckbox2">2</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox3">3</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox3">4</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox3">5</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox3">7</label>
+                    </div>
+                </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-3" for="amount"><span
+                            class="font-weight-bolder">материальная поддержка в размере:</span></label>
+                    <input class="col-9 form-control float-right align-items-center" type="text" id="amount"
+                           placeholder="(уточнить) рублей (в зависимости от того, на что подаете, уточнить)">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="group"><span
+                            class="font-weight-bolder">Института/филиала/факультет:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="group"
+                           placeholder="Высшей школы ИТИС">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="course"><span class="font-weight-bolder">Курс:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="course" placeholder="Х">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="group"><span class="font-weight-bolder">Группа:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="group" placeholder="11-ХХХ">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="SNP"><span class="font-weight-bolder">Ф.И.О:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="SNP"
+                           placeholder="Иванова Ивана Ивановича">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="Passport"><span class="font-weight-bolder">Пасспорт №:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="Passport" placeholder="XXXX XXXXXX">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="date"><span class="font-weight-bolder">выдан:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="date" placeholder="ХХ ХХ ХХ">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="Department"><span class="font-weight-bolder">отделом...</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="Department" placeholder="отделом...">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="inn"><span class="font-weight-bolder">ИНН:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="inn" placeholder="номер ИНН">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="insurance_certificate"><span
+                            class="font-weight-bolder">Страх. св-во:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="insurance_certificate"
+                           placeholder="ХХХ ХХХ ХХХ ХХ">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="registration_address"><span class="font-weight-bolder">Зарегистрирован по адресу:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="registration_address"
+                           placeholder="индекс города. улица. дом. кв.">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="Date_of_Birth"><span
+                            class="font-weight-bolder">Дата рождения:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="Date_of_Birth"
+                           placeholder="ДД ММ ГГГГ">
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="disability_group"><span
+                            class="font-weight-bolder">Инвалидность:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="disability_group"
+                           placeholder="Х. (заполнить по необходимости)">
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="state_support" required>
+                        <label class="form-check-label" for="state_support">
+                            Полное государственное обеспечение:
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-3" for="contact_number"><span
+                            class="font-weight-bolder">Контактный телефон:</span></label>
+                    <input class="col-9 form-control float-right" type="text" id="contact_number"
+                           placeholder="(без 8) 9ХХХХХХХХХ">
+                </div>
+                <div class="form-group">
+                    <label for="category_of_need_field"></label>
+                    <textarea class="form-control" id="category_of_need_field" rows="3"
+                              placeholder="тем, что я... (указать категорию нуждаемости) в скобках указать на что (общ.ранспорт, усил.питание, учебн.лит-ра"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="category_of_need_field"></label>
+                    <textarea class="form-control" id="category_of_need_field" rows="3"
+                              placeholder="документы, которые вы прикладываете (например: копия паспорта (гл.страница + прописка)"></textarea>
+                </div>
+
+                <div class="form-group ">
+                    <div class="float-left">
+                        <button type="submit" class="btn btn-primary float-left">Автозаполнение</button>
+                    </div>
+                    <div class="float-right">
+                        <button type="submit" class="btn btn-primary float-right">Создать PDF</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class=" col-sm">
+            <img src="https://sun9-19.userapi.com/c846020/v846020577/1c63ae/bRXrd9yuP4Y.jpg" alt="образец">
         </div>
     </div>
 
