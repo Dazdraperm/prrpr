@@ -1,14 +1,25 @@
 from django.shortcuts import render
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+
+from document.forms import NameForm
 
 
 def index(request):
-    x = request.user.email
-    if x[::-12] == 'stud.kpfu.ru':
-        return render(request, 'index3.html')
+    return render(request, 'index.html')
 
-    if request.user.is_authenticated:
-        return render(request, 'index.html')
-    else:
-        return render(request, 'index2.HTML')
+
+def category(request):
+    return render(request, 'category_of_need.html')
+
+
+def get_name(request):
+    if request.method == "POST":
+        return HttpResponseRedirect('/')
+
+
+def info(request):
+    return render(request, 'info_123.html')
+
+
+def statements(request):
+    return render(request, 'statements.html')

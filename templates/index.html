@@ -1,35 +1,53 @@
 <!DOCTYPE html>
-
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Documents</title>
 </head>
-<body>
+<body style="background-image: url(https://html5book.ru/wp-content/uploads/2015/06/background28.jpg)">
 
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd; border-bottom: 1px solid firebrick">
-        <a class="navbar-brand" href="{% static 'images//kfu.png' %}"> "><img class="embed-responsive" src="kfu.png" style="width: 100px; height: 100px" alt="шапка"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-light shadow p-3 border-bottom border-primary" style="background-image: url(https://html5book.ru/wp-content/uploads/2015/06/background28.jpg) ">
+        <a class="navbar-brand" href="/"><img class="embed-responsive" src="{% static "images/kfu.png" %}" style="width: 100px; height: 100px" alt="шапка"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><button type="button" class="btn btn-outline-primary">Заявления</button><span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'statements' %}"><button type="button" class="btn btn-outline-primary shadow p-2 rounded">Заявления</button></a>
                 </li>
 
 
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <button type="button" class="btn btn-outline-primary">Вход/Регистрация</button>
+                        <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Профиль</button>
                     </a>
                 </li>
+
+                {% elif request.user.is_anonymous %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'info' %}">
+                            <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Вход/Регистрация</button>
+                        </a>
+                    </li>
+                {% endif %}
+
 
             </ul>
         </div>
     </nav>
-
+    <form action="{% url 'get_name' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <label for="your_name">Your name: </label>
+<input id="your_name" type="text" name="your_name" maxlength="100">
+        <input type="submit" value="OK">
+</form>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>
