@@ -1,8 +1,11 @@
 from django.shortcuts import render
 
+from document.forms import NameForm
+
 
 def index(request):
-    return render(request, 'index.html')
+    form = NameForm
+    return render(request, 'index.html', context={'form': form})
 
 
 def category(request):
