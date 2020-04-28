@@ -23,11 +23,10 @@
 
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{% url 'profile' %}">
                         <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Профиль</button>
                     </a>
                 </li>
-
                 {% elif request.user.is_anonymous %}
                     <li class="nav-item">
                         <a class="nav-link" href="#">

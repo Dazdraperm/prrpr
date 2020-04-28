@@ -18,3 +18,7 @@ def info(request):
 
 def statements(request):
     return render(request, 'statements.html')
+
+
+def profile(request):
+    return render(request, 'profile.html')
