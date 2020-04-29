@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from document.models import SiteUser
+
 
 def index(request):
 
@@ -21,6 +23,7 @@ def statements(request):
 
 
 def profile(request):
-    return render(request, 'profile.html')
+    user = SiteUser.objects.get(user=request.user)
+    return render(request, 'profile.html', context={'user': user})
 
 
