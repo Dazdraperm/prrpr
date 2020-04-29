@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import statements, index, category, info, profile
+from .views import statements, index, category, info, profile, UpdateCharacterView
 
 urlpatterns = [
     path('', index, name='index'),
@@ -8,6 +8,6 @@ urlpatterns = [
     path('info', info, name='info'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile', profile, name='profile'),
-
+    path('profile?', UpdateCharacterView, name='profile?')
 ]
 

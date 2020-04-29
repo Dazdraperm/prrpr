@@ -5,8 +5,8 @@
     <div class="container">
         <form>
             <div class="form-group">
-                <label for="exampleFormControlInput1">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" value={{ user.INN }} placeholder="example@mail.ru" >
+                <label for="exampleFormControlInput1">INN</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" value={{ site_user.INN }} placeholder="example@mail.ru" >
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Example select</label>
@@ -33,7 +33,11 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
             <div class="float-right">
-                <button type="submit" class="btn btn-primary float-right">Отправить</button>
+                <form method="POST" class="post-form">
+
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary float-right">Отправить</button>
+                </form>
             </div>
         </form>
     </div>
