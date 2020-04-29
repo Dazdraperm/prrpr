@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import UserManager
 
 
 class Passport(models.Model):
@@ -17,7 +18,7 @@ class CourseGroup(models.Model):
     nameInstitute = models.TextField()
 
 
-class SiteUser(models.Model):
+class Site(models.Model):
     user = models.ForeignKey(User, name='user', on_delete=models.CASCADE)
     passport = models.ForeignKey(Passport, name='passport', on_delete=models.CASCADE)
     course_Group = models.ForeignKey(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True, null=True)
@@ -34,4 +35,3 @@ class SiteUser(models.Model):
     addressOfResidence = models.TextField()  # Адрес фактического проживания
     FormOfEducation = models.TextField()  # Форма обучения
     inProfCom = models.TextField()  # Состоит в профкоме или нет
-

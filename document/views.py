@@ -1,18 +1,18 @@
 from django.shortcuts import render
 
-from document.forms import NameForm
-
 
 def index(request):
-    form = NameForm
-    return render(request, 'index.html', context={'form': form})
+
+    return render(request, 'index.html', )
 
 
 def category(request):
-    return render(request, 'category_of_need.html')
+
+    return render(request, 'category_of_need.html', )
 
 
 def info(request):
+
     return render(request, 'info_123.html')
 
 
@@ -22,3 +22,5 @@ def statements(request):
 
 def profile(request):
     return render(request, 'profile.html')
+
+

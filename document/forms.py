@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from document.models import SiteUser
+from document.models import Site
 
 
 class NameForm(forms.Form):
