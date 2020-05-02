@@ -2,12 +2,11 @@ from django.shortcuts import render
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 from document.models import SiteUser
-from django.contrib.auth.models import User
 
 
 def index(request):
-
-    return render(request, 'index.html', )
+    site_user = SiteUser.objects.get(user=request.user)
+    return render(request, 'index.html', context={'site_user': site_user})
 
 
 def category(request):
@@ -24,14 +23,17 @@ def statements(request):
     return render(request, 'statements.html')
 
 
-def profile(request):
-    site_user = SiteUser.objects.get(user=request.user)
-    return render(request, 'profile.html', context={'site_user': site_user})
-
-
-class UpdateCharacterView(UpdateView):
+class UpdateProfile(UpdateView):
     model = SiteUser
-    templates_name = 'profile.html'
-    fields = {'INN'}
-    success_url = reverse_lazy('/')
+    template_name = 'profile.html'
+    fields = ['INN', 'pFact']
+    success_url = reverse_lazy("index")
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateProfile, self).get_context_data(**kwargs)
+        context['site_user'] = SiteUser.objects.get(user=self.request.user)
+        return context
+
+
+
 
