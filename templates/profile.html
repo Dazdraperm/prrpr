@@ -3,16 +3,14 @@
 
 {% block content %}
     <div class="container">
-        <form>
-
-            <div class="float-right">
-                <form method="POST" class="post-form">
+            <div class="post">
+                <form method="post" class="post-form" action="{% url 'profile' site_user.id %}">
                     {% csrf_token %}
-                    {{ form.as_table }}
-                    <button type="submit" class="btn btn-primary float-right">Отправить</button>
+                    <input type="submit" value="Отправить" class="btn btn-primary float-right" />
+                    {{ form.as_p}}
+                    <input type="submit" value="Отправить" class="btn btn-primary float-right" />
                 </form>
             </div>
-        </form>
     </div>
 
 {% endblock %}

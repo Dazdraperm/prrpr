@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
+
+from document.forms import NameForm
 from document.models import SiteUser
 
 
@@ -27,8 +29,8 @@ def statements(request):
 class UpdateProfile(UpdateView):
     model = SiteUser
     template_name = 'profile.html'
-    fields = ['INN', 'pFact']
-    success_url = reverse_lazy("info")
+    fields = ['INN', 'pFact', 'dateBirthday', 'phoneNumber', 'patronymic', 'numberInsuranceCertificate',  'disability', 'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence', 'FormOfEducation', 'inProfCom']
+    success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
         context = super(UpdateProfile, self).get_context_data(**kwargs)
