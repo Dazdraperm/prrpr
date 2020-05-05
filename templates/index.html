@@ -40,7 +40,7 @@
                         <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Профиль</button>
                     </a>
                 </li>
-            {% elif request.user.is_anonymous %}
+            {% else %}
                 <li class="nav-item p-2">
                     <button id="dLabel" class="btn btn-outline-primary shadow p-2 rounded" type="button"
                             data-toggle="dropdown" aria-haspopup="true"
@@ -52,7 +52,7 @@
                         <form class="px-4 py-3">
                             <div class="form-group">
                                 <label for="exampleDropdownFormEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleDropdownFormEmail1"
+                                <input type="text" class="form-control" id="exampleDropdownFormEmail1"
                                        placeholder="email@example.com">
                             </div>
                             <div class="form-group">

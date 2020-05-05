@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
-
-from document.forms import NameForm
 from document.models import SiteUser
 
 
 def index(request):
-    site_user = SiteUser.objects.get(user=request.user)
-    return render(request, 'index.html', context={'site_user': site_user})
+    if request.user.is_authenticated:
+        site_user = SiteUser.objects.get(user=request.user)
+        return render(request, 'index.html', context={'site_user': site_user})
+    else:
+        return render(request, 'index.html')
 
 
 def category(request):
@@ -17,13 +18,19 @@ def category(request):
 
 
 def info(request):
-    site_user = SiteUser.objects.get(user=request.user)
-    return render(request, 'info_123.html', context={'site_user': site_user})
+    if request.user.is_authenticated:
+        site_user = SiteUser.objects.get(user=request.user)
+        return render(request, 'info_123.html', context={'site_user': site_user})
+    else:
+        return render(request, 'info_123.html')
 
 
 def statements(request):
-    site_user = SiteUser.objects.get(user=request.user)
-    return render(request, 'statements.html', context={'site_user': site_user})
+    if request.user.is_authenticated:
+        site_user = SiteUser.objects.get(user=request.user)
+        return render(request, 'statements.html', context={'site_user': site_user})
+    else:
+        return render(request, 'statements.html')
 
 
 class UpdateProfile(UpdateView):
