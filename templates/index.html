@@ -34,10 +34,9 @@
                 </a>
             </li>
 
-
-            {% if user.is_authenticated %}
+            {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">
+                    <a class="nav-link" href="{% url 'profile' site_user.id %}">
                         <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Профиль</button>
                     </a>
                 </li>
@@ -75,15 +74,14 @@
                     </div>
                 </li>
 
-
-
             {% endif %}
-
 
         </ul>
     </div>
 </nav>
+
 {% block content %}
 {% endblock %}
+
 </body>
 </html>
