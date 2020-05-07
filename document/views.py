@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
-from document.models import SiteUser
+from document.models import SiteUser, Passport
 from docxtpl import DocxTemplate
 from random import randint
 
@@ -28,17 +28,20 @@ def info(request):
 
 
 def document(request):
-    site_user = SiteUser.objects.get(user=request.user)
-    name = site_user.passport.series
-    passport = site_user.passport.series
-    doc = DocxTemplate("document/test.docx")
-    context = {'name': name, 'nomer': passport}
-    doc.render(context)
-    # document = Document('test.docx')
-    # document.save('example.docx')
-    id = randint(1, 10000000)
-    doc.save("document/documents/" + str(id) +".docx")
-    return render(request, 'index.html', context={'site_user': site_user})
+    if request.user.is_authenticated:
+        site_user = SiteUser.objects.get(user=request.user)
+        name = site_user.course_Group.nameInstitute
+        passport = site_user.passport.series
+        doc = DocxTemplate("document/documents/test.docx")
+        context = {'name': name, 'nomer': passport}
+        doc.render(context)
+        id = randint(1, 10000000)
+        doc.save("document/documents/" + str(id) +".docx")
+        return render(request, 'index.html', context={'site_user': site_user})
+    else:
+        doc = DocxTemplate("document/documents/test.docx")
+        doc.save("document/documents/test.docx")
+        return render(request, 'index.html')
 
 
 def statements(request):

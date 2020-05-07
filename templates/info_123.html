@@ -21,7 +21,6 @@
 
     <div class="m-5 row">
         <div class="col-sm-6">
-            <form>
 
                 <div class="form-group">
                 <span class="font-weight-bolder col-3">Оказать поддержку в форме с.п.2.2.X:</span>
@@ -165,11 +164,12 @@
                         <button type="submit" class="btn btn-primary float-left">Автозаполнение</button>
                     </div>
                     <div class="float-right">
-
-                        <button type="submit" class="btn btn-primary float-right">Создать PDF</button>
+                        <form method="post" class="post-form" action="{% url 'document' %}">
+                            {% csrf_token %}
+                        <input type="submit" value="Отправить" class="btn btn-primary float-right" />
+                        </form>
                     </div>
                 </div>
-            </form>
         </div>
         <div class=" col-sm">
             <img src="https://sun9-19.userapi.com/c846020/v846020577/1c63ae/bRXrd9yuP4Y.jpg" alt="образец">
