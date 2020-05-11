@@ -10,6 +10,6 @@ urlpatterns = [
     path('profile/<int:pk>/', UpdateProfile.as_view(), name='profile'),
     path('passport/<int:pk>/', UpdatePassport.as_view(), name='passport'),
     path('document', document, name='document'),
-    path('admin', admin, name='admin'),
+    path('admin1', admin, name='admin1'),
 ]
 

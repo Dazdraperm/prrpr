@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
-from document.forms import NameForm
+from document.forms import NameForm, UserForm
 from document.models import SiteUser, Passport
 from docxtpl import DocxTemplate
 from random import randint
@@ -25,9 +25,10 @@ def category(request):
 
 def info(request):
     form = NameForm()
+    form1 = UserForm()
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
-        return render(request, 'info_123.html', context={'site_user': site_user, 'form': form})
+        return render(request, 'info_123.html', context={'site_user': site_user, 'form': form, 'form1': form1})
     else:
         return render(request, 'info_123.html')
 
@@ -36,7 +37,7 @@ def document(request):
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
         if request.method == "POST":
-            series = request.POST['series']
+            series = request.POST['username']
             doc = DocxTemplate("document/documents/test.docx")
             context = {'series': series}
             doc.render(context)
