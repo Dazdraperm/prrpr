@@ -23,14 +23,24 @@ class SiteUser(models.Model):
     course_Group = models.ForeignKey(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True, null=True)
     INN = models.IntegerField()
     pFact = models.TextField()
-    dateBirthday = models.TextField()
+    dateBirthday = models.IntegerField()
     phoneNumber = models.IntegerField()
-    patronymic = models.TextField()  # Отчество
-    numberInsuranceCertificate = models.TextField()  # Страховое свидетельство
-    disability = models.TextField()  # Инвалидность
-    fullStateSupport = models.TextField()  # Полное гос. обеспечение
-    preferentialCategory = models.TextField()  # Льготная категория
+    patronymic = models.CharField(max_length=20)  # Отчество
+    numberInsuranceCertificate = models.IntegerField()  # Страховое свидетельство
+    disability = models.CharField(max_length=20)   # Инвалидность
+    _STATUS_CHOICES = [  # Полное гос. обеспечение
+        ('Да', 'Да'),
+        ('Нет', 'Нет'),
+    ]
+    fullStateSupport = models.CharField(max_length=3, choices=_STATUS_CHOICES)   # Полное гос. обеспечение
+    preferentialCategory = models.CharField(max_length=1)  # Льготная категория
     numberTravelCard = models.IntegerField()  # Номер проездной карты
     addressOfResidence = models.TextField()  # Адрес фактического проживания
-    FormOfEducation = models.TextField()  # Форма обучения
-    inProfCom = models.TextField()  # Состоит в профкоме или нет
+    FormOfEducation = models.CharField(max_length=1)  # Форма обучения
+    inProfCom = models.CharField(max_length=3, choices=_STATUS_CHOICES)  # Состоит в профкоме или нет
+
+
+class Statement1(models.Model):
+    phoneNumber = models.IntegerField()
+    patronymic = models.CharField(max_length=20)  # Отчество
+    numberInsuranceCertificate = models.IntegerField()  # Страховое свидетельство
