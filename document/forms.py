@@ -5,10 +5,10 @@ from django.forms import ModelForm
 from document.models import SiteUser, Passport
 
 
-class NameForm(ModelForm):
+class PassportForm(ModelForm):
     class Meta:
         model = Passport
-        fields = ['series', 'number']
+        fields = ['Серия', 'number']
 
 
 class UserForm(ModelForm):

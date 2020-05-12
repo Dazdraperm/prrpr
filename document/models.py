@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Passport(models.Model):
-    series = models.IntegerField()
+    series = models.IntegerField(name="Серия")
     number = models.IntegerField()
     code = models.IntegerField()
     dateTimeField = models.TextField()

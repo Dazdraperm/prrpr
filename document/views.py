@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
-from document.forms import NameForm, UserForm
+from document.forms import UserForm, PassportForm
 from document.models import SiteUser, Passport
 from docxtpl import DocxTemplate
 from random import randint
@@ -24,8 +24,10 @@ def category(request):
 
 
 def info(request):
-    form = NameForm()
+    form = PassportForm()
     form1 = UserForm()
+   # formSiteUser = SiteUserForm()
+
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
         return render(request, 'info_123.html', context={'site_user': site_user, 'form': form, 'form1': form1})
@@ -34,15 +36,17 @@ def info(request):
 
 
 def document(request):
+
+    if request.method == "POST":
+        name = request.POST['username']
+        doc = DocxTemplate("document/documents/test.docx")
+        context = {'name': name}
+        doc.render(context)
+        id = randint(1, 10000000)
+        doc.save("document/documents/" + str(id) +".docx")
+
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
-        if request.method == "POST":
-            series = request.POST['username']
-            doc = DocxTemplate("document/documents/test.docx")
-            context = {'series': series}
-            doc.render(context)
-            id = randint(1, 10000000)
-            doc.save("document/documents/" + str(id) +".docx")
         return render(request, 'index.html', context={'site_user': site_user})
     else:
         doc = DocxTemplate("document/documents/test.docx")
