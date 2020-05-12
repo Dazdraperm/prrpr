@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
-from document.forms import NameForm, UserForm
+from document.forms import NameForm, UserForm, Course
 from document.models import SiteUser, Passport
 from docxtpl import DocxTemplate
 from random import randint
@@ -40,6 +40,7 @@ def document(request):
         site_user = SiteUser.objects.get(user=request.user)
         if request.method == "POST":
             series = request.POST['username']
+
             doc = DocxTemplate("document/documents/test.docx")
             context = {'series': series}
             doc.render(context)
