@@ -23,7 +23,8 @@ class SiteUserForm(ModelForm):
         fields = (
             'user', 'passport', 'course_Group', 'INN', 'pFact',
             'dateBirthday', 'phoneNumber', 'patronymic', 'numberInsuranceCertificate', 'disability',
-            'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence', 'FormOfEducation', 'inProfCom')
+            'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence',
+            'FormOfEducation', 'inProfCom')
 
 
 class Course(ModelForm):

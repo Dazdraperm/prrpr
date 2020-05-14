@@ -31,7 +31,7 @@ def info(request):
 
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
-        return render(request, 'info_123.html', context={'site_user': site_user, 'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
+        return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
     else:
         return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
 
