@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'document',
+    'django_forms_bootstrap'
 ]
 
 MIDDLEWARE = [
@@ -123,6 +125,5 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 
 STATICFILES_DIRS = [
-
     os.path.join(BASE_DIR, "document/static"),
 ]

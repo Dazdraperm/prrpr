@@ -8,23 +8,22 @@ from document.models import SiteUser, Passport, CourseGroup
 class PassportForm(ModelForm):
     class Meta:
         model = Passport
-        fields = ['Серия', 'number', 'code', 'dateTimeField', 'place']
+        fields = ['series', 'number', 'code', 'dateTimeField', 'place']
 
 
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name')
 
 
-class SiteUserForm(ModelForm):
+class SiteUserForm1(ModelForm):
     class Meta:
         model = SiteUser
         fields = (
             'user', 'passport', 'course_Group', 'INN', 'pFact',
-            'dateBirthday', 'phoneNumber', 'patronymic', 'numberInsuranceCertificate', 'disability',
-            'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence',
-            'FormOfEducation', 'inProfCom')
+            'dateBirthday', 'phoneNumber', 'inProfCom', 'patronymic', 'numberInsuranceCertificate', 'disability',
+            'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence', 'FormOfEducation')
 
 
 class Course(ModelForm):

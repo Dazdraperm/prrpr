@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Passport(models.Model):
-    series = models.IntegerField(name="Серия")
+    series = models.IntegerField()
     number = models.IntegerField()
     code = models.IntegerField()
     dateTimeField = models.TextField()
@@ -37,7 +37,7 @@ class SiteUser(models.Model):
     numberTravelCard = models.IntegerField()  # Номер проездной карты
     addressOfResidence = models.TextField()  # Адрес фактического проживания
     FormOfEducation = models.CharField(max_length=1)  # Форма обучения
-    inProfCom = models.CharField(max_length=3, choices=_STATUS_CHOICES)  # Состоит в профкоме или нет
+    inProfCom = models.CharField(max_length=3)  # Состоит в профкоме или нет
 
 
 class Statement1(models.Model):

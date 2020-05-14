@@ -1,10 +1,13 @@
+import mimetypes
+import os
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
-from document.forms import UserForm, PassportForm, SiteUserForm, Course
+from document.forms import UserForm, PassportForm, Course, SiteUserForm1
 from document.models import SiteUser, Passport
 from docxtpl import DocxTemplate
 from random import randint
@@ -26,26 +29,35 @@ def category(request):
 def info(request):
     form = PassportForm()
     form1 = UserForm()
-    form2 = SiteUserForm()
+    form2 = SiteUserForm1()
     form3 = Course()
-
-    if request.user.is_authenticated:
-        site_user = SiteUser.objects.get(user=request.user)
-        return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
-    else:
-        return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
+    return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
 
 
 def document(request):
-
     if request.method == "POST":
-        name = request.POST['username']
+
         doc = DocxTemplate("document/documents/test.docx")
+        name = request.POST['series']
         context = {'name': name}
         doc.render(context)
         id = randint(1, 10000000)
         doc.save("document/documents/" + str(id) +".docx")
 
+        excel_file_name = "document/documents/" + str(id) +".docx"
+        fp = open(excel_file_name, "rb")
+        response = HttpResponse(fp.read())
+        fp.close()
+
+        file_type = mimetypes.guess_type(excel_file_name)
+        if file_type is None:
+            file_type = 'application/octet-stream'
+        response['Content-Type'] = file_type
+        response['Content-Length'] = str(os.stat(excel_file_name).st_size)
+        response['Content-Disposition'] = "attachment; filename=document/documents/" + str(id) +".docx"
+        os.remove(excel_file_name)
+
+        return response
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
         return render(request, 'index.html', context={'site_user': site_user})
