@@ -21,7 +21,7 @@ class SiteUserForm1(ModelForm):
     class Meta:
         model = SiteUser
         fields = (
-            'user', 'passport', 'course_Group', 'INN', 'pFact',
+            'INN', 'pFact',
             'dateBirthday', 'phoneNumber', 'inProfCom', 'patronymic', 'numberInsuranceCertificate', 'disability',
             'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence', 'FormOfEducation')
 
@@ -29,4 +29,4 @@ class SiteUserForm1(ModelForm):
 class Course(ModelForm):
     class Meta:
         model = CourseGroup
-        fields = ('course', 'Group', 'namePraepostor', 'nameInstitute')
+        fields = ('course', 'Group', 'nameInstitute')

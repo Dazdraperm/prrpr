@@ -24,11 +24,11 @@ def category(request):
 
 
 def info(request):
-    form = PassportForm()
+    form0 = PassportForm()
     form1 = UserForm()
     form2 = SiteUserForm1()
     form3 = Course()
-    return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
+    return render(request, 'info_123.html', context={'form0': form0, 'form1': form1, 'form2': form2, 'form3': form3})
 
 
 def document(request):
