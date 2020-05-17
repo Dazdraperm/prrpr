@@ -28,19 +28,26 @@
         </div>
     </div>
 
-    <div class="container-fluid row mt-5 m-0">
+    <div class="container-fluid row mt-3 m-0">
         <div class="col-sm">
             <form method="post" class="post-form aling" action="{% url 'document' %}">
-                {% csrf_token %}
-                {{ form0|as_bootstrap_inline }}
-                {{ form1|as_bootstrap_inline }}
-                {{ form2|as_bootstrap_inline }}
-                {{ form3|as_bootstrap_inline }}
 
-                <input type="submit" value="Отправить" class="btn btn-primary float-right">
+                <div class="container mb-5 pt-5 pb-5">
+                        <input type="submit" value="Автозаполнение" class="btn btn-primary float-left btn-block">
+                        <input type="submit" value="Скачать" class="btn btn-primary float-right btn-block">
+                </div>
+
+                    {% csrf_token %}
+                <div class="container">
+                    {{ form0|as_bootstrap_inline }}
+                    {{ form1|as_bootstrap_inline }}
+                    {{ form2|as_bootstrap_inline }}
+                    {{ form3|as_bootstrap_inline }}
+                </div>
+
             </form>
         </div>
-        <div class="col-sm">
+        <div class="col-sm pt-5">
             <img src="https://sun9-19.userapi.com/c846020/v846020577/1c63ae/bRXrd9yuP4Y.jpg" alt="образец">
         </div>
     </div>

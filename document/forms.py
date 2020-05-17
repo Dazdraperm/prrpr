@@ -29,4 +29,4 @@ class SiteUserForm1(ModelForm):
 class Course(ModelForm):
     class Meta:
         model = CourseGroup
-        fields = ('course', 'Group', 'nameInstitute')
+        fields = ('course', 'group', 'nameHeadman', 'nameInstitute')
