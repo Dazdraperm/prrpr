@@ -38,10 +38,10 @@
 
                     {% csrf_token %}
                 <div class="container">
-                    {{ form0 }}
-                    {{ form1 }}
-                    {{ form2 }}
-                    {{ form3 }}
+                    {{ form0|as_bootstrap_inline }}
+                    {{ form1|as_bootstrap_inline }}
+                    {{ form2|as_bootstrap_inline }}
+                    {{ form3|as_bootstrap_inline }}
                 </div>
 
             </form>

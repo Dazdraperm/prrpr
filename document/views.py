@@ -32,35 +32,51 @@ def info(request):
     return render(request, 'info_123.html', context={'form0': form0, 'form1': form1, 'form2': form2, 'form3': form3})
 
 
+def login(request):
+    return redirect('accounts/login')
+
+
 def document(request):
     if request.method == "POST":
-        id = randint(1, 10000000)
-        doc = DocxTemplate("document/documents/test.docx")
-        context = {}
-        doc.render(context)
-        doc.save("document/documents/" + str(id) + ".docx")
+        if request.user.is_authenticated:
+            id = request.user.last_name
+            doc = DocxTemplate("document/documents/test.docx")
+            context = {}
+            doc.render(context)
+            doc.save("document/documents/" + str(id) + ".docx")
 
-        excel_file_name = "document/documents/" + str(id) + ".docx"
-        fp = open(excel_file_name, "rb")
-        response = HttpResponse(fp.read())
-        fp.close()
+            excel_file_name = "document/documents/" + str(id) + ".docx"
+            fp = open(excel_file_name, "rb")
+            response = HttpResponse(fp.read())
+            fp.close()
 
-        file_type = mimetypes.guess_type(excel_file_name)
-        if file_type is None:
-            file_type = 'application/octet-stream'
-        response['Content-Type'] = file_type
-        response['Content-Length'] = str(os.stat(excel_file_name).st_size)
-        response['Content-Disposition'] = "attachment; filename= " + str(id) + ".docx"
-        os.remove(excel_file_name)
+            file_type = mimetypes.guess_type(excel_file_name)
+            if file_type is None:
+                file_type = 'application/octet-stream'
+            response['Content-Type'] = file_type
+            response['Content-Length'] = str(os.stat(excel_file_name).st_size)
+            response['Content-Disposition'] = "attachment; filename= " + str(id) + ".docx"
+            os.remove(excel_file_name)
+            return response
+        else:
+            doc = DocxTemplate("document/documents/test.docx")
+            context = {}
+            doc.render(context)
+            doc.save("document/documents/anonym.docx")
 
-        return response
-    if request.user.is_authenticated:
-        site_user = SiteUser.objects.get(user=request.user)
-        return render(request, 'index.html', context={'site_user': site_user})
-    else:
-        doc = DocxTemplate("document/documents/test.docx")
-        doc.save("document/documents/test.docx")
-        return render(request, 'index.html')
+            excel_file_name = "document/documents/anonym.docx"
+            fp = open(excel_file_name, "rb")
+            response = HttpResponse(fp.read())
+            fp.close()
+
+            file_type = mimetypes.guess_type(excel_file_name)
+            if file_type is None:
+                file_type = 'application/octet-stream'
+            response['Content-Type'] = file_type
+            response['Content-Length'] = str(os.stat(excel_file_name).st_size)
+            response['Content-Disposition'] = "attachment; filename= anonym.docx"
+            os.remove(excel_file_name)
+            return response
 
 
 def statements(request):
