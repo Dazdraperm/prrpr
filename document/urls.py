@@ -1,4 +1,4 @@
-from django.urls import path, include, re_path
+from django.urls import path, include
 from .views import statements, index, category, info, UpdateProfile, document, admin, UpdatePassport
 
 urlpatterns = [
@@ -12,4 +12,3 @@ urlpatterns = [
     path('document', document, name='document'),
     path('admin1', admin, name='admin1'),
 ]
-

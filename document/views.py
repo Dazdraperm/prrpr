@@ -1,13 +1,12 @@
 import mimetypes
 import os
 
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
-from document.forms import UserForm, PassportForm, Course, SiteUserForm1
+from document.forms import StatementForm1
 from document.models import SiteUser, Passport
 from docxtpl import DocxTemplate
 from random import randint
@@ -26,12 +25,17 @@ def category(request):
     return render(request, 'category_of_need.html', context={'site_user': site_user})
 
 
+# def info(request):
+#     form0 = PassportForm()
+#     form1 = UserForm()
+#     form2 = SiteUserForm1()
+#     form3 = Course()
+#     return render(request, 'info_123.html', context={'form0': form0, 'form1': form1, 'form2': form2, 'form3': form3})
+
+
 def info(request):
-    form0 = PassportForm()
-    form1 = UserForm()
-    form2 = SiteUserForm1()
-    form3 = Course()
-    return render(request, 'info_123.html', context={'form0': form0, 'form1': form1, 'form2': form2, 'form3': form3})
+    form = StatementForm1()
+    return render(request, 'info_123.html', context={'form': form})
 
 
 def document(request):

@@ -4,7 +4,7 @@
 {% block content %}
 
     <div class="card mb-0">
-        <div class="card-header">
+        <div class="card-header font-weight-bold">
             Для получения этого вида материальной помощи нужно:
         </div>
         <div class="card-body">
@@ -13,36 +13,25 @@
             <p class="card-text">2) заполнить заявление в соответствии с образцом</p>
             <p class="card-text">3) приложить к заявлению копии документов, необходимые для подтверждения вашей
                 категории нуждаемости</p>
-            <p class="card-text">4) отнести заявление в профбюро нашего института (график работы можно найти в меню)</p>
+            <p class="card-text">4) отнести заявление в профбюро института (график работы можно найти в здесь)</p>
         </div>
     </div>
 
-    <div class="card mt-3">
-        <div class="card-body">
-            <h5 class="card-title">Дополнительно приложить к заявлению:</h5>
-            <p class="card-text">оригинал справки из
-                домоуправления о месте проживания родителей,</p>
-            <p class="card-text">проездные документы до населенного пункта
-                и обратно, где проживают родители (дата документов должна соответствовать каникулярному
-                времени, предшествующему текущему или текущему семестру);</p>
-        </div>
-    </div>
+    {% block informer %}
+    {% endblock informer %}
 
     <div class="container-fluid row mt-3 m-0">
         <div class="col-sm">
-            <form method="post" class="post-form aling" action="{% url 'document' %}">
+            <form method="post" class="post-form aling mb-5" action="{% url 'document' %}">
 
                 <div class="container mb-5 pt-5 pb-5">
-                        <input type="submit" value="Автозаполнение" class="btn btn-primary float-left btn-block">
-                        <input type="submit" value="Скачать" class="btn btn-primary float-right btn-block">
+                    <input type="submit" value="Скачать" class="btn btn-primary float-left btn-block">
+                    <input type="submit" value="Автозаполнение" class="btn btn-primary float-right btn-block">
                 </div>
 
-                    {% csrf_token %}
+                {% csrf_token %}
                 <div class="container">
-                    {{ form0|as_bootstrap_inline }}
-                    {{ form1|as_bootstrap_inline }}
-                    {{ form2|as_bootstrap_inline }}
-                    {{ form3|as_bootstrap_inline }}
+                    {{ form|as_bootstrap_inline }}
                 </div>
 
             </form>
