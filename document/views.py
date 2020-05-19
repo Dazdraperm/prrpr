@@ -1,10 +1,12 @@
-from django.contrib.auth.decorators import login_required
+
+import mimetypes
+import os
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
-from document.forms import UserForm, PassportForm, Course, SiteUserForm1
+from document.forms import StatementForm1
 from document.models import SiteUser, Passport
 from docxtpl import DocxTemplate
 from random import randint
@@ -23,20 +25,26 @@ def category(request):
     return render(request, 'category_of_need.html', context={'site_user': site_user})
 
 
+# def info(request):
+#     form0 = PassportForm()
+#     form1 = UserForm()
+#     form2 = SiteUserForm1()
+#     form3 = Course()
+#     return render(request, 'info_123.html', context={'form0': form0, 'form1': form1, 'form2': form2, 'form3': form3})
+
+
 def info(request):
-    form = PassportForm()
-    form1 = UserForm()
-    form2 = SiteUserForm1()
-    form3 = Course()
-    return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
+    form = StatementForm1()
+    return render(request, 'info_123.html', context={'form': form})
 
 
 def document(request):
 
     if request.method == "POST":
-        name = request.POST['username']
-        doc = DocxTemplate("document/documents/test.docx")
-        context = {'name': name}
+        course = request.POST['course']
+        group = request.POST['group']
+        doc = DocxTemplate("document/docExample/socPitanie.docx")
+        context = {'course': course, 'group': group}
         doc.render(context)
         id = randint(1, 10000000)
         doc.save("document/documents/" + str(id) +".docx")
@@ -45,8 +53,8 @@ def document(request):
         site_user = SiteUser.objects.get(user=request.user)
         return render(request, 'index.html', context={'site_user': site_user})
     else:
-        doc = DocxTemplate("document/documents/test.docx")
-        doc.save("document/documents/test.docx")
+        doc = DocxTemplate("document/docExample/socPitanie.docx")
+        doc.save("document/documents/")
         return render(request, 'index.html')
 
 
