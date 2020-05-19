@@ -22,7 +22,6 @@ class CourseGroup(models.Model):
     nameInstitute = models.CharField(max_length=30, blank=True, null=True)  # Название института
 
 
-
 class SiteUser(models.Model):
     user = models.ForeignKey(User, name='user', on_delete=models.CASCADE)
     passport = models.ForeignKey(Passport, name='passport', on_delete=models.CASCADE, blank=True, null=True)
@@ -71,8 +70,7 @@ class Statement1(models.Model):
     INN = models.CharField(max_length=10)  # ИНН
     numberInsuranceCertificate = models.CharField(max_length=11)  # Страховое свидетельство
     dateBirthday = models.DateField()  # День рождения
-    disability_group = models.ForeignKey(DisabilityGroup, name='disability_group',
-                                         on_delete=models.CASCADE)  # группа инвалидности
+    disability_group = models.CharField(max_length=20)  # группа инвалидности
     disability_group_text = models.CharField(max_length=50, default='Заполнить по необходимости', blank=True,
                                              null=True)  # инвалидность по...
     phoneNumber = models.CharField(max_length=11)  # Номер телефона

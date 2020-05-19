@@ -1,4 +1,3 @@
-
 from django.urls import path, include
 from .views import statements, index, category, info, UpdateProfile, document, admin, UpdatePassport, login
 

@@ -22,20 +22,12 @@
 
     <div class="container-fluid row mt-3 m-0">
         <div class="col-sm">
-            <form method="post" class="post-form aling mb-5" action="{% url 'document' %}">
-
-                <div class="container mb-5 pt-5 pb-5">
-                    <input type="submit" value="Скачать" class="btn btn-primary float-left btn-block">
-                    {% if request.user.is_authenticated %}
-                    <input type="submit" value="Автозаполнение" class="btn btn-primary float-right btn-block">
-                    {% endif %}
-                </div>
-
+            <form method="post" class="post-form aling mb-5" action="">
+                <button formaction="document">test1</button>
                 {% csrf_token %}
                 <div class="container">
                     {{ form|as_bootstrap_inline }}
                 </div>
-
             </form>
         </div>
         <div class="col-sm pt-5">

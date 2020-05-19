@@ -31,6 +31,10 @@ def info(request):
 def login(request):
     return redirect('accounts/login')
 
+#def auto_fill(request):
+ #   if request.method == "POST":
+
+
 
 def document(request):
     if request.method == "POST":
