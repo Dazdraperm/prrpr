@@ -1,10 +1,6 @@
-<<<<<<<<< Temporary merge branch 1
-from django.urls import path, include
-from .views import statements, index, category, info, UpdateProfile, document, admin, UpdatePassport
-=========
+
 from django.urls import path, include, re_path
 from .views import statements, index, category, info, UpdateProfile, document, admin, UpdatePassport, login
->>>>>>>>> Temporary merge branch 2
 
 urlpatterns = [
     path('', index, name='index'),

@@ -16,28 +16,16 @@ class Passport(models.Model):
 
 
 class CourseGroup(models.Model):
-<<<<<<<<< Temporary merge branch 1
     course = models.CharField(max_length=1, blank=True, null=True)  # Курс
     group = models.CharField(max_length=10, blank=True, null=True)  # Группа
     nameHeadman = models.CharField(max_length=30, blank=True, null=True)  # Имя старосты
     nameInstitute = models.CharField(max_length=30, blank=True, null=True)  # Название института
-=========
-    course = models.CharField(max_length=1)  # Курс
-    group = models.CharField(max_length=10, default='1')  # Группа
-    nameHeadman = models.CharField(max_length=30)  # Имя старосты
-    nameInstitute = models.CharField(max_length=30)     # Название института
->>>>>>>>> Temporary merge branch 2
 
 
 class SiteUser(models.Model):
     user = models.ForeignKey(User, name='user', on_delete=models.CASCADE)
-<<<<<<<<< Temporary merge branch 1
     passport = models.ForeignKey(Passport, name='passport', on_delete=models.CASCADE, blank=True, null=True)
     course_Group = models.ForeignKey(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True, null=True)
-=========
-    passport = models.ForeignKey(Passport, name='passport', on_delete=models.CASCADE)
-    course_Group = models.ForeignKey(CourseGroup, name='course_Group', on_delete=models.CASCADE, null=True, blank=True)
->>>>>>>>> Temporary merge branch 2
     INN = models.CharField(max_length=10)
     pFact = models.CharField(max_length=150)
     dateBirthday = models.CharField(max_length=20)
@@ -66,13 +54,13 @@ class DisabilityGroup(models.Model):
 class Statement1(models.Model):
     course = models.CharField(max_length=1)  # Курс
     group = models.CharField(max_length=10)  # Группа
+    pFact = models.CharField(max_length=150)  # Фактическое место проживания
     nameHeadman = models.CharField(max_length=30)  # Имя старосты
-    nameInstitute = models.CharField(max_length=30)  # Название института
     series = models.CharField(max_length=4, blank=True, null=True)
     number = models.CharField(max_length=6, blank=True, null=True)
     code = models.CharField(max_length=20, blank=True, null=True)
-    dateTimeField = models.CharField(max_length=20, blank=True, null=True)
-    place = models.CharField(max_length=150, blank=True, null=True)
+    dateTimeField = models.DateTimeField(max_length=20, blank=True, null=True)
+    place = models.CharField(max_length=100, blank=True, null=True)
     number_of_statement = models.CharField(max_length=1)
     amount = models.CharField(max_length=10)
     name_institute = models.CharField(max_length=20)  # Название института
@@ -82,8 +70,7 @@ class Statement1(models.Model):
     INN = models.CharField(max_length=10)  # ИНН
     numberInsuranceCertificate = models.CharField(max_length=11)  # Страховое свидетельство
     dateBirthday = models.DateField()  # День рождения
-    disability_group = models.ForeignKey(DisabilityGroup, name='disability_group',
-                                         on_delete=models.CASCADE)  # группа инвалидности
+    disability_group = models.CharField(max_length=20)  # группа инвалидности
     disability_group_text = models.CharField(max_length=50, default='Заполнить по необходимости', blank=True,
                                              null=True)  # инвалидность по...
     phoneNumber = models.CharField(max_length=11)  # Номер телефона
