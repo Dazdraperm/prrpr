@@ -62,7 +62,6 @@ def document(request):
             return response
         else:
             doc = DocxTemplate("document/docExample/socPitanie.docx")
-            doc = DocxTemplate("document/docExample/socPitanie.docx")
             course = request.POST['course']
             group = request.POST['group']
             nameHeadman = request.POST['nameHeadman']
