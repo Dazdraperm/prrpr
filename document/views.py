@@ -20,16 +20,7 @@ def index(request):
 
 
 def category(request):
-    site_user = SiteUser.objects.get(user=request.user)
-    return render(request, 'category_of_need.html', context={'site_user': site_user})
-
-
-# def info(request):
-#     form0 = PassportForm()
-#     form1 = UserForm()
-#     form2 = SiteUserForm1()
-#     form3 = Course()
-#     return render(request, 'info_123.html', context={'form0': form0, 'form1': form1, 'form2': form2, 'form3': form3})
+    return render(request, 'category_of_need.html')
 
 
 def info(request):
@@ -84,7 +75,7 @@ def document(request):
             return response
 
 
-def statements(request, pk):
+def statements(request):
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
         return render(request, 'statements.html', context={'site_user': site_user})
