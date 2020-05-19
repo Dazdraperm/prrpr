@@ -1,17 +1,49 @@
 {% extends 'index.html' %}
-
+{% load bootstrap_tags %}
+{% load static %}
 
 {% block content %}
-    <div class="container">
-            <div class="post">
-                <form method="post" class="post-form" action="{% url 'profile' site_user.id %}">
-                    {% csrf_token %}
-                    <input type="submit" value="Отправить" class="btn btn-primary float-right" />
-                    {{ form.as_p}}
 
-                    <input type="submit" value="Отправить" class="btn btn-primary float-right" />
-                </form>
+    <div class="container bootstrap snippet mb-5">
+        <div class="col-sm">
+            <div class="text-center p-3"><h1>{{ request.user.first_name }}</h1></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+
+
+                <div class="text-center">
+                    <img src="{% static 'images/avatar.png' %}"
+                         class="avatar img-circle img-thumbnail border-primary rounded-circle shadow rounded"
+                         alt="avatar">
+                    <p>Загрузить другое фото...</p>
+                    <input type="file" class="btn">
+                </div>
+                <br>
+
+
             </div>
+            <div class="col-sm-9">
+
+                <div class="container pl-5">
+                    <div class="post">
+                        <form method="post" class="post-form" action="{% url 'profile' request.user.id %}">
+                            {% csrf_token %}
+                            {{ form|as_bootstrap_horizontal }}
+
+                            <div class="container-fluid">
+                                <input type="submit" value="Сохранить"
+                                       class="btn btn-primary float-left shadow rounded"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+
+
+
 
 {% endblock %}

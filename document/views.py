@@ -1,13 +1,14 @@
-from django.contrib.auth.decorators import login_required
+import mimetypes
+import os
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
-from document.forms import UserForm, PassportForm, SiteUserForm, Course
+from document.forms import StatementForm1
 from document.models import SiteUser, Passport
 from docxtpl import DocxTemplate
-from random import randint
 
 
 def index(request):
@@ -19,40 +20,59 @@ def index(request):
 
 
 def category(request):
-    site_user = SiteUser.objects.get(user=request.user)
-    return render(request, 'category_of_need.html', context={'site_user': site_user})
+    return render(request, 'category_of_need.html')
 
 
 def info(request):
-    form = PassportForm()
-    form1 = UserForm()
-    form2 = SiteUserForm()
-    form3 = Course()
+    form = StatementForm1()
+    return render(request, 'info_123.html', context={'form': form})
 
-    if request.user.is_authenticated:
-        site_user = SiteUser.objects.get(user=request.user)
-        return render(request, 'info_123.html', context={'site_user': site_user, 'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
-    else:
-        return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
+
+def login(request):
+    return redirect('accounts/login')
 
 
 def document(request):
-
     if request.method == "POST":
-        name = request.POST['username']
-        doc = DocxTemplate("document/documents/test.docx")
-        context = {'name': name}
-        doc.render(context)
-        id = randint(1, 10000000)
-        doc.save("document/documents/" + str(id) +".docx")
+        if request.user.is_authenticated:
+            id = request.user.last_name
+            doc = DocxTemplate("document/documents/test.docx")
+            context = {}
+            doc.render(context)
+            doc.save("document/documents/" + str(id) + ".docx")
 
-    if request.user.is_authenticated:
-        site_user = SiteUser.objects.get(user=request.user)
-        return render(request, 'index.html', context={'site_user': site_user})
-    else:
-        doc = DocxTemplate("document/documents/test.docx")
-        doc.save("document/documents/test.docx")
-        return render(request, 'index.html')
+            excel_file_name = "document/documents/" + str(id) + ".docx"
+            fp = open(excel_file_name, "rb")
+            response = HttpResponse(fp.read())
+            fp.close()
+
+            file_type = mimetypes.guess_type(excel_file_name)
+            if file_type is None:
+                file_type = 'application/octet-stream'
+            response['Content-Type'] = file_type
+            response['Content-Length'] = str(os.stat(excel_file_name).st_size)
+            response['Content-Disposition'] = "attachment; filename= " + str(id) + ".docx"
+            os.remove(excel_file_name)
+            return response
+        else:
+            doc = DocxTemplate("document/documents/test.docx")
+            context = {}
+            doc.render(context)
+            doc.save("document/documents/anonym.docx")
+
+            excel_file_name = "document/documents/anonym.docx"
+            fp = open(excel_file_name, "rb")
+            response = HttpResponse(fp.read())
+            fp.close()
+
+            file_type = mimetypes.guess_type(excel_file_name)
+            if file_type is None:
+                file_type = 'application/octet-stream'
+            response['Content-Type'] = file_type
+            response['Content-Length'] = str(os.stat(excel_file_name).st_size)
+            response['Content-Disposition'] = "attachment; filename= anonym.docx"
+            os.remove(excel_file_name)
+            return response
 
 
 def statements(request):
@@ -70,7 +90,9 @@ def admin(request):
 class UpdateProfile(UpdateView):
     model = SiteUser
     template_name = 'profile.html'
-    fields = ['INN', 'pFact', 'dateBirthday', 'phoneNumber', 'patronymic', 'numberInsuranceCertificate',  'disability', 'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence', 'FormOfEducation', 'inProfCom', 'passport']
+    fields = ['INN', 'pFact', 'dateBirthday', 'phoneNumber', 'patronymic', 'numberInsuranceCertificate', 'disability',
+              'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence', 'FormOfEducation',
+              'inProfCom', 'passport']
     success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):

@@ -1,5 +1,6 @@
-from django.urls import path, include, re_path
-from .views import statements, index, category, info, UpdateProfile, document, admin, UpdatePassport
+
+from django.urls import path, include
+from .views import statements, index, category, info, UpdateProfile, document, admin, UpdatePassport, login
 
 urlpatterns = [
     path('', index, name='index'),
@@ -11,5 +12,5 @@ urlpatterns = [
     path('passport/<int:pk>/', UpdatePassport.as_view(), name='passport'),
     path('document', document, name='document'),
     path('admin1', admin, name='admin1'),
+    path('login', login, name='login')
 ]
-
