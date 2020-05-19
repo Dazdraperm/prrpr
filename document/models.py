@@ -16,16 +16,28 @@ class Passport(models.Model):
 
 
 class CourseGroup(models.Model):
+<<<<<<<<< Temporary merge branch 1
     course = models.CharField(max_length=1, blank=True, null=True)  # Курс
     group = models.CharField(max_length=10, blank=True, null=True)  # Группа
     nameHeadman = models.CharField(max_length=30, blank=True, null=True)  # Имя старосты
     nameInstitute = models.CharField(max_length=30, blank=True, null=True)  # Название института
+=========
+    course = models.CharField(max_length=1)  # Курс
+    group = models.CharField(max_length=10, default='1')  # Группа
+    nameHeadman = models.CharField(max_length=30)  # Имя старосты
+    nameInstitute = models.CharField(max_length=30)     # Название института
+>>>>>>>>> Temporary merge branch 2
 
 
 class SiteUser(models.Model):
     user = models.ForeignKey(User, name='user', on_delete=models.CASCADE)
+<<<<<<<<< Temporary merge branch 1
     passport = models.ForeignKey(Passport, name='passport', on_delete=models.CASCADE, blank=True, null=True)
     course_Group = models.ForeignKey(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True, null=True)
+=========
+    passport = models.ForeignKey(Passport, name='passport', on_delete=models.CASCADE)
+    course_Group = models.ForeignKey(CourseGroup, name='course_Group', on_delete=models.CASCADE, null=True, blank=True)
+>>>>>>>>> Temporary merge branch 2
     INN = models.CharField(max_length=10)
     pFact = models.CharField(max_length=150)
     dateBirthday = models.CharField(max_length=20)
