@@ -54,13 +54,13 @@ class DisabilityGroup(models.Model):
 class Statement1(models.Model):
     course = models.CharField(max_length=1)  # Курс
     group = models.CharField(max_length=10)  # Группа
+    pFact = models.CharField(max_length=150)  # Фактическое место проживания
     nameHeadman = models.CharField(max_length=30)  # Имя старосты
-    nameInstitute = models.CharField(max_length=30)  # Название института
     series = models.CharField(max_length=4, blank=True, null=True)
     number = models.CharField(max_length=6, blank=True, null=True)
     code = models.CharField(max_length=20, blank=True, null=True)
-    dateTimeField = models.CharField(max_length=20, blank=True, null=True)
-    place = models.CharField(max_length=150, blank=True, null=True)
+    dateTimeField = models.DateTimeField(max_length=20, blank=True, null=True)
+    place = models.CharField(max_length=100, blank=True, null=True)
     number_of_statement = models.CharField(max_length=1)
     amount = models.CharField(max_length=10)
     name_institute = models.CharField(max_length=20)  # Название института
