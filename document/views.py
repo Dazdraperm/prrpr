@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
-from document.forms import UserForm, PassportForm, SiteUserForm, Course
+from document.forms import UserForm, PassportForm, Course, SiteUserForm1
 from document.models import SiteUser, Passport
 from docxtpl import DocxTemplate
 from random import randint
@@ -26,22 +26,27 @@ def category(request):
 def info(request):
     form = PassportForm()
     form1 = UserForm()
-    form2 = SiteUserForm()
+    form2 = SiteUserForm1()
     form3 = Course()
-
-    if request.user.is_authenticated:
-        site_user = SiteUser.objects.get(user=request.user)
-        return render(request, 'info_123.html', context={'site_user': site_user, 'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
-    else:
-        return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
+    return render(request, 'info_123.html', context={'form': form, 'form1': form1, 'form2': form2, 'form3': form3})
 
 
 def document(request):
 
     if request.method == "POST":
         name = request.POST['username']
-        doc = DocxTemplate("document/documents/test.docx")
-        context = {'name': name}
+        passport = request.POST['series']
+        passport2 = request.POST['number']
+        passport3 = request.POST['code']
+        passport4 = request.POST['dateTimeField']
+        passport5 = request.POST['place']
+        course = request.POST['course']
+        group = request.POST['Group']
+        namePraepostor = request.POST['namePraepostor']
+        nameInstitute = request.POST['nameInstitute']
+        phoneNumber = request.POST['phoneNumber']
+        doc = DocxTemplate("document/docExample/socPitanie.docx")
+        context = {'nameInstitute': name, 'passport': passport}
         doc.render(context)
         id = randint(1, 10000000)
         doc.save("document/documents/" + str(id) +".docx")
@@ -50,7 +55,7 @@ def document(request):
         site_user = SiteUser.objects.get(user=request.user)
         return render(request, 'index.html', context={'site_user': site_user})
     else:
-        doc = DocxTemplate("document/documents/test.docx")
+        doc = DocxTemplate("document/docExample/socPitanie.docx")
         doc.save("document/documents/test.docx")
         return render(request, 'index.html')
 
