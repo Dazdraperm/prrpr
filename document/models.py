@@ -11,8 +11,9 @@ class Passport(models.Model):
     series = models.CharField(max_length=4, blank=True, null=True)
     number = models.CharField(max_length=6, blank=True, null=True)
     code = models.CharField(max_length=20, blank=True, null=True)
-    dateTimeField = models.CharField(max_length=20, blank=True, null=True)
-    place = models.CharField(max_length=150, blank=True, null=True)
+    dateTimeField = models.CharField(max_length=20, blank=True, null=True)  #
+    placeOfRegistration = models.CharField(max_length=150, blank=True, null=True)  # Место регистрации
+    dateBirthday = models.DateField(max_length=20)
 
 
 class CourseGroup(models.Model):
@@ -20,7 +21,6 @@ class CourseGroup(models.Model):
     group = models.CharField(max_length=10, blank=True, null=True)  # Группа
     nameHeadman = models.CharField(max_length=30, blank=True, null=True)  # Имя старосты
     nameInstitute = models.CharField(max_length=30, blank=True, null=True)  # Название института
-
 
 
 class SiteUser(models.Model):
@@ -65,9 +65,9 @@ class Statement1(models.Model):
     number_of_statement = models.CharField(max_length=1)
     amount = models.CharField(max_length=10)
     name_institute = models.CharField(max_length=20)  # Название института
-    name = models.CharField(max_length=20)  # Имя
-    surname = models.CharField(max_length=20)  # Фамилия
-    patronymic = models.CharField(max_length=20)  # Отчество
+    name = models.CharField(max_length=30)  # Имя
+    surname = models.CharField(max_length=30)  # Фамилия
+    patronymic = models.CharField(max_length=30)  # Отчество
     INN = models.CharField(max_length=10)  # ИНН
     numberInsuranceCertificate = models.CharField(max_length=11)  # Страховое свидетельство
     dateBirthday = models.DateField()  # День рождения

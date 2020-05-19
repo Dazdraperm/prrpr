@@ -7,7 +7,7 @@ from document.models import SiteUser, Passport, CourseGroup, Statement1, Disabil
 class PassportForm(ModelForm):
     class Meta:
         model = Passport
-        fields = ['series', 'number', 'code', 'dateTimeField', 'place']
+        fields = ['series', 'number', 'code', 'dateTimeField', 'placeOfRegistration']
 
 
 class UserForm(ModelForm):
