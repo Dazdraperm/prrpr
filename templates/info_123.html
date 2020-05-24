@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
 {% load bootstrap_tags %}
+{% load static %}
 
 {% block content %}
 
@@ -16,18 +17,6 @@
                 категории нуждаемости</p>
             <p class="card-text"><b><i>4)</i></b> Отнести заявление в профбюро института (график работы можно найти <a
                     class="card-link" href="{% url 'schedule' %}"><b><i>здесь</i></b></a>)</p>
-        </div>
-    </div>
-
-    <div class="card text-white bg-danger mb-3 mt-3 border-primary border-right-0 border-left-0">
-        <div class="card-header font-weight-bold shadow-sm">Дополнительно приложить к заявлению:</div>
-        <div class="card-body shadow">
-            <p class="card-text"><b><i>1)</i></b> Справку из медицинского учреждения о
-                назначении лечения;</p>
-            <p class="card-text"><b><i>2)</i></b>оригиналы чеков на покупку лекарственных препаратов либо договор на
-                оказание платных медицинских услуг и т.п;<br>
-                <b><i>(Документы действительны в течение шести
-                    месяцев со дня установления диагноза)</i></b></p>
         </div>
     </div>
 
@@ -55,7 +44,7 @@
             </form>
         </div>
         <div class="col-sm pt-5">
-            <img class="shadow rounded" src="https://sun9-19.userapi.com/c846020/v846020577/1c63ae/bRXrd9yuP4Y.jpg"
+            <img class="shadow rounded" src="{% static 'images/example_123457.jpg' %}"
                  alt="образец">
         </div>
     </div>

@@ -22,6 +22,35 @@ def schedule(request):
     return render(request, 'schedule.html')
 
 
+def info_6(request):
+    form = StatementForm1()
+    return render(request, 'info_6.html', context={'form': form})
+
+
+def consent(request):
+    return render(request, 'info_6_links/consent.html')
+
+
+def contract(request):
+    return render(request, 'info_6_links/contract.html')
+
+
+def survey_questionnaire(request):
+    return render(request, 'info_6_links/survey_questionnaire.html')
+
+
+def additional_bank(request):
+    return render(request, 'info_6_links/additional_bank.html')
+
+
+def statement_of_command(request):
+    return render(request, 'info_6_links/statement_of_command.html')
+
+
+def conditions(request):
+    return render(request, 'conditions.html')
+
+
 def category(request):
     return render(request, 'category_of_need.html')
 
@@ -31,12 +60,20 @@ def info(request):
     return render(request, 'info_123.html', context={'form': form})
 
 
+def position(request):
+    return render(request, 'position.html')
+
+
 def login(request):
     return redirect('accounts/login')
 
 
-#def auto_fill(request):
- #   if request.method == "POST":
+def how(request):
+    return render(request, 'how.html')
+
+
+# def auto_fill(request):
+#     if request.method == "POST":
 
 
 def document(request):
@@ -64,9 +101,9 @@ def document(request):
         name = request.POST['name']
         patronymic = request.POST['patronymic']
         context = {"group": group, "course": course, "starosta": nameHeadman, "name": name_institute,
-                       "nomer": number, "series": series,  "vidan": place, "inn": INN, "adress": pFact,
-                        "svidetel": certificate, "dateNumber": dateBirthday, "invalid": invalid, "invalid2": invalid2,
-                       "answer": answer, "numberPhone": numberPhone, "sur": surname, "nam": name, "otchet": patronymic}
+                   "nomer": number, "series": series, "vidan": place, "inn": INN, "adress": pFact,
+                   "svidetel": certificate, "dateNumber": dateBirthday, "invalid": invalid, "invalid2": invalid2,
+                   "answer": answer, "numberPhone": numberPhone, "sur": surname, "nam": name, "otchet": patronymic}
         doc.render(context)
         doc.save("document/documents/anonym.docx")
 
@@ -86,11 +123,7 @@ def document(request):
 
 
 def statements(request):
-    if request.user.is_authenticated:
-        site_user = SiteUser.objects.get(user=request.user)
-        return render(request, 'statements.html', context={'site_user': site_user})
-    else:
-        return render(request, 'statements.html')
+    return render(request, 'statements.html')
 
 
 def admin(request):
@@ -99,7 +132,7 @@ def admin(request):
 
 class UpdateProfile(UpdateView):
     model = SiteUser
-    template_name = 'profile.html'
+    template_name = 'example_profile.html'
     fields = ['INN', 'pFact', 'dateBirthday', 'phoneNumber', 'patronymic', 'numberInsuranceCertificate', 'disability',
               'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence', 'FormOfEducation',
               'inProfCom', 'passport']
