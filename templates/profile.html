@@ -24,18 +24,37 @@
 
             </div>
             <div class="col-sm-9">
-
                 <div class="container pl-5">
                     <div class="post">
-                        <form method="post" class="post-form" action="{% url 'profile' request.user.id %}">
+                        <form method="post" class="post-form" action="{% url 'profile' request.user.id %}">{#форма для профиля#}
+                            {# Я ГОВОРЮ БЛЯ НАДО СДЕЛАТЬ ОТЕДЛЬНО ДЛЯ КАЖДОГО HTNM ФАЙЛ ИНАЧЕ ПОЛНАЯ ХУИТА ПОЛУЧАЕТСЯ( и тут хуй как сделаешь эти IF птмч туда просто нечего пихать уникального и так уже есть id#}
                             {% csrf_token %}
-                            {{ form|as_bootstrap_inline }}
+                            {{ form|as_bootstrap_inline}}
 
                             <div class="container-fluid">
                                 <input type="submit" value="Сохранить"
                                        class="btn btn-primary float-left shadow rounded"/>
                             </div>
                         </form>
+
+                        <form method="post" class="post-form" action="{% url 'passport' request.user.id %}">{#форма для пасспорта   #}
+                           {# Я ГОВОРЮ БЛЯ НАДО СДЕЛАТЬ ОТЕДЛЬНО ДЛЯ КАЖДОГО HTNM ФАЙЛ ИНАЧЕ ПОЛНАЯ ХУИТА ПОЛУЧАЕТСЯ( и тут хуй как сделаешь эти IF птмч туда просто нечего пихать уникального и так уже есть id#}
+                            {% csrf_token %}
+                            {{ form|as_bootstrap_inline}}
+                            <div class="container-fluid">
+                                <input type="submit" value="Сохранить"
+                                       class="btn btn-primary float-left shadow rounded"/>
+                            </div>
+                        </form>
+{#                        <form method="post" class="post-form" action="{% url 'passport' request.user.id %}">#}
+{#                            {% csrf_token %}#}
+{#                            {{ form|as_bootstrap_inline }}#}
+{##}
+{#                            <div class="container-fluid">#}
+{#                                <input type="submit" value="Сохранить"#}
+{#                                       class="btn btn-primary float-left shadow rounded"/>#}
+{#                            </div>#}
+{#                        </form>#}
                     </div>
                 </div>
 

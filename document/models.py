@@ -29,19 +29,18 @@ class SiteUser(models.Model):
     user = models.OneToOneField(User, name='user', on_delete=models.CASCADE)
     passport = models.OneToOneField(Passport, name='passport', on_delete=models.CASCADE, blank=True, null=True)
     course_Group = models.OneToOneField(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True, null=True)
-    INN = models.CharField(max_length=10)
+    INN = models.CharField(max_length=10, blank=True, null=True)
     pFact = models.CharField(max_length=150, blank=True, null=True)
-    dateBirthday = models.CharField(max_length=20)
-    phoneNumber = models.CharField(max_length=11)
-    patronymic = models.CharField(max_length=30)  # Отчество
-    numberInsuranceCertificate = models.CharField(max_length=20)  # Страховое свидетельство
-    disability = models.CharField(max_length=20)  # Инвалидность
+    phoneNumber = models.CharField(max_length=11, blank=True, null=True)
+    patronymic = models.CharField(max_length=30, blank=True, null=True)  # Отчество
+    numberInsuranceCertificate = models.CharField(max_length=20, blank=True, null=True)  # Страховое свидетельство
+    disability = models.CharField(max_length=20, blank=True, null=True)  # Инвалидность
     fullStateSupport = models.CharField(max_length=10, choices=_STATUS_CHOICES, blank=True,
                                         null=True)  # Полное гос. обеспечение
-    preferentialCategory = models.CharField(max_length=1)  # Льготная категория
-    numberTravelCard = models.CharField(max_length=20)  # Номер проездной карты
-    addressOfResidence = models.CharField(max_length=20)  # Адрес фактического проживания
-    FormOfEducation = models.CharField(max_length=1)  # Форма обучения
+    preferentialCategory = models.CharField(max_length=1, blank=True, null=True)  # Льготная категория
+    numberTravelCard = models.CharField(max_length=20, blank=True, null=True)  # Номер проездной карты
+    addressOfResidence = models.CharField(max_length=20, blank=True, null=True)  # Адрес фактического проживания
+    FormOfEducation = models.CharField(max_length=1, blank=True, null=True)  # Форма обучения
     inProfCom = models.CharField(max_length=10, choices=_STATUS_CHOICES, blank=True,
                                  null=True)  # Состоит в профкоме или нет
 
@@ -59,7 +58,7 @@ class Statement1(models.Model):
     group = models.CharField(max_length=10)  # Группа
     pFact = models.CharField(max_length=150, blank=True, null=True)  # Фактическое место проживания
     nameHeadman = models.CharField(max_length=30)  # Имя старосты
-    series = models.CharField(max_length=4, blank=True, null=True)
+    series = models.CharField(max_length=4, blank=True, null=True, verbose_name='Серия')
     number = models.CharField(max_length=6, blank=True, null=True)
     code = models.CharField(max_length=20, blank=True, null=True)
     dateTimeField = models.CharField(max_length=20, blank=True, null=True)

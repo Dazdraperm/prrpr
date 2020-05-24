@@ -36,7 +36,12 @@
             {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'profile' request.user.id %}">
+{#                        короче тут где-то должен быть переход на две ссылки        вот одна #}
                         <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Профиль</button>
+                    </a>
+                 <a class="nav-link" href="{% url 'passport' request.user.id %}">
+{#                        короче тут где-то должен быть переход на две ссылки        вот одна #}
+                        <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Пасспорт</button>
                     </a>
                 </li>
             {% else %}
