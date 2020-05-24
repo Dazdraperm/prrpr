@@ -3,17 +3,31 @@
 
 {% block content %}
 
-    <div class="card mb-0">
-        <div class="card-header font-weight-bold">
+    <div class="card mb-0 border-primary border-top-0 border-right-0 border-left-0">
+        <div class="card-header font-weight-bold shadow-sm">
             Для получения этого вида материальной помощи нужно:
         </div>
-        <div class="card-body">
-            <p class="card-text">1) определить, к какой категории нуждаемости вы относитесь (посмотреть <a
-                    class="card-link" href="{% url 'category' %}">здесь</a>)</p>
-            <p class="card-text">2) заполнить заявление в соответствии с образцом</p>
-            <p class="card-text">3) приложить к заявлению копии документов, необходимые для подтверждения вашей
+        <div class="card-body shadow">
+            <p class="card-text"><b><i>1)</i></b> Определить, к какой категории нуждаемости вы относитесь (посмотреть <a
+                    class="card-link" href="{% url 'category' %}"><b><i>здесь</i></b></a>)</p>
+            <p class="card-text"><b><i>2)</i></b> Заполнить заявление в соответствии с образцом</p>
+            <p class="card-text"><b><i>3)</i></b> Приложить к заявлению копии документов, необходимые для подтверждения
+                вашей
                 категории нуждаемости</p>
-            <p class="card-text">4) отнести заявление в профбюро института (график работы можно найти в здесь)</p>
+            <p class="card-text"><b><i>4)</i></b> Отнести заявление в профбюро института (график работы можно найти <a
+                    class="card-link" href="{% url 'schedule' %}"><b><i>здесь</i></b></a>)</p>
+        </div>
+    </div>
+
+    <div class="card text-white bg-danger mb-3 mt-3 border-primary border-right-0 border-left-0">
+        <div class="card-header font-weight-bold shadow-sm">Дополнительно приложить к заявлению:</div>
+        <div class="card-body shadow">
+            <p class="card-text"><b><i>1)</i></b> Справку из медицинского учреждения о
+                назначении лечения;</p>
+            <p class="card-text"><b><i>2)</i></b>оригиналы чеков на покупку лекарственных препаратов либо договор на
+                оказание платных медицинских услуг и т.п;<br>
+                <b><i>(Документы действительны в течение шести
+                    месяцев со дня установления диагноза)</i></b></p>
         </div>
     </div>
 
@@ -24,21 +38,25 @@
         <div class="col-sm">
             <form method="post" class="post-form aling mb-5 pb-5">
                 <div class="container mb-5 pt-5 pb-5">
-                    <button class="btn btn-primary float-left btn-block" value="Скачать" formaction="document">Скачать</button>
-                    <button class="btn btn-primary float-left btn-block" value="Скачать" formaction="document">Скачать</button>
+                    <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded" value="Скачать"
+                            formaction="document"><b>Скачать</b></button>
+                    <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                            value="Автозаполнение" formaction="document"><b>Автозаполнение</b></button>
                 </div>
 
                 {% csrf_token %}
-                <div class="container">
+                <div class="container pt-2">
                     {{ form|as_bootstrap_inline }}
                 </div>
                 <div class="container">
-                    <button class="btn btn-primary float-left btn-block" value="Скачать" formaction="document">Скачать</button>
+                    <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded" value="Скачать"
+                            formaction="document"><b>Скачать</b></button>
                 </div>
             </form>
         </div>
         <div class="col-sm pt-5">
-            <img src="https://sun9-19.userapi.com/c846020/v846020577/1c63ae/bRXrd9yuP4Y.jpg" alt="образец">
+            <img class="shadow rounded" src="https://sun9-19.userapi.com/c846020/v846020577/1c63ae/bRXrd9yuP4Y.jpg"
+                 alt="образец">
         </div>
     </div>
 {% endblock %}

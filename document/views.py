@@ -18,6 +18,10 @@ def index(request):
         return render(request, 'index.html')
 
 
+def schedule(request):
+    return render(request, 'schedule.html')
+
+
 def category(request):
     return render(request, 'category_of_need.html')
 

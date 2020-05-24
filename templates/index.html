@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %}Documents{% endblock title %}</title>
     <link rel="shortcut icon" href="{% static 'images/kfu.png' %}" type="image/png">
@@ -78,7 +80,7 @@
 </nav>
 
 {% block content %}
-{% endblock %}
+{% endblock content %}
 
 </body>
 </html>
