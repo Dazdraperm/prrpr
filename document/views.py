@@ -37,7 +37,7 @@ def login(request):
 
 def auto_fill(request):
     site_user = SiteUser.objects.get(user=request.user)
-    course_group = CourseGroup.objects.get()
+    course_group = CourseGroup.objects.get(user=request.user)
     form = StatementForm1(initial={
         'name': request.user.first_name,
         'surname': request.user.last_name
@@ -94,7 +94,8 @@ def document(request):
 def statements(request):
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
-        return render(request, 'statements.html', context={'site_user': site_user})
+        course_group = CourseGroup.objects.get(user=request.user)
+        return render(request, 'statements.html', context={'site_user': site_user, 'course_group': course_group})
     else:
         return render(request, 'statements.html')
 

@@ -8,6 +8,7 @@ _STATUS_CHOICES = [
 
 
 class Passport(models.Model):
+    user = models.OneToOneField(User, name='user', on_delete=models.CASCADE, blank=True, null=True)
     series = models.CharField(max_length=4, blank=True, null=True)
     number = models.CharField(max_length=6, blank=True, null=True)
     code = models.CharField(max_length=20, blank=True, null=True)
@@ -17,6 +18,7 @@ class Passport(models.Model):
 
 
 class CourseGroup(models.Model):
+    user = models.OneToOneField(User, name='user', on_delete=models.CASCADE, blank=True, null=True)
     course = models.CharField(max_length=1, blank=True, null=True)  # Курс
     group = models.CharField(max_length=10, blank=True, null=True)  # Группа
     nameHeadman = models.CharField(max_length=30, blank=True, null=True)  # Имя старосты
@@ -24,9 +26,9 @@ class CourseGroup(models.Model):
 
 
 class SiteUser(models.Model):
-    user = models.ForeignKey(User, name='user', on_delete=models.CASCADE)
-    passport = models.ForeignKey(Passport, name='passport', on_delete=models.CASCADE, blank=True, null=True)
-    course_Group = models.ForeignKey(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True, null=True)
+    user = models.OneToOneField(User, name='user', on_delete=models.CASCADE)
+    passport = models.OneToOneField(Passport, name='passport', on_delete=models.CASCADE, blank=True, null=True)
+    course_Group = models.OneToOneField(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True, null=True)
     INN = models.CharField(max_length=10)
     pFact = models.CharField(max_length=150, blank=True, null=True)
     dateBirthday = models.CharField(max_length=20)
