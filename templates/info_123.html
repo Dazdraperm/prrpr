@@ -22,19 +22,29 @@
 
     <div class="container-fluid row mt-3 m-0">
         <div class="col-sm">
-            <form method="post" class="post-form aling mb-5" action="{% url 'document' %}">
 
+            <form method="post" class="post-form aling mb-5 pb-5">
                 <div class="container mb-5 pt-5 pb-5">
-                    <input type="submit" value="Скачать" class="btn btn-primary float-left btn-block">
-                    <input type="submit" value="Автозаполнение" class="btn btn-primary float-right btn-block">
+                    <button class="btn btn-primary float-left btn-block" value="Скачать" formaction="document">Скачать</button>
                 </div>
-
                 {% csrf_token %}
                 <div class="container">
                     {{ form|as_bootstrap_inline }}
                 </div>
-
+                {% if request.user.is_authenticated  %}
+                <div class="container">
+                    <button class="btn btn-primary float-left btn-block" value="Автозаполнение" formaction="auto_fill">Автозаполнение</button>
+                </div>
+                {% endif %}
             </form>
+         <form method="post" class="post-form aling mb-5 pb-5">
+            {% if request.user.is_authenticated  %}
+                <div class="container">
+                    <button class="btn btn-primary float-left btn-block" value="Автозаполнение" formaction="auto_fill">Автозаполнение</button>
+                </div>
+                {% endif %}
+                {% csrf_token %}
+        </form>
         </div>
         <div class="col-sm pt-5">
             <img src="https://sun9-19.userapi.com/c846020/v846020577/1c63ae/bRXrd9yuP4Y.jpg" alt="образец">

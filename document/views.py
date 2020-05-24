@@ -6,9 +6,8 @@ from django.views.generic import UpdateView
 from django.urls import reverse_lazy
 
 from document.forms import StatementForm1
-from document.models import SiteUser, Passport
+from document.models import SiteUser, CourseGroup
 from docxtpl import DocxTemplate
-from random import randint
 
 
 def index(request):
@@ -31,8 +30,15 @@ def info(request):
 def login(request):
     return redirect('accounts/login')
 
-#def auto_fill(request):
- #   if request.method == "POST":
+
+def auto_fill(request):
+    site_user = SiteUser.objects.get(user=request.user)
+    course_group = CourseGroup.objects.get()
+    form = StatementForm1(initial={
+        'name': request.user.first_name,
+        'surname': request.user.last_name
+    })
+    return render(request, 'info_123.html', context={'form': form})
 
 
 def document(request):
@@ -103,17 +109,5 @@ class UpdateProfile(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(UpdateProfile, self).get_context_data(**kwargs)
-        context['site_user'] = SiteUser.objects.get(user=self.request.user)
-        return context
-
-
-class UpdatePassport(UpdateView):
-    model = Passport
-    template_name = 'passport.html'
-    fields = ['series', 'number', 'code', 'dateTimeField', 'place']
-    success_url = reverse_lazy('index')
-
-    def get_context_data(self, **kwargs):
-        context = super(UpdatePassport, self).get_context_data(**kwargs)
         context['site_user'] = SiteUser.objects.get(user=self.request.user)
         return context
