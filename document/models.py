@@ -12,9 +12,9 @@ class Passport(models.Model):
     series = models.CharField(max_length=4, blank=True, null=True)
     number = models.CharField(max_length=6, blank=True, null=True)
     code = models.CharField(max_length=20, blank=True, null=True)
-    dateTimeField = models.CharField(max_length=20, blank=True, null=True)  #
+    dateTimeField = models.DateField(max_length=20, blank=True, null=True)  #
     placeOfRegistration = models.CharField(max_length=150, blank=True, null=True)  # Место регистрации
-    dateBirthday = models.CharField(max_length=8, blank=True, null=True)
+    dateBirthday = models.DateField(max_length=8, blank=True, null=True)
 
 
 class CourseGroup(models.Model):
@@ -28,9 +28,13 @@ class CourseGroup(models.Model):
 class SiteUser(models.Model):
     user = models.OneToOneField(User, name='user', on_delete=models.CASCADE)
     passport = models.OneToOneField(Passport, name='passport', on_delete=models.CASCADE, blank=True, null=True)
-    course_Group = models.OneToOneField(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True, null=True)
+    course_Group = models.OneToOneField(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True,
+                                        null=True)
     INN = models.CharField(max_length=10, blank=True, null=True)
-    pFact = models.CharField(max_length=150, blank=True, null=True)
+    pFact = models.CharField(max_length=150, blank=True, null=True)  # Место жительства
+    apartment = models.IntegerField(max_length=7, blank=True, null=True)  # Квартира
+    index = models.IntegerField(max_length=8, blank=True, null=True)  # Почтовый индекс
+    house = models.IntegerField(max_length=7, blank=True, null=True)  # Дом
     phoneNumber = models.CharField(max_length=11, blank=True, null=True)
     patronymic = models.CharField(max_length=30, blank=True, null=True)  # Отчество
     numberInsuranceCertificate = models.CharField(max_length=20, blank=True, null=True)  # Страховое свидетельство
@@ -61,8 +65,11 @@ class Statement1(models.Model):
     series = models.CharField(max_length=4, blank=True, null=True, verbose_name='Серия')
     number = models.CharField(max_length=6, blank=True, null=True)
     code = models.CharField(max_length=20, blank=True, null=True)
-    dateTimeField = models.CharField(max_length=20, blank=True, null=True)
+    dateTimeField = models.DateField(max_length=20, blank=True, null=True)
     place = models.CharField(max_length=100, blank=True, null=True)
+    index = models.IntegerField(max_length=8, blank=True, null=True)  # Почтовый индекс
+    house = models.IntegerField(max_length=7, blank=True, null=True)  # Дом
+    apartment = models.IntegerField(max_length=7, blank=True, null=True)  # Квартира
     number_of_statement = models.CharField(max_length=1, blank=True, null=True)
     amount = models.CharField(max_length=10, blank=True, null=True)
     name_institute = models.CharField(max_length=20, blank=True, null=True)  # Название института
@@ -71,11 +78,12 @@ class Statement1(models.Model):
     patronymic = models.CharField(max_length=30, blank=True, null=True)  # Отчество
     INN = models.CharField(max_length=10, blank=True, null=True)  # ИНН
     numberInsuranceCertificate = models.CharField(max_length=11, blank=True, null=True)  # Страховое свидетельство
-    dateBirthday = models.CharField(max_length=8, blank=True, null=True)  # День рождения
+    dateBirthday = models.DateField(max_length=8, blank=True, null=True)  # День рождения
     disability_group = models.CharField(max_length=20, blank=True, null=True)  # группа инвалидности
     disability_group_text = models.CharField(max_length=50, default='Заполнить по необходимости', blank=True,
                                              null=True)  # инвалидность по...
     phoneNumber = models.CharField(max_length=11, blank=True, null=True)  # Номер телефона
-    fullStateSupport = models.CharField(max_length=3, choices=_STATUS_CHOICES, default='Да', blank=True, null=True)  # Полное гос. обеспечение
+    fullStateSupport = models.CharField(max_length=3, choices=_STATUS_CHOICES, default='Да', blank=True,
+                                        null=True)  # Полное гос. обеспечение
     textfield1 = models.CharField(max_length=150, blank=True, null=True)  # Просьба
     textfield2 = models.CharField(max_length=150, blank=True, null=True)  # Приложение

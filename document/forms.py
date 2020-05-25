@@ -19,11 +19,7 @@ class UserForm(ModelForm):
 class SiteUserForm1(ModelForm):
     class Meta:
         model = SiteUser
-        fields = (
-            'INN', 'pFact',  'phoneNumber', 'inProfCom', 'patronymic', 'numberInsuranceCertificate',
-            'disability', 'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence',
-            'FormOfEducation'
-        )
+        exclude = ['user', 'course_Group', 'passport']
 
 
 class StatementForm1(ModelForm):
