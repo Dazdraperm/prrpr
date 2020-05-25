@@ -79,7 +79,7 @@ def how(request):
     return render(request, 'how.html')
 
 
-def auto_fill(request):
+def auto_fill(request, pk):
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
         course_group = CourseGroup.objects.get(user=request.user)
@@ -122,7 +122,7 @@ def auto_fill(request):
         return render(request, 'index.html')
 
 
-def document(request):
+def document(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/socPitanie.docx")
         course = request.POST['course']

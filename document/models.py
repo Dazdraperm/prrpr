@@ -54,28 +54,28 @@ class DisabilityGroup(models.Model):
 
 
 class Statement1(models.Model):
-    course = models.CharField(max_length=1)  # Курс
-    group = models.CharField(max_length=10)  # Группа
+    course = models.CharField(max_length=1, blank=True, null=True)  # Курс
+    group = models.CharField(max_length=10, blank=True, null=True)  # Группа
     pFact = models.CharField(max_length=150, blank=True, null=True)  # Фактическое место проживания
-    nameHeadman = models.CharField(max_length=30)  # Имя старосты
+    nameHeadman = models.CharField(max_length=30, blank=True, null=True)  # Имя старосты
     series = models.CharField(max_length=4, blank=True, null=True, verbose_name='Серия')
     number = models.CharField(max_length=6, blank=True, null=True)
     code = models.CharField(max_length=20, blank=True, null=True)
     dateTimeField = models.CharField(max_length=20, blank=True, null=True)
     place = models.CharField(max_length=100, blank=True, null=True)
-    number_of_statement = models.CharField(max_length=1)
-    amount = models.CharField(max_length=10)
-    name_institute = models.CharField(max_length=20)  # Название института
-    name = models.CharField(max_length=30)  # Имя
-    surname = models.CharField(max_length=30)  # Фамилия
-    patronymic = models.CharField(max_length=30)  # Отчество
-    INN = models.CharField(max_length=10)  # ИНН
-    numberInsuranceCertificate = models.CharField(max_length=11)  # Страховое свидетельство
-    dateBirthday = models.CharField(max_length=8)  # День рождения
-    disability_group = models.CharField(max_length=20)  # группа инвалидности
+    number_of_statement = models.CharField(max_length=1, blank=True, null=True)
+    amount = models.CharField(max_length=10, blank=True, null=True)
+    name_institute = models.CharField(max_length=20, blank=True, null=True)  # Название института
+    name = models.CharField(max_length=30, blank=True, null=True)  # Имя
+    surname = models.CharField(max_length=30, blank=True, null=True)  # Фамилия
+    patronymic = models.CharField(max_length=30, blank=True, null=True)  # Отчество
+    INN = models.CharField(max_length=10, blank=True, null=True)  # ИНН
+    numberInsuranceCertificate = models.CharField(max_length=11, blank=True, null=True)  # Страховое свидетельство
+    dateBirthday = models.CharField(max_length=8, blank=True, null=True)  # День рождения
+    disability_group = models.CharField(max_length=20, blank=True, null=True)  # группа инвалидности
     disability_group_text = models.CharField(max_length=50, default='Заполнить по необходимости', blank=True,
                                              null=True)  # инвалидность по...
-    phoneNumber = models.CharField(max_length=11)  # Номер телефона
-    fullStateSupport = models.CharField(max_length=3, choices=_STATUS_CHOICES, default='Да')  # Полное гос. обеспечение
-    textfield1 = models.CharField(max_length=150)  # Просьба
-    textfield2 = models.CharField(max_length=150)  # Приложение
+    phoneNumber = models.CharField(max_length=11, blank=True, null=True)  # Номер телефона
+    fullStateSupport = models.CharField(max_length=3, choices=_STATUS_CHOICES, default='Да', blank=True, null=True)  # Полное гос. обеспечение
+    textfield1 = models.CharField(max_length=150, blank=True, null=True)  # Просьба
+    textfield2 = models.CharField(max_length=150, blank=True, null=True)  # Приложение
