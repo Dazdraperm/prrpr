@@ -1,7 +1,8 @@
 from django.urls import path, include
-from .views import auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, document, admin, login,\
+from .views import auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, document, admin, \
     schedule, consent, \
-    survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position, material_aid
+    survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position, material_aid, \
+    my_login, my_logout
 
 urlpatterns = [
     path('', index, name='index'),
@@ -26,5 +27,6 @@ urlpatterns = [
     # path('CourseGroup/<int:pk>/', UpdateCourse.as_view(), name='CourseGroup'),
     path('info/<int:pk>/document', document, name='document'),
     path('admin1', admin, name='admin1'),
-    path('login', login, name='login'),
+    path('login', my_login, name='my_login'),
+    path('logout', my_logout, name='my_logout'),
 ]

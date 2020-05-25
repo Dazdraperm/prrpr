@@ -39,6 +39,13 @@
 {#                        короче тут где-то должен быть переход на две ссылки        вот одна #}
                         <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Профиль</button>
                     </a>
+                    <a class="" href="{% url 'logout' %}">
+                        <button id="dLabel" class="btn btn-outline-primary shadow p-2 rounded" type="button"
+                                data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                            Выйти из аккаунта
+                        </button>
+                    </a>
                  <a class="nav-link" href="{% url 'passport' request.user.id %}">
 {#                        короче тут где-то должен быть переход на две ссылки        вот одна #}
                         <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Пасспорт</button>

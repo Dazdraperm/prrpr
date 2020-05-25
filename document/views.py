@@ -71,7 +71,7 @@ def position(request):
     return render(request, 'position.html')
 
 
-def login(request):
+def my_login(request):
     return redirect('accounts/login')
 
 
@@ -82,42 +82,102 @@ def how(request):
 def auto_fill(request, pk):
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
-        course_group = CourseGroup.objects.get(user=request.user)
-        passport = Passport.objects.get(user=request.user)
-        form = StatementForm1(initial={
-            # Здесь начинаются поля Юзера
-            'name': request.user.first_name,
-            'surname': request.user.last_name,
+        if site_user.passport is None:
+            course_group = CourseGroup.objects.get(user=request.user)
+            form = StatementForm1(initial={
+                # Здесь начинаются поля Юзера
+                'name': request.user.first_name,
+                'surname': request.user.last_name,
 
-            # Здес начинаются поля Пасспорта
-            'code': passport.code,
-            'series': passport.series,
-            'number': passport.number,
-            'dateBirthday': passport.dateBirthday,
-            'place': passport.placeOfRegistration,
-            'dateTimeField': passport.dateTimeField,
+                # Здесь начинаются поля Курса и группы
+                'course': course_group.course,
+                'name_institute': course_group.course,
+                'group': course_group.group,
+                'nameHeadman': course_group.nameHeadman,
 
-            # Здесь начинаются поля Курса и группы
-            'course': course_group.course,
-            'name_institute': course_group.course,
-            'group': course_group.group,
-            'nameHeadman': course_group.nameHeadman,
+                # Здесь начинаются поля Сайт юзера
+                'INN': site_user.INN,
+                'pFact': site_user.pFact,
+                'phoneNumber': site_user.phoneNumber,
+                'patronymic': site_user.patronymic,
+                'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
+                'disability': site_user.disability,
+                'fullStateSupport': site_user.fullStateSupport,
+                'preferentialCategory': site_user.preferentialCategory,
+                'numberTravelCard': site_user.numberTravelCard,
+                'addressOfResidence': site_user.addressOfResidence,
+                'FormOfEducation': site_user.FormOfEducation,
+                'inProfCom': site_user.inProfCom,
+            })
+            return render(request, 'info_123.html', context={'form': form})
+        elif site_user.course_Group is None:
 
-            # Здесь начинаются поля Сайт юзера
-            'INN': site_user.INN,
-            'pFact': site_user.pFact,
-            'phoneNumber': site_user.phoneNumber,
-            'patronymic': site_user.patronymic,
-            'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
-            'disability': site_user.disability,
-            'fullStateSupport': site_user.fullStateSupport,
-            'preferentialCategory': site_user.preferentialCategory,
-            'numberTravelCard': site_user.numberTravelCard,
-            'addressOfResidence': site_user.addressOfResidence,
-            'FormOfEducation': site_user.FormOfEducation,
-            'inProfCom': site_user.inProfCom,
-        })
-        return render(request, 'info_123.html', context={'form': form})
+            passport = Passport.objects.get(user=request.user)
+            form = StatementForm1(initial={
+                # Здесь начинаются поля Юзера
+                'name': request.user.first_name,
+                'surname': request.user.last_name,
+
+                # Здес начинаются поля Пасспорта
+                'code': passport.code,
+                'series': passport.series,
+                'number': passport.number,
+                'dateBirthday': passport.dateBirthday,
+                'place': passport.placeOfRegistration,
+                'dateTimeField': passport.dateTimeField,
+
+                # Здесь начинаются поля Сайт юзера
+                'INN': site_user.INN,
+                'pFact': site_user.pFact,
+                'phoneNumber': site_user.phoneNumber,
+                'patronymic': site_user.patronymic,
+                'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
+                'disability': site_user.disability,
+                'fullStateSupport': site_user.fullStateSupport,
+                'preferentialCategory': site_user.preferentialCategory,
+                'numberTravelCard': site_user.numberTravelCard,
+                'addressOfResidence': site_user.addressOfResidence,
+                'FormOfEducation': site_user.FormOfEducation,
+                'inProfCom': site_user.inProfCom,
+            })
+            return render(request, 'info_123.html', context={'form': form})
+        else:
+            course_group = CourseGroup.objects.get(user=request.user)
+            passport = Passport.objects.get(user=request.user)
+            form = StatementForm1(initial={
+                # Здесь начинаются поля Юзера
+                'name': request.user.first_name,
+                'surname': request.user.last_name,
+
+                # Здес начинаются поля Пасспорта
+                'code': passport.code,
+                'series': passport.series,
+                'number': passport.number,
+                'dateBirthday': passport.dateBirthday,
+                'place': passport.placeOfRegistration,
+                'dateTimeField': passport.dateTimeField,
+
+                # Здесь начинаются поля Курса и группы
+                'course': course_group.course,
+                'name_institute': course_group.course,
+                'group': course_group.group,
+                'nameHeadman': course_group.nameHeadman,
+
+                # Здесь начинаются поля Сайт юзера
+                'INN': site_user.INN,
+                'pFact': site_user.pFact,
+                'phoneNumber': site_user.phoneNumber,
+                'patronymic': site_user.patronymic,
+                'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
+                'disability': site_user.disability,
+                'fullStateSupport': site_user.fullStateSupport,
+                'preferentialCategory': site_user.preferentialCategory,
+                'numberTravelCard': site_user.numberTravelCard,
+                'addressOfResidence': site_user.addressOfResidence,
+                'FormOfEducation': site_user.FormOfEducation,
+                'inProfCom': site_user.inProfCom,
+            })
+            return render(request, 'info_123.html', context={'form': form})
     else:
         return render(request, 'index.html')
 
@@ -204,12 +264,27 @@ class UpdateProfile(UpdateView):
         return context
 
 
-# class UpdateCourse(UpdateView):
+class UpdateCourse(UpdateView):
+    model = CourseGroup
+    template_name = 'course.html'
+    form_class = Course
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        course_group = CourseGroup.objects.get(user=self.request.user)
+        context = super(UpdateCourse, self).get_context_data(**kwargs)
+        context['active_client'] = True
+        context['form'] = self.form_class(initial={'course': course_group.course,
+                                                   'name_institute': course_group.course,
+                                                   'group': course_group.group,
+                                                   'nameHeadman': course_group.nameHeadman, })
+        context['active_client'] = True
+        return context
 
 
 class UpdatePassport(UpdateView):
     model = Passport
-    template_name = 'profile.html'
+    template_name = 'passport.html'
     form_class = PassportForm
     success_url = reverse_lazy('index')
 
@@ -225,5 +300,7 @@ class UpdatePassport(UpdateView):
                                                    'dateTimeField': passport.dateTimeField})
         context['active_client'] = True
         return context
-    # def get_context_data(self, **kwargs):
-    #     context['form'] = self.form_class(self.request.GET, instance=request.user)
+
+
+def my_logout(request):
+    redirect('accounts/logout')
