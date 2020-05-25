@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import statements, index, category, info, UpdateProfile, document, admin, login, schedule, info_6, consent, \
-    survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position
+    survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position, material_aid
 
 urlpatterns = [
     path('', index, name='index'),
@@ -11,6 +11,7 @@ urlpatterns = [
     path('statement_of_command', statement_of_command, name='statement_of_command'),
     path('additional_bank', additional_bank, name='additional_bank'),
     path('contract', contract, name='contract'),
+    path('material_aid', material_aid, name='material_aid'),
     path('how', how, name='how'),
     path('position', position, name='position'),
     path('conditions', conditions, name='conditions'),

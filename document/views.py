@@ -22,6 +22,10 @@ def schedule(request):
     return render(request, 'schedule.html')
 
 
+def material_aid(request):
+    return render(request, 'material_aid.html')
+
+
 def info_6(request):
     form = StatementForm1()
     return render(request, 'info_6.html', context={'form': form})

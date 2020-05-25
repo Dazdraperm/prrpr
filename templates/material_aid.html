@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="jumbotron jumbotron-fluid shadow ">
+        <div class="container">
+            <h1 class="display-4">Материальная помощь для всех</h1>
+            <p class="lead"> Чтобы получить материальную помощь, нужно
+                <button type="button" class="btn btn-dark btn-sm font-weight-bold center">скачать</button>
+                распечатать (или взять на стене в 1510) заявление,
+                в котором заполнить всё, кроме левого верхнего угла и дат.
+            </p>
+            <p> Также нужно приложить копию профсоюзного билета и пакет документов, подтверждающих льготную категорию
+                (посмотреть <a
+                    class="card-link" href="{% url 'category' %}"><b><i>здесь</i></b></a>).</p>
+        </div>
+    </div>
+
+    <div class="container pb-5 row-cols-sm-2">
+        <img src="{% static 'images/material_aid.jpg' %}" class="mx-auto d-block shadow rounded" alt="statement_of_command">
+    </div>
+
+{% endblock content %}
