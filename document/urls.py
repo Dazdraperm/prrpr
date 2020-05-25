@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, document, admin, login,\
-    schedule, info_6, consent, \
+    schedule, consent, \
     survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position, material_aid
 
 urlpatterns = [
@@ -18,7 +18,6 @@ urlpatterns = [
     path('conditions', conditions, name='conditions'),
     path('category', category, name='category'),
     path('info/<int:pk>/', info, name='info'),
-    path('info_6', info_6, name='info_6'),
     path('auto_fill', auto_fill, name='auto_fill'),
     path('schedule', schedule, name='schedule'),
     path('accounts/', include('django.contrib.auth.urls')),

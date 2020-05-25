@@ -26,11 +26,6 @@ def material_aid(request):
     return render(request, 'material_aid.html')
 
 
-def info_6(request):
-    form = StatementForm1()
-    return render(request, 'info_6.html', context={'form': form})
-
-
 def consent(request):
     return render(request, 'info_6_links/consent.html')
 
@@ -64,7 +59,11 @@ def informer(request):
 
 
 def info(request, pk):
-    form = StatementForm1()
+    if pk == 6:
+        form = StatementForm1()
+        return render(request, 'info_6.html', context={'form': form, 'pk': pk}, )
+    else:
+        form = StatementForm1()
     return render(request, 'info_123.html', context={'form': form, 'pk': pk}, )
 
 
