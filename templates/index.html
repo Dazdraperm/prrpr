@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
-<link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %}Documents{% endblock title %}</title>
     <link rel="shortcut icon" href="{% static 'images/kfu.png' %}" type="image/png">
@@ -36,7 +36,6 @@
             {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'profile' request.user.id %}">
-{#                        короче тут где-то должен быть переход на две ссылки        вот одна #}
                         <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Профиль</button>
                     </a>
                     <a class="" href="{% url 'logout' %}">
@@ -46,9 +45,11 @@
                             Выйти из аккаунта
                         </button>
                     </a>
-                 <a class="nav-link" href="{% url 'passport' request.user.id %}">
-{#                        короче тут где-то должен быть переход на две ссылки        вот одна #}
+                    <a class="nav-link" href="{% url 'passport' request.user.id %}">
                         <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Пасспорт</button>
+                    </a>
+                    <a class="nav-link" href="{% url 'CourseGroup' request.user.id %}">
+                        <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Группа</button>
                     </a>
                 </li>
             {% else %}

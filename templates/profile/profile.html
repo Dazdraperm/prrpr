@@ -27,9 +27,10 @@
 
                 <div class="container pl-5">
                     <div class="post">
-                        <form method="post" class="post-form" action="{% url 'profile' request.user.id %}">{#форма для профиля#}
+                        <form method="post" class="post-form" action="{% url 'profile' request.user.id %}">
+                            {#форма для профиля#}
                             {% csrf_token %}
-                            {{ form|as_bootstrap_inline}}
+                            {{ form|as_bootstrap_inline }}
 
                             <div class="container-fluid">
                                 <input type="submit" value="Сохранить"
@@ -38,11 +39,11 @@
                         </form>
 
 
-
                         {#ДЛЯ ПАСПОРТА#}
-                        <form method="post" class="post-form" action="{% url 'passport' request.user.id %}">{#форма для пасспорта   #}
+                        <form method="post" class="post-form" action="{% url 'passport' request.user.id %}">
+                            {#форма для пасспорта   #}
                             {% csrf_token %}
-                            {{ form|as_bootstrap_inline}}
+                            {{ form|as_bootstrap_inline }}
                             <div class="container-fluid">
                                 <input type="submit" value="Сохранить"
                                        class="btn btn-primary float-left shadow rounded"/>

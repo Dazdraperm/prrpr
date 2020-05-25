@@ -1,11 +1,7 @@
 from django.urls import path, include
-from .views import auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, document, admin, \
-    schedule, consent, \
-    survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position, material_aid, \
-    my_login, my_logout
-from .views import auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, document, admin, login, \
-    schedule, consent, survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position, \
-    material_aid, online_wallet, social_nutrition
+from .views import my_login, my_logout, auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, \
+    document, admin, schedule, consent, survey_questionnaire, statement_of_command, additional_bank, contract, how, \
+    conditions, position, material_aid, online_wallet, social_nutrition, UpdateCourse
 
 urlpatterns = [
     path('', index, name='index'),
@@ -29,7 +25,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/<int:pk>/', UpdateProfile.as_view(), name='profile'),
     path('passport/<int:pk>/', UpdatePassport.as_view(), name='passport'),
-    # path('CourseGroup/<int:pk>/', UpdateCourse.as_view(), name='CourseGroup'),
+    path('CourseGroup/<int:pk>/', UpdateCourse.as_view(), name='CourseGroup'),
     path('info/<int:pk>/document', document, name='document'),
     path('admin1', admin, name='admin1'),
     path('login', my_login, name='my_login'),
