@@ -22,6 +22,39 @@ def schedule(request):
     return render(request, 'schedule.html')
 
 
+def material_aid(request):
+    return render(request, 'material_aid.html')
+
+
+def info_6(request):
+    form = StatementForm1()
+    return render(request, 'info_6.html', context={'form': form})
+
+
+def consent(request):
+    return render(request, 'info_6_links/consent.html')
+
+
+def contract(request):
+    return render(request, 'info_6_links/contract.html')
+
+
+def survey_questionnaire(request):
+    return render(request, 'info_6_links/survey_questionnaire.html')
+
+
+def additional_bank(request):
+    return render(request, 'info_6_links/additional_bank.html')
+
+
+def statement_of_command(request):
+    return render(request, 'info_6_links/statement_of_command.html')
+
+
+def conditions(request):
+    return render(request, 'conditions.html')
+
+
 def category(request):
     return render(request, 'category_of_need.html')
 
@@ -35,9 +68,16 @@ def info(request, pk):
     return render(request, 'info_123.html', context={'form': form, 'pk': pk}, )
 
 
+def position(request):
+    return render(request, 'position.html')
+
+
 def login(request):
     return redirect('accounts/login')
 
+
+def how(request):
+    return render(request, 'how.html')
 
 def auto_fill(request):
     if request.user.is_authenticated:
@@ -91,8 +131,11 @@ def document(request):
         name_institute = request.POST['name_institute']
         series = request.POST['series']
         number = request.POST['number']
+        code = request.POST['code']
+        dateTimeField = request.POST['dateTimeField']
         INN = request.POST['INN']
         place = request.POST['place']
+        dateBirthday = request.POST['dateBirthday']
         numberPhone = request.POST['phoneNumber']
         certificate = request.POST['numberInsuranceCertificate']
         dateBirthday = request.POST['dateBirthday']
@@ -126,64 +169,11 @@ def document(request):
 
 
 def statements(request):
-    if request.user.is_authenticated:
-        site_user = SiteUser.objects.get(user=request.user)
-        course_group = CourseGroup.objects.get(user=request.user)
-        return render(request, 'statements.html', context={'site_user': site_user, 'course_group': course_group})
-    else:
-        return render(request, 'statements.html')
+    return render(request, 'statements.html')
 
 
 def admin(request):
     return redirect("/admin")
-
-
-# def profile(request):
-#     course_group = CourseGroup.objects.get(user=request.user)
-#     site_user = SiteUser.objects.get(user=request.user)
-#     passport = Passport.objects.get(user=request.user)
-#     form_site_user = SiteUserForm1(initial={'INN': site_user.INN,
-#                                             'pFact': site_user.pFact,
-#                                             'phoneNumber': site_user.phoneNumber,
-#                                             'patronymic': site_user.patronymic,
-#                                             'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
-#                                             'disability': site_user.disability,
-#                                             'fullStateSupport': site_user.fullStateSupport,
-#                                             'preferentialCategory': site_user.preferentialCategory,
-#                                             'numberTravelCard': site_user.numberTravelCard,
-#                                             'addressOfResidence': site_user.addressOfResidence,
-#                                             'FormOfEducation': site_user.FormOfEducation,
-#                                             'inProfCom': site_user.inProfCom})
-#
-#     form_passport = PassportForm(initial={'code': passport.code,
-#                                           'series': passport.series,
-#                                           'number': passport.number,
-#                                           'dateBirthday': passport.dateBirthday,
-#                                           'place': passport.placeOfRegistration,
-#                                           'dateTimeField': passport.dateTimeField, })
-#
-#     form_course = Course(initial={'course': course_group.course,
-#                                   'name_institute': course_group.course,
-#                                   'group': course_group.group,
-#                                   'nameHeadman': course_group.nameHeadman, })
-#     return render(request, 'profile.html', context={'form': form_site_user, 'form_passport': form_passport,
-#                                                     'form_course': form_course})
-
-# def profile(request):
-#     site_user = SiteUser.objects.get(user=request.user)
-#     form = SiteUserForm1(initial={'INN': site_user.INN,
-#                                   'pFact': site_user.pFact,
-#                                   'phoneNumber': site_user.phoneNumber,
-#                                   'patronymic': site_user.patronymic,
-#                                   'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
-#                                   'disability': site_user.disability,
-#                                   'fullStateSupport': site_user.fullStateSupport,
-#                                   'preferentialCategory': site_user.preferentialCategory,
-#                                   'numberTravelCard': site_user.numberTravelCard,
-#                                   'addressOfResidence': site_user.addressOfResidence,
-#                                   'FormOfEducation': site_user.FormOfEducation,
-#                                   'inProfCom': site_user.inProfCom})
-#     return render(request, 'profile.html', context={'form': form})
 
 
 class UpdateProfile(UpdateView):
