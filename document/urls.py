@@ -1,7 +1,7 @@
 from django.urls import path, include
-from .views import auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, document, admin, login,\
-    schedule, consent, \
-    survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position, material_aid
+from .views import auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, document, admin, login, \
+    schedule, consent, survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position, \
+    material_aid, online_wallet, social_nutrition
 
 urlpatterns = [
     path('', index, name='index'),
@@ -12,8 +12,10 @@ urlpatterns = [
     path('statement_of_command', statement_of_command, name='statement_of_command'),
     path('additional_bank', additional_bank, name='additional_bank'),
     path('contract', contract, name='contract'),
+    path('online_wallet', online_wallet, name='online_wallet'),
     path('material_aid', material_aid, name='material_aid'),
     path('how', how, name='how'),
+    path('social_nutrition', social_nutrition, name='social_nutrition'),
     path('position', position, name='position'),
     path('conditions', conditions, name='conditions'),
     path('category', category, name='category'),

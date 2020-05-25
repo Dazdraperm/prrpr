@@ -6573,7 +6573,7 @@
         $link.addClass(ClassName$8.ACTIVE);
       } else {
         // Set triggered link as active
-        $link.addClass(ClassName$8.ACTIVE); // Set triggered links parents as active
+        $link.addClass(ClassName$8.ACTIVE); // Set triggered first_7 parents as active
         // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
 
         $link.parents(Selector$8.NAV_LIST_GROUP).prev(Selector$8.NAV_LINKS + ", " + Selector$8.LIST_ITEMS).addClass(ClassName$8.ACTIVE); // Handle special case when .nav-link is inside .nav-item

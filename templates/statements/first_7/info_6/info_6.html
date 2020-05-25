@@ -49,29 +49,63 @@
         </div>
     </div>
 
-    <div class="container-fluid row mt-3 m-0">
-        <div class="col-sm">
-            <form method="post" class="post-form align mb-5 pb-5">
-                <div class="container mb-5 pt-5 pb-5">
-                    <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded" value="Скачать"
-                            formaction="document"><b>Скачать</b></button>
-                    <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
-                            value="Автозаполнение" formaction="document"><b>Автозаполнение</b></button>
-                </div>
+    {% if request.user.is_authenticated %}
+        <div class="container-fluid row mt-3 m-0">
+            <div class="col-sm">
 
-                {% csrf_token %}
-                <div class="container pt-2">
-                    {{ form|as_bootstrap_inline }}
-                </div>
-                <div class="container">
-                    <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded" value="Скачать"
-                            formaction="document"><b>Скачать</b></button>
-                </div>
-            </form>
+                <form>
+                    <div class="container mb-5 ">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Автозаполнение" formaction="auto_fill"><b>Автозаполнение</b></button>
+                    </div>
+                </form>
+                <form method="post" class="post-form align mb-5 pb-5">
+                    <div class="container  pt-5 pb-5">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Скачать"
+                                formaction="document"><b>Скачать</b></button>
+                    </div>
+                    <div class="container pt-2">
+                        {{ form|as_bootstrap_inline }}
+                    </div>
+                    <div class="container">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Скачать"
+                                formaction="document"><b>Скачать</b></button>
+                    </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="col-sm pt-5">
+                <img class="shadow rounded" src="{% static 'images/example_6.jpg' %}"
+                     alt="образец">
+            </div>
         </div>
-        <div class="col-sm pt-5">
-            <img class="shadow rounded" src="{% static 'images/example_6.jpg' %}"
-                 alt="образец">
+    {% else %}
+        <div class="container-fluid row mt-3 m-0">
+            <div class="col-sm">
+                <form method="post" class="post-form align mb-5 pb-5">
+                    <div class="container mb-5 pt-5 ">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Скачать"
+                                formaction="document"><b>Скачать</b></button>
+                    </div>
+                    <div class="container pt-2">
+                        {{ form|as_bootstrap_inline }}
+                    </div>
+                    <div class="container">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Скачать"
+                                formaction="document"><b>Скачать</b></button>
+                    </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="col-sm pt-5">
+                <img class="shadow rounded" src="{% static 'images/example_6.jpg' %}"
+                     alt="образец">
+            </div>
         </div>
-    </div>
+    {% endif %}
+
 {% endblock %}

@@ -22,53 +22,64 @@ def schedule(request):
     return render(request, 'schedule.html')
 
 
-def material_aid(request):
-    return render(request, 'material_aid.html')
-
-
 def consent(request):
-    return render(request, 'info_6_links/consent.html')
+    return render(request, 'statements/first_7/info_6/info_6_links/consent.html')
 
 
 def contract(request):
-    return render(request, 'info_6_links/contract.html')
+    return render(request, 'statements/first_7/info_6/info_6_links/contract.html')
+
+
+def material_aid(request):
+    form = StatementForm1
+    return render(request, 'statements/last_123/material_aid/material_aid.html', context={'form': form})
+
+
+def online_wallet(request):
+    form = StatementForm1
+    return render(request, 'statements/last_123/online_wallet/online_wallet.html', context={'form': form})
+
+
+def social_nutrition(request):
+    form = StatementForm1
+    return render(request, 'statements/last_123/social_nutrition/social_nutrition.html', context={'form': form})
 
 
 def survey_questionnaire(request):
-    return render(request, 'info_6_links/survey_questionnaire.html')
+    return render(request, 'statements/first_7/info_6/info_6_links/survey_questionnaire.html')
 
 
 def additional_bank(request):
-    return render(request, 'info_6_links/additional_bank.html')
+    return render(request, 'statements/first_7/info_6/info_6_links/additional_bank.html')
 
 
 def statement_of_command(request):
-    return render(request, 'info_6_links/statement_of_command.html')
+    return render(request, 'statements/first_7/info_6/info_6_links/statement_of_command.html')
 
 
 def conditions(request):
-    return render(request, 'conditions.html')
+    return render(request, 'statements/first_7/conditions/conditions.html')
 
 
 def category(request):
-    return render(request, 'category_of_need.html')
+    return render(request, 'statements/category_of_need.html')
 
 
 def informer(request):
-    return render(request, 'informers/informer_4.html')
+    return render(request, 'statements/first_7/info_123/informers/informer_4.html')
 
 
 def info(request, pk):
     if pk == 6:
         form = StatementForm1()
-        return render(request, 'info_6.html', context={'form': form, 'pk': pk}, )
+        return render(request, 'statements/first_7/info_6/info_6.html', context={'form': form, 'pk': pk}, )
     else:
         form = StatementForm1()
-    return render(request, 'info_123.html', context={'form': form, 'pk': pk}, )
+    return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form, 'pk': pk}, )
 
 
 def position(request):
-    return render(request, 'position.html')
+    return render(request, 'statements/first_7/conditions/position/position.html')
 
 
 def login(request):
@@ -76,7 +87,7 @@ def login(request):
 
 
 def how(request):
-    return render(request, 'how.html')
+    return render(request, 'statements/last_123/how.html')
 
 
 def auto_fill(request, pk):
@@ -99,7 +110,7 @@ def auto_fill(request, pk):
 
             # Здесь начинаются поля Курса и группы
             'course': course_group.course,
-            'name_institute': course_group.course,
+            'name_institute': course_group.nameInstitute,
             'group': course_group.group,
             'nameHeadman': course_group.nameHeadman,
 
@@ -117,7 +128,7 @@ def auto_fill(request, pk):
             'FormOfEducation': site_user.FormOfEducation,
             'inProfCom': site_user.inProfCom,
         })
-        return render(request, 'info_123.html', context={'form': form})
+        return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form})
     else:
         return render(request, 'index.html')
 
@@ -169,7 +180,7 @@ def document(request, pk):
 
 
 def statements(request):
-    return render(request, 'statements.html')
+    return render(request, 'statements/statements.html')
 
 
 def admin(request):
@@ -178,7 +189,7 @@ def admin(request):
 
 class UpdateProfile(UpdateView):
     model = SiteUser
-    template_name = 'profile.html'
+    template_name = 'profile/profile.html'
     form_class = SiteUserForm1
     success_url = reverse_lazy('index')
 
@@ -209,7 +220,7 @@ class UpdateProfile(UpdateView):
 
 class UpdatePassport(UpdateView):
     model = Passport
-    template_name = 'profile.html'
+    template_name = 'profile/profile.html'
     form_class = PassportForm
     success_url = reverse_lazy('index')
 
