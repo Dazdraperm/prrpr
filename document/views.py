@@ -79,6 +79,7 @@ def login(request):
 def how(request):
     return render(request, 'how.html')
 
+
 def auto_fill(request):
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)

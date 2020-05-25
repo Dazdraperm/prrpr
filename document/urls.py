@@ -1,8 +1,6 @@
 from django.urls import path, include
-from .views import statements, index, category, info, document, admin, login, schedule, auto_fill, \
-    UpdatePassport, UpdateProfile
-
-from .views import statements, index, category, info, UpdateProfile, document, admin, login, schedule, info_6, consent, \
+from .views import auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, document, admin, login,\
+    schedule, info_6, consent, \
     survey_questionnaire, statement_of_command, additional_bank, contract, how, conditions, position, material_aid
 
 urlpatterns = [
