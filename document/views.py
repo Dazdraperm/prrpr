@@ -312,7 +312,7 @@ def doc_budget_main(request, pk):
         return response
 
 
-def doc_profcom_2(request, pk):
+def doc_profcom_2(request):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_profcom_2.docx")  # или должен сохранять 3
         group = request.POST['group']
