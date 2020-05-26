@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 _STATUS_CHOICES = [
     ('Да', 'Да'),
@@ -25,6 +27,20 @@ class CourseGroup(models.Model):
     nameInstitute = models.CharField(max_length=30, blank=True, null=True)  # Название института
 
 
+@receiver(post_save, sender=User)
+def new_course_group(sender, instance, created, **kwargs):
+    if created:
+        CourseGroup.objects.create(user=instance)
+        instance.coursegroup.save()
+
+
+@receiver(post_save, sender=User)
+def new_passport(sender, instance, created, **kwargs):
+    if created:
+        Passport.objects.create(user=instance)
+        instance.passport.save()
+
+
 class SiteUser(models.Model):
     user = models.OneToOneField(User, name='user', on_delete=models.CASCADE)
     passport = models.OneToOneField(Passport, name='passport', on_delete=models.CASCADE, blank=True, null=True)
@@ -47,6 +63,13 @@ class SiteUser(models.Model):
     FormOfEducation = models.CharField(max_length=1, blank=True, null=True)  # Форма обучения
     inProfCom = models.CharField(max_length=10, choices=_STATUS_CHOICES, blank=True,
                                  null=True)  # Состоит в профкоме или нет
+
+
+@receiver(post_save, sender=User)
+def new_user(sender, instance, created, **kwargs):
+    if created:
+        SiteUser.objects.create(user=instance)
+        instance.siteuser.save()
 
 
 class DisabilityGroup(models.Model):
