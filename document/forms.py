@@ -14,7 +14,7 @@ class SiteRegistrationForm(UserCreationForm):
 class PassportForm(ModelForm):
     class Meta:
         model = Passport
-        fields = ['series', 'number', 'code', 'dateTimeField', 'placeOfRegistration', 'dateBirthday']
+        fields = ('series', 'number', 'code', 'dateTimeField', 'placeOfRegistration', 'dateBirthday')
 
 
 class UserForm(ModelForm):
