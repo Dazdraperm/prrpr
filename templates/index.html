@@ -56,20 +56,23 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item text-center pt-0 pb-0"><a class="nav-link"
-                                                                       href="{% url 'profile' request.user.id %}">
-                                <button type="button" class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
+                                                                                 href="{% url 'profile' request.user.id %}">
+                                <button type="button"
+                                        class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
                                     Основа
                                 </button>
                             </a></li>
                             <li class="list-group-item text-center pt-0 pb-0"><a class="nav-link"
-                                                                       href="{% url 'passport' request.user.id %}">
-                                <button type="button" class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
+                                                                                 href="{% url 'passport' request.user.id %}">
+                                <button type="button"
+                                        class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
                                     Паспорт
                                 </button>
                             </a></li>
                             <li class="list-group-item text-center pt-0 pb-0"><a class="nav-link"
-                                                                       href="{% url 'course_group' request.user.id %}">
-                                <button type="button" class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
+                                                                                 href="{% url 'course_group' request.user.id %}">
+                                <button type="button"
+                                        class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
                                     Курс
                                 </button>
                             </a></li>
@@ -77,38 +80,10 @@
                     </div>
                 </li>
             {% else %}
-                <li class="nav-item p-2">
-                    <a class="" href="{% url 'login' %}">
-                        <button id="dLabel" class="btn btn-outline-primary shadow p-2 rounded" type="button"
-                                data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                            Регистрация/Вход
-                        </button>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'my_login' %}">
+                        <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Вход/Регистрация</button>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-                        <form class="px-4 py-3">
-                            <div class="form-group">
-                                <label for="exampleDropdownFormEmail1">майл</label>
-                                <input type="text" class="form-control" id="exampleDropdownFormEmail1"
-                                       placeholder="email@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">пароль</label>
-                                <input type="password" class="form-control" id="exampleDropdownFormPassword1"
-                                       placeholder="Password">
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    Запомнить меня
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">войти</button>
-                        </form>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">еще не зареганы? пососи</a>
-                        <a class="dropdown-item" href="#">Забыли пароль</a>
-                    </div>
                 </li>
             {% endif %}
 
