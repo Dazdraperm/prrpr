@@ -20,8 +20,7 @@ def index(request):
 
 
 def category(request):
-    site_user = SiteUser.objects.get(user=request.user)
-    return render(request, 'category_of_need.html', context={'site_user': site_user})
+    return render(request, 'category_of_need.html')
 
 
 # def info(request):
