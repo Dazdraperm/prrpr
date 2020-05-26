@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
-from document.forms import SiteRegistrationForm
+from document.forms import SiteRegistrationForm, StatementForm6
 from document.forms import StatementForm1, SiteUserForm1, PassportForm, Course
 from document.models import SiteUser, CourseGroup, Passport
 from docxtpl import DocxTemplate
@@ -86,7 +86,7 @@ def informer(request):
 
 def info(request, pk):
     if pk == 6:
-        form = StatementForm1()
+        form = StatementForm6()
         return render(request, 'statements/first_7/info_6/info_6.html', context={'form': form, 'pk': pk}, )
     else:
         form = StatementForm1()
