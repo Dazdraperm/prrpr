@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container pb-5 pt-5 ">
+        <div class="row row-cols-sm-2">
+            <img src="{% static 'images/contract_1.jpg' %}" class="mx-auto d-block shadow rounded" alt="contact_1">
+            <img src="{% static 'images/contract_2.jpg' %}" class="mx-auto d-block shadow rounded border-left-1" alt="contact_1">
+        </div>
+    </div>
+
+{% endblock content %}

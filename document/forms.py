@@ -1,13 +1,20 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
 from document.models import SiteUser, Passport, CourseGroup, Statement1, DisabilityGroup
 
 
+class SiteRegistrationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('username',  'password1', 'password2')
+
+
 class PassportForm(ModelForm):
     class Meta:
         model = Passport
-        fields = ['series', 'number', 'code', 'dateTimeField', 'place']
+        fields = ('series', 'number', 'code', 'dateTimeField', 'placeOfRegistration', 'dateBirthday')
 
 
 class UserForm(ModelForm):
@@ -19,21 +26,14 @@ class UserForm(ModelForm):
 class SiteUserForm1(ModelForm):
     class Meta:
         model = SiteUser
-        fields = (
-            'INN', 'pFact', 'dateBirthday', 'phoneNumber', 'inProfCom', 'patronymic', 'numberInsuranceCertificate',
-            'disability', 'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence',
-            'FormOfEducation'
-        )
+        exclude = ['user', 'course_Group', 'passport']
 
 
 class StatementForm1(ModelForm):
     class Meta:
         model = Statement1
         fields = (
-            'course', 'group', 'nameHeadman', 'series', 'number', 'code', 'dateTimeField', 'place',
-            'number_of_statement', 'amount', 'name_institute', 'name', 'surname', 'patronymic', 'INN',
-            'numberInsuranceCertificate', 'dateBirthday', 'disability_group', 'disability_group_text', 'phoneNumber',
-            'fullStateSupport', 'textfield1', 'textfield2', 'pFact'
+            '__all__'
         )
 
 

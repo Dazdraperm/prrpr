@@ -4,9 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %}Documents{% endblock title %}</title>
     <link rel="shortcut icon" href="{% static 'images/kfu.png' %}" type="image/png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="{% static 'js/js.js' %}" rel="script"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
@@ -32,46 +46,42 @@
                 </a>
             </li>
             {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' request.user.id %}">
-                        <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Профиль</button>
-                    </a>
-                </li>
-            {% else %}
                 <li class="nav-item p-2">
-                <a class="" href="{% url 'login' %}">
-                    <button id="dLabel" class="btn btn-outline-primary shadow p-2 rounded" type="button"
-                            data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                        Регистрация/Вход
+                    <button id="dLabel" type="button" class="btn mb-0 btn-outline-primary shadow p-2 rounded"
+                            data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Профиль
                     </button>
-
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-                        <form class="px-4 py-3">
-                            <div class="form-group">
-                                <label for="exampleDropdownFormEmail1">майл</label>
-                                <input type="text" class="form-control" id="exampleDropdownFormEmail1"
-                                       placeholder="email@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">пароль</label>
-                                <input type="password" class="form-control" id="exampleDropdownFormPassword1"
-                                       placeholder="Password">
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label" for="dropdownCheck">
-                                    Запомнить меня
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">войти</button>
-                        </form>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">еще не зареганы? пососи</a>
-                        <a class="dropdown-item" href="#">Забыли пароль</a>
+                    <div class="dropdown-menu dropdown-menu-right mt-0" style="width: 20%" aria-labelledby="dLabel">
+                        <div class="card-head text-center border-bottom-1 rounded">
+                            <b>Профиль:</b>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-center pt-0 pb-0"><a class="nav-link"
+                                                                       href="{% url 'profile' request.user.id %}">
+                                <button type="button" class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
+                                    Основа
+                                </button>
+                            </a></li>
+                            <li class="list-group-item text-center pt-0 pb-0"><a class="nav-link"
+                                                                       href="{% url 'passport' request.user.id %}">
+                                <button type="button" class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
+                                    Паспорт
+                                </button>
+                            </a></li>
+                            <li class="list-group-item text-center pt-0 pb-0"><a class="nav-link"
+                                                                       href="{% url 'course_group' request.user.id %}">
+                                <button type="button" class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
+                                    Курс
+                                </button>
+                            </a></li>
+                        </ul>
                     </div>
                 </li>
-
+            {% else %}
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'my_login' %}">
+                    <button type="button" class="btn btn-outline-primary shadow p-2 rounded">Регистрация/Вход</button>
+                </a>
+            </li>
             {% endif %}
 
         </ul>
@@ -79,7 +89,7 @@
 </nav>
 
 {% block content %}
-{% endblock %}
+{% endblock content %}
 
 </body>
 </html>

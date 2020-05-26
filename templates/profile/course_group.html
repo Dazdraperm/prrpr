@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load bootstrap_tags %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container bootstrap snippet mb-5">
+        <div class="col-sm">
+            <div class="text-center p-3"><h1>{{ request.user.first_name }}</h1></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <br>
+            </div>
+            <div class="col-sm-9">
+                <div class="container pl-5">
+                    <div class="post">
+                        <form method="post" class="post-form" action="{% url 'course_group' request.user.id %}">
+                            {% csrf_token %}
+                            {{ form|as_bootstrap_inline }}
+                            <div class="container-fluid">
+                                <input type="submit" value="Сохранить"
+                                       class="btn btn-primary float-left shadow rounded">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
