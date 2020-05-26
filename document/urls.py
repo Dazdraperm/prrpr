@@ -32,4 +32,5 @@ urlpatterns = [
     path('admin1', admin, name='admin1'),
     path('login', my_login, name='my_login'),
     path('logout', my_logout, name='my_logout'),
+    path('doc_profcom_1', doc_profcom_1, name='doc_profcom_1')
 ]

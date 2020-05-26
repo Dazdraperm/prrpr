@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
-from document.forms import SiteRegistrationForm, StatementForm6
+from document.forms import SiteRegistrationForm, StatementForm6, FormProfCom23, FormProfCom1
 from document.forms import StatementForm1, SiteUserForm1, PassportForm, Course
 from document.models import SiteUser, CourseGroup, Passport
 from docxtpl import DocxTemplate
@@ -46,17 +46,17 @@ def contract(request):
 
 
 def material_aid(request):
-    form = StatementForm1
+    form = FormProfCom1
     return render(request, 'statements/last_123/material_aid/material_aid.html', context={'form': form})
 
 
 def online_wallet(request):
-    form = StatementForm1
+    form = FormProfCom23
     return render(request, 'statements/last_123/online_wallet/online_wallet.html', context={'form': form})
 
 
 def social_nutrition(request):
-    form = StatementForm1
+    form = FormProfCom23
     return render(request, 'statements/last_123/social_nutrition/social_nutrition.html', context={'form': form})
 
 
@@ -222,17 +222,25 @@ def document(request, pk):
         numberPhone = request.POST['phoneNumber']
         certificate = request.POST['numberInsuranceCertificate']
         dateBirthday = request.POST['dateBirthday']
-        pFact = request.POST['pFact']
         invalid = request.POST['disability_group']
         invalid2 = request.POST['disability_group_text']
         answer = request.POST['fullStateSupport']
         surname = request.POST['surname']
         name = request.POST['name']
+        index = request.POST['index']
         patronymic = request.POST['patronymic']
-        context = {"group": group, "course": course, "starosta": nameHeadman, "name": name_institute,
-                   "nomer": number, "series": series, "vidan": place, "inn": INN, "adress": pFact,
+        house = request.POST['house']
+        apartment = request.POST['apartment']
+        date_day = request.POST['date_day']
+        date_month = request.POST['date_month']
+        date_year = request.POST['date_year']
+        street = request.POST['street']
+        context = {"group": group, "c": course, "starosta": nameHeadman, "name": name_institute,
+                   "nomer": number, "series": series, "vidan": place, "inn": INN,
                    "svidetel": certificate, "dateNumber": dateBirthday, "invalid": invalid, "invalid2": invalid2,
-                   "answer": answer, "numberPhone": numberPhone, "sur": surname, "nam": name, "otchet": patronymic}
+                   "answer": answer, "numberPhone": numberPhone, "sur": surname, "nam": name, "otchet": patronymic,
+                   "in": index, "d": house, "k": apartment, "t": date_day, "m": date_month, "y": date_year,
+                   "street": street}
         doc.render(context)
         doc.save("document/documents/Soc.docx")
 
