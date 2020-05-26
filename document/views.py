@@ -120,7 +120,7 @@ def auto_fill(request, pk):
                 'FormOfEducation': site_user.FormOfEducation,
                 'inProfCom': site_user.inProfCom,
             })
-            return render(request, 'info_123.html', context={'form': form})
+            return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form})
         elif site_user.course_Group is None:
 
             passport = Passport.objects.get(user=request.user)
@@ -151,7 +151,7 @@ def auto_fill(request, pk):
                 'FormOfEducation': site_user.FormOfEducation,
                 'inProfCom': site_user.inProfCom,
             })
-            return render(request, 'info_123.html', context={'form': form})
+            return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form})
         else:
             course_group = CourseGroup.objects.get(user=request.user)
             passport = Passport.objects.get(user=request.user)
@@ -188,7 +188,7 @@ def auto_fill(request, pk):
                 'FormOfEducation': site_user.FormOfEducation,
                 'inProfCom': site_user.inProfCom,
             })
-            return render(request, 'info_123.html', context={'form': form})
+            return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form})
     else:
         return render(request, 'index.html')
 
@@ -277,7 +277,7 @@ class UpdateProfile(UpdateView):
 
 class UpdateCourse(UpdateView):
     model = CourseGroup
-    template_name = 'course.html'
+    template_name = 'profile/course_group.html'
     form_class = Course
     success_url = reverse_lazy('index')
 
@@ -286,7 +286,7 @@ class UpdateCourse(UpdateView):
         context = super(UpdateCourse, self).get_context_data(**kwargs)
         context['active_client'] = True
         context['form'] = self.form_class(initial={'course': course_group.course,
-                                                   'name_institute': course_group.course,
+                                                   'nameInstitute': course_group.nameInstitute,
                                                    'group': course_group.group,
                                                    'nameHeadman': course_group.nameHeadman, })
         context['active_client'] = True
@@ -295,7 +295,7 @@ class UpdateCourse(UpdateView):
 
 class UpdatePassport(UpdateView):
     model = Passport
-    template_name = 'passport.html'
+    template_name = 'profile/passport.html'
     form_class = PassportForm
     success_url = reverse_lazy('index')
 
@@ -308,7 +308,7 @@ class UpdatePassport(UpdateView):
                                                    'number': passport.number,
                                                    'dateBirthday': passport.dateBirthday,
                                                    'placeOfRegistration': passport.placeOfRegistration,
-                                                   'dateTimeField': passport.dateTimeField})
+                                                   'dateTimeField': passport.dateTimeField, })
         context['active_client'] = True
         return context
 

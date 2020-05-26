@@ -15,7 +15,7 @@
             <div class="col-sm-9">
                 <div class="container pl-5">
                     <div class="post">
-                        <form method="post" class="post-form" action="{% url 'profile' request.user.id %}">
+                        <form method="post" class="post-form" action="{% url 'passport' request.user.id %}">
                             {% csrf_token %}
                             {{ form|as_bootstrap_inline }}
                             <div class="container-fluid">
