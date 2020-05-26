@@ -4,10 +4,25 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 from django.urls import reverse_lazy
-
+from document.forms import SiteRegistrationForm
 from document.forms import StatementForm1, SiteUserForm1, PassportForm, Course
 from document.models import SiteUser, CourseGroup, Passport
 from docxtpl import DocxTemplate
+
+
+def register(request):
+    if request.user.is_authenticated == False:
+        if request.method == 'POST':
+            form = SiteRegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+            return redirect('index')
+        else:
+            form = SiteRegistrationForm()
+            return render(request, 'registration/register.html', {'form': form})
+    else:
+        site_user = SiteUser.objects.get(user=request.user)
+        return render(request, 'index.html', context={'site_user': site_user})
 
 
 def index(request):
@@ -202,11 +217,8 @@ def document(request, pk):
         name_institute = request.POST['name_institute']
         series = request.POST['series']
         number = request.POST['number']
-        code = request.POST['code']
-        dateTimeField = request.POST['dateTimeField']
         INN = request.POST['INN']
         place = request.POST['place']
-        dateBirthday = request.POST['dateBirthday']
         numberPhone = request.POST['phoneNumber']
         certificate = request.POST['numberInsuranceCertificate']
         dateBirthday = request.POST['dateBirthday']
