@@ -46,13 +46,16 @@ class SiteUser(models.Model):
     passport = models.OneToOneField(Passport, name='passport', on_delete=models.CASCADE, blank=True, null=True)
     course_Group = models.OneToOneField(CourseGroup, name='course_Group', on_delete=models.CASCADE, blank=True,
                                         null=True)
+    name = models.CharField(max_length=15, blank=True, null=True)
+    surname = models.CharField(max_length=15, blank=True, null=True)
+    patronymic = models.CharField(max_length=30, blank=True, null=True)  # Отчество
     INN = models.CharField(max_length=10, blank=True, null=True)
     pFact = models.CharField(max_length=150, blank=True, null=True)  # Место жительства
-    apartment = models.IntegerField(max_length=7, blank=True, null=True)  # Квартира
-    index = models.IntegerField(max_length=8, blank=True, null=True)  # Почтовый индекс
-    house = models.IntegerField(max_length=7, blank=True, null=True)  # Дом
+    apartment = models.CharField(max_length=7, blank=True, null=True)  # Квартира
+    index = models.CharField(max_length=8, blank=True, null=True)  # Почтовый индекс
+    house = models.CharField(max_length=7, blank=True, null=True)  # Дом
     phoneNumber = models.CharField(max_length=11, blank=True, null=True)
-    patronymic = models.CharField(max_length=30, blank=True, null=True)  # Отчество
+
     numberInsuranceCertificate = models.CharField(max_length=20, blank=True, null=True)  # Страховое свидетельство
     disability = models.CharField(max_length=20, blank=True, null=True)  # Инвалидность
     fullStateSupport = models.CharField(max_length=10, choices=_STATUS_CHOICES, blank=True,
@@ -83,30 +86,54 @@ class DisabilityGroup(models.Model):
 class Statement1(models.Model):
     course = models.CharField(max_length=1, blank=True, null=True)  # Курс
     group = models.CharField(max_length=10, blank=True, null=True)  # Группа
-    pFact = models.CharField(max_length=150, blank=True, null=True)  # Фактическое место проживания
     nameHeadman = models.CharField(max_length=30, blank=True, null=True)  # Имя старосты
-    series = models.CharField(max_length=4, blank=True, null=True, verbose_name='Серия')
-    number = models.CharField(max_length=6, blank=True, null=True)
-    code = models.CharField(max_length=20, blank=True, null=True)
-    dateTimeField = models.DateField(max_length=20, blank=True, null=True)
-    place = models.CharField(max_length=100, blank=True, null=True)
+    series = models.CharField(max_length=4, blank=True, null=True, verbose_name='Серия')  # Серия
+    number = models.CharField(max_length=6, blank=True, null=True)  # Номер
+    code = models.CharField(max_length=20, blank=True, null=True)  # Код подразделения
+    dateTimeField = models.DateField(max_length=20, blank=True, null=True)  # Дата выдачи паспорта
+    date_day = models.IntegerField(max_length=2, blank=True, null=True)  # День выдачи
+    date_month = models.CharField(max_length=8, blank=True, null=True)  # Месяц выдачи
+    date_year = models.IntegerField(max_length=2, blank=True, null=True)  # Год выдачи
+    place = models.CharField(max_length=100, blank=True, null=True)  # Паспорт выдан
     index = models.IntegerField(max_length=8, blank=True, null=True)  # Почтовый индекс
     house = models.IntegerField(max_length=7, blank=True, null=True)  # Дом
+    street = models.CharField(max_length=15, blank=True, null=True)  # Улица
     apartment = models.IntegerField(max_length=7, blank=True, null=True)  # Квартира
-    number_of_statement = models.CharField(max_length=1, blank=True, null=True)
-    amount = models.CharField(max_length=10, blank=True, null=True)
+    number_of_statement = models.CharField(max_length=1, blank=True, null=True)  # Номер заявления
+    # amount = models.CharField(max_length=10, blank=True, null=True)  # Сумма денег
     name_institute = models.CharField(max_length=20, blank=True, null=True)  # Название института
-    name = models.CharField(max_length=30, blank=True, null=True)  # Имя
-    surname = models.CharField(max_length=30, blank=True, null=True)  # Фамилия
-    patronymic = models.CharField(max_length=30, blank=True, null=True)  # Отчество
+    name = models.CharField(max_length=15, blank=True, null=True)  # Имя
+    surname = models.CharField(max_length=15, blank=True, null=True)  # Фамилия
+    patronymic = models.CharField(max_length=15, blank=True, null=True)  # Отчество
     INN = models.CharField(max_length=10, blank=True, null=True)  # ИНН
     numberInsuranceCertificate = models.CharField(max_length=11, blank=True, null=True)  # Страховое свидетельство
     dateBirthday = models.DateField(max_length=8, blank=True, null=True)  # День рождения
     disability_group = models.CharField(max_length=20, blank=True, null=True)  # группа инвалидности
-    disability_group_text = models.CharField(max_length=50, default='Заполнить по необходимости', blank=True,
-                                             null=True)  # инвалидность по...
+    disability_group_text = models.CharField(max_length=50, blank=True, null=True)  # инвалидность по...
     phoneNumber = models.CharField(max_length=11, blank=True, null=True)  # Номер телефона
     fullStateSupport = models.CharField(max_length=3, choices=_STATUS_CHOICES, default='Да', blank=True,
                                         null=True)  # Полное гос. обеспечение
-    textfield1 = models.CharField(max_length=150, blank=True, null=True)  # Просьба
-    textfield2 = models.CharField(max_length=150, blank=True, null=True)  # Приложение
+    textfield1 = models.CharField(max_length=175, blank=True, null=True)  # Просьба
+    textfield2 = models.CharField(max_length=175, blank=True, null=True)  # Приложение
+
+
+class StatementProfCom1(models.Model):
+    group = models.CharField(max_length=10, blank=True, null=True)  # Группа
+    name_institute = models.CharField(max_length=20, blank=True, null=True)  # Название института
+    name = models.CharField(max_length=15, blank=True, null=True)  # Имя
+    surname = models.CharField(max_length=15, blank=True, null=True)  # Фамилия
+    patronymic = models.CharField(max_length=15, blank=True, null=True)  # Отчество
+    apartment = models.CharField(max_length=7, blank=True, null=True)  # Квартира
+    house = models.CharField(max_length=7, blank=True, null=True)  # Дом
+    street = models.CharField(max_length=100, blank=True, null=True)
+    place = models.CharField(max_length=100, blank=True, null=True)
+    series = models.CharField(max_length=4, blank=True, null=True)
+    number = models.CharField(max_length=6, blank=True, null=True)
+    date_day = models.IntegerField(max_length=2, blank=True, null=True)  # День выдачи
+    date_month = models.CharField(max_length=8, blank=True, null=True)  # Месяц выдачи
+    date_year = models.IntegerField(max_length=2, blank=True, null=True)  # Год выдачи
+    dateBirthday = models.DateField(max_length=8, blank=True, null=True)
+    INN = models.CharField(max_length=10, blank=True, null=True)  # ИНН
+    phoneNumber = models.CharField(max_length=11, blank=True, null=True)  # Номер телефона
+    textfield1 = models.CharField(max_length=175, blank=True, null=True)  # Просьба
+    textfield2 = models.CharField(max_length=175, blank=True, null=True)  # Приложение

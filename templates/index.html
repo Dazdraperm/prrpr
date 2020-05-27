@@ -64,7 +64,7 @@
                                                                                  href="{% url 'profile' request.user.id %}">
                                 <button type="button"
                                         class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
-                                    Основа
+                                    Основные данные
                                 </button>
                             </a></li>
                             <li class="list-group-item text-center pt-0 pb-0"><a class="nav-link"
@@ -78,7 +78,7 @@
                                                                                  href="{% url 'course_group' request.user.id %}">
                                 <button type="button"
                                         class="btn-sm btn-block btn-outline-primary shadow p-2 rounded font-weight-bold">
-                                    Курс
+                                    Учебные данные
                                 </button>
                             </a></li>
                             <li class="list-group-item text-center pt-0 pb-0"><a class="nav-link"
@@ -91,6 +91,13 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                                <a class="nav-link" href="{% url 'my_logout' %}">
+                                    <button type="button" class="btn btn-outline-primary shadow p-2 rounded">
+                                        ВЫйти
+                                    </button>
+                                </a>
+                            </li>
             {% else %}
                 <li class="nav-item p-2">
                     <button id="dLabel" class="btn btn-outline-primary shadow p-2 rounded" type="button"
@@ -115,7 +122,6 @@
                             </a></li>
                         </ul>
                     </div>
-
                 </li>
             {% endif %}
 

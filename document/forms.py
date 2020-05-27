@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from document.models import SiteUser, Passport, CourseGroup, Statement1, DisabilityGroup
+from document.models import SiteUser, Passport, CourseGroup, Statement1, DisabilityGroup, StatementProfCom1
 
 
 class SiteRegistrationForm(UserCreationForm):
@@ -29,12 +29,32 @@ class SiteUserForm1(ModelForm):
         exclude = ['user', 'course_Group', 'passport']
 
 
+class StatementForm6(ModelForm):
+    class Meta:
+        model = Statement1
+        exclude = ['textfield1', 'textfield2']
+
+
 class StatementForm1(ModelForm):
     class Meta:
         model = Statement1
         fields = (
             '__all__'
         )
+
+
+class FormProfCom1(ModelForm):
+    class Meta:
+        model = StatementProfCom1
+        fields = (
+            '__all__'
+        )
+
+
+class FormProfCom23(ModelForm):
+    class Meta:
+        model = StatementProfCom1
+        exclude = ['textfield1', 'textfield2']
 
 
 class Course(ModelForm):
