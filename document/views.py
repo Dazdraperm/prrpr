@@ -406,7 +406,7 @@ def admin(request):
 
 class UpdateProfile(UpdateView):
     model = SiteUser
-    template_name = 'profile/profile.html'
+    template_name = 'profile_list/profile.html'
     form_class = SiteUserForm1
     success_url = reverse_lazy('index')
 
@@ -434,7 +434,7 @@ class UpdateProfile(UpdateView):
 
 class UpdateCourse(UpdateView):
     model = CourseGroup
-    template_name = 'profile/course_group.html'
+    template_name = 'profile_list/course_group.html'
     form_class = Course
     success_url = reverse_lazy('index')
 
@@ -452,7 +452,7 @@ class UpdateCourse(UpdateView):
 
 class UpdatePassport(UpdateView):
     model = Passport
-    template_name = 'profile/passport.html'
+    template_name = 'profile_list/passport.html'
     form_class = PassportForm
     success_url = reverse_lazy('index')
 
