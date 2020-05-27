@@ -17,11 +17,12 @@
                     <div class="post">
                         <form method="post" class="post-form" action="{% url 'profile' request.user.id %}">
                             {% csrf_token %}
-                            {{ form|as_bootstrap_inline }}
+                            {% for f in form %}
                             <div class="container-fluid">
                                 <input type="submit" value="Сохранить"
                                        class="btn btn-primary float-left shadow rounded">
                             </div>
+                            {%  %}
                         </form>
                     </div>
                 </div>
