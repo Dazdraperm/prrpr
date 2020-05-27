@@ -1,5 +1,4 @@
 from django.urls import path, include
-from django.conf.urls import url
 from .views import my_login, my_logout, auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, \
     document, admin, schedule, consent, survey_questionnaire, statement_of_command, additional_bank, contract, how, \
     conditions, position, material_aid, online_wallet, social_nutrition, UpdateCourse, register

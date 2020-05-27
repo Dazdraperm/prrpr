@@ -6,3 +6,4 @@ $(document).bind( 'mousewheel', function (e) {
          scrollTop : nt
      } , 500 , 'easeInOutCubic' );
 } )
+

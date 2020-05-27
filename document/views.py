@@ -326,4 +326,4 @@ class UpdatePassport(UpdateView):
 
 
 def my_logout(request):
-    redirect('accounts/logout')
+    return redirect('accounts/logout')

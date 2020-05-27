@@ -2,40 +2,42 @@
 
 {% block content %}
 
-  {% if user.is_authenticated == False %}
-    {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
-
-    {% if next %}
-        {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,
-                please login with an account that has access.</p>
-        {% else %}
-            <p>Please login to see this page.</p>
+    {% if user.is_authenticated == False %}
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
         {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.</p>
+            {% else %}
+                <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+        <div class="container pb-5 pt-5 row-cols-sm-2">
+            <div class="container">
+                <form class="px-4 py-3">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <input type="hidden" name="next" value="{{ next }}">
+                </form>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">New around here? Sign up</a>
+                <a class="dropdown-item" href="#">Forgot password?</a>
+            </div>
+        </div>
+    {% else %}
+        <p>Вы уже вошли.</p>
+        <p><a href="{% url 'index' %}" class="text-black">Вернуться на главную</a></p>
     {% endif %}
-
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-
-        <div>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-        </div>
-        <div>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-        </div>
-
-        <div>
-            <input type="submit" value="Войти"/>
-            <input type="hidden" name="next" value="{{ next }}"/>
-        </div>
-    </form>
-{% else %}
-    <p>Вы уже вошли.</p>
-    <p><a href="{% url 'index' %}" class="text-black">Вернуться на главную</a></p>
-{% endif %}
 
 {% endblock %}
