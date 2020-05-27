@@ -1,8 +1,9 @@
 from django.urls import path, include
 from django.conf.urls import url
 from .views import my_login, my_logout, auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, \
-    document, admin, schedule, consent, survey_questionnaire, statement_of_command, additional_bank, contract, how, \
-    conditions, position, material_aid, online_wallet, social_nutrition, UpdateCourse, register
+    admin, schedule, consent, survey_questionnaire, statement_of_command, additional_bank, contract, how, \
+    conditions, position, material_aid, online_wallet, social_nutrition, UpdateCourse, register, doc_budget_soc, \
+    doc_profcom_1, doc_profcom_2, doc_budget_main
 
 urlpatterns = [
     path('register/', register, name='registration'),
@@ -28,7 +29,10 @@ urlpatterns = [
     path('profile/<int:pk>/', UpdateProfile.as_view(), name='profile'),
     path('passport/<int:pk>/', UpdatePassport.as_view(), name='passport'),
     path('CourseGroup/<int:pk>/', UpdateCourse.as_view(), name='course_group'),
-    path('info/<int:pk>/document', document, name='document'),
+    path('info/<int:pk>/doc_budget_soc', doc_budget_soc, name='doc_budget_soc'),
+    path('info/<int:pk>/doc_budget_main', doc_budget_main, name='doc_budget_main'),
+    path('doc_profcom_1', doc_profcom_1, name='doc_profcom_1'),
+    path('doc_profcom_2', doc_profcom_2, name='doc_profcom_2'),
     path('admin1', admin, name='admin1'),
     path('login', my_login, name='my_login'),
     path('logout', my_logout, name='my_logout'),

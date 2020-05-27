@@ -129,7 +129,9 @@ class StatementProfCom1(models.Model):
     place = models.CharField(max_length=100, blank=True, null=True)
     series = models.CharField(max_length=4, blank=True, null=True)
     number = models.CharField(max_length=6, blank=True, null=True)
-    dateTimeField = models.DateField(max_length=20, blank=True, null=True)  #
+    date_day = models.IntegerField(max_length=2, blank=True, null=True)  # День выдачи
+    date_month = models.CharField(max_length=8, blank=True, null=True)  # Месяц выдачи
+    date_year = models.IntegerField(max_length=2, blank=True, null=True)  # Год выдачи
     dateBirthday = models.DateField(max_length=8, blank=True, null=True)
     INN = models.CharField(max_length=10, blank=True, null=True)  # ИНН
     phoneNumber = models.CharField(max_length=11, blank=True, null=True)  # Номер телефона
