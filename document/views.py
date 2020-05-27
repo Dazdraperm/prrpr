@@ -4,6 +4,11 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
+
+from document.forms import SiteRegistrationForm, StatementForm6, FormProfCom1, FormProfCom23, SiteUserForm1, \
+    PassportForm, Course
+from document.forms import StatementForm1
+from django.views.generic import UpdateView
 from document.forms import SiteRegistrationForm, StatementForm6, FormProfCom1, FormProfCom23
 from document.forms import StatementForm1, SiteUserForm1, PassportForm, Course
 from document.models import SiteUser, CourseGroup, Passport
@@ -238,6 +243,8 @@ def doc_budget_soc(request):
                    "in": index, "d": house, "k": apartment, "t": date_day, "m": date_month, "y": date_year,
                    "street": street}
 
+
+
         doc.render(context)
         doc.save("document/documents/Soc.docx")
 
@@ -254,7 +261,6 @@ def doc_budget_soc(request):
         response['Content-Disposition'] = "attachment; filename= Soc.docx"
         os.remove(excel_file_name)
         return response
-
 
 
 def doc_budget_main(request):
