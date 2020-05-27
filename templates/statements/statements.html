@@ -28,7 +28,7 @@
         <div class="border-top border-bottom shadow p-2">
             <h4 class="ml-5 mb-3 mt-3"><b>Материальная помощь от университета</b></h4>
         </div>
-        <ul class="list-group float-center mb-0 border border-primary shadow">
+        <ul class="list-group float-center mb-0 border border-primary border-right-0 border-left-0 shadow">
             <li class="list-group-item border-top-0 border-bottom border-primary"><a class="nav-link"
                                                                                      href="{% url 'info' 1 %}"><span
                     class="ml-5"><b
@@ -65,17 +65,17 @@
         <div class=" border-bottom shadow p-2 mt-0 mb-0">
             <h4 class="ml-5 mb-3 mt-3"><b>Материальная помощь от профкома</b> (<a href="{% url 'how' %}"><b><i>как им стать?</i></b></a>)</h4>
         </div>
-        <ul class="list-group float-center border border-primary shadow">
+        <ul class="list-group float-center border border-primary border-right-0 border-left-0 shadow">
             <li class="list-group-item border-top-0 border-bottom border-primary"><p
                     class="blockquote text-success ml-5"><a class="link text-success" href="{% url 'conditions' %}">Условия
                 оказания материальной помощи членам ППОС КФУ</a></p></li>
-            <li class="list-group-item border-top-0 border-bottom border-primary"><a class="nav-link" href="{% url 'material_aid' %}"><span
+            <li class="list-group-item border-top-0 border-bottom border-primary"><a class="nav-link" href="{% url 'material_aid' 8 %}"><span
                     class="ml-5"><b class="text-dark"><i>1.</i></b> Материальная помощь</span></a></li>
             <li class="list-group-item border border-top-0 border-bottom border-primary"><a class="nav-link"
-                                                                                            href="{% url 'online_wallet' %}"><span class="ml-5"><b
+                                                                                            href="{% url 'online_wallet' 9 %}"><span class="ml-5"><b
                     class="text-dark"><i>2.</i></b> Электронный кошелёк (общественный транспорт)</span></a>
             </li>
-            <li class="list-group-item"><a class="nav-link" href="{% url 'social_nutrition' %}"><span class="ml-5"><b
+            <li class="list-group-item"><a class="nav-link" href="{% url 'social_nutrition' 10 %}"><span class="ml-5"><b
                     class="text-dark"><i>3.</i></b> Социальное питание</span></a>
             </li>
         </ul>

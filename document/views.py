@@ -21,7 +21,8 @@ def register(request):
             form = SiteRegistrationForm(request.POST)
             if form.is_valid():
                 form.save()
-            return redirect('index')
+
+            return redirect('my_login')
         else:
             form = SiteRegistrationForm()
             return render(request, 'registration/register.html', {'form': form})
@@ -50,19 +51,20 @@ def contract(request):
     return render(request, 'statements/first_7/info_6/info_6_links/contract.html')
 
 
-def material_aid(request):
+def material_aid(request, pk):
     form = FormProfCom1
-    return render(request, 'statements/last_123/material_aid/material_aid.html', context={'form': form})
+    return render(request, 'statements/last_123/material_aid/material_aid.html', context={'form': form, 'pk': pk})
 
 
-def online_wallet(request):
+def online_wallet(request, pk):
     form = FormProfCom23
-    return render(request, 'statements/last_123/online_wallet/online_wallet.html', context={'form': form})
+    return render(request, 'statements/last_123/online_wallet/online_wallet.html', context={'form': form, 'pk': pk})
 
 
-def social_nutrition(request):
+def social_nutrition(request, pk):
     form = FormProfCom23
-    return render(request, 'statements/last_123/social_nutrition/social_nutrition.html', context={'form': form})
+    return render(request, 'statements/last_123/social_nutrition/social_nutrition.html',
+                  context={'form': form, 'pk': pk})
 
 
 def survey_questionnaire(request):
@@ -106,44 +108,16 @@ def how(request):
     return render(request, 'statements/last_123/how.html')
 
 
-def auto_fill(request):
+def auto_fill(request, pk):
     if request.user.is_authenticated:
         site_user = SiteUser.objects.get(user=request.user)
-        if site_user.passport is None:
-            course_group = CourseGroup.objects.get(user=request.user)
+        course_group = CourseGroup.objects.get(user=request.user)
+        passport = Passport.objects.get(user=request.user)
+        if pk == 1 or 2 or 3 or 4 or 5 or 6 or 7:
             form = StatementForm1(initial={
                 # Здесь начинаются поля Юзера
-                'name': request.user.first_name,
-                'surname': request.user.last_name,
-
-                # Здесь начинаются поля Курса и группы
-                'course': course_group.course,
-                'name_institute': course_group.course,
-                'group': course_group.group,
-                'nameHeadman': course_group.nameHeadman,
-
-                # Здесь начинаются поля Сайт юзера
-                'INN': site_user.INN,
-                'pFact': site_user.pFact,
-                'phoneNumber': site_user.phoneNumber,
-                'patronymic': site_user.patronymic,
-                'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
-                'disability': site_user.disability,
-                'fullStateSupport': site_user.fullStateSupport,
-                'preferentialCategory': site_user.preferentialCategory,
-                'numberTravelCard': site_user.numberTravelCard,
-                'addressOfResidence': site_user.addressOfResidence,
-                'FormOfEducation': site_user.FormOfEducation,
-                'inProfCom': site_user.inProfCom,
-            })
-            return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form})
-        elif site_user.course_Group is None:
-
-            passport = Passport.objects.get(user=request.user)
-            form = StatementForm1(initial={
-                # Здесь начинаются поля Юзера
-                'name': request.user.first_name,
-                'surname': request.user.last_name,
+                'name': site_user.name,
+                'surname': site_user.surname,
 
                 # Здес начинаются поля Пасспорта
                 'code': passport.code,
@@ -151,65 +125,77 @@ def auto_fill(request):
                 'number': passport.number,
                 'dateBirthday': passport.dateBirthday,
                 'place': passport.placeOfRegistration,
-                'dateTimeField': passport.dateTimeField,
-
-                # Здесь начинаются поля Сайт юзера
-                'INN': site_user.INN,
-                'pFact': site_user.pFact,
-                'phoneNumber': site_user.phoneNumber,
-                'patronymic': site_user.patronymic,
-                'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
-                'disability': site_user.disability,
-                'fullStateSupport': site_user.fullStateSupport,
-                'preferentialCategory': site_user.preferentialCategory,
-                'numberTravelCard': site_user.numberTravelCard,
-                'addressOfResidence': site_user.addressOfResidence,
-                'FormOfEducation': site_user.FormOfEducation,
-                'inProfCom': site_user.inProfCom,
-            })
-            return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form})
-        else:
-            course_group = CourseGroup.objects.get(user=request.user)
-            passport = Passport.objects.get(user=request.user)
-            form = StatementForm1(initial={
-                # Здесь начинаются поля Юзера
-                'name': request.user.first_name,
-                'surname': request.user.last_name,
-
-                # Здес начинаются поля Пасспорта
-                'code': passport.code,
-                'series': passport.series,
-                'number': passport.number,
-                'dateBirthday': passport.dateBirthday,
-                'place': passport.placeOfRegistration,
-                'dateTimeField': passport.dateTimeField,
+                'date_day': passport.date_day,
+                'date_month': passport.date_month,
+                'date_year': passport.date_year,
 
                 # Здесь начинаются поля Курса и группы
                 'course': course_group.course,
                 'name_institute': course_group.course,
                 'group': course_group.group,
                 'nameHeadman': course_group.nameHeadman,
+                'number_of_statement': pk,
 
                 # Здесь начинаются поля Сайт юзера
                 'INN': site_user.INN,
-                'pFact': site_user.pFact,
+                'street': site_user.street,
+                'house': site_user.house,
+                'index': site_user.index,
+                'apartment': site_user.apartment,
                 'phoneNumber': site_user.phoneNumber,
                 'patronymic': site_user.patronymic,
                 'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
                 'disability': site_user.disability,
                 'fullStateSupport': site_user.fullStateSupport,
-                'preferentialCategory': site_user.preferentialCategory,
                 'numberTravelCard': site_user.numberTravelCard,
-                'addressOfResidence': site_user.addressOfResidence,
                 'FormOfEducation': site_user.FormOfEducation,
                 'inProfCom': site_user.inProfCom,
             })
-            return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form})
+            if pk == 6:
+                return render(request, 'statements/first_7/info_6/info_6.html', context={'form': form, 'pk': pk})
+            else:
+                return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form, 'pk': pk})
+
+        if pk == 8 or 9 or 10:
+            form = FormProfCom1(initial={
+                # Здесь начинаются поля Юзера
+                'name': site_user.name,
+                'surname': site_user.surname,
+
+                # Здес начинаются поля Пасспорта
+                'series': passport.series,
+                'number': passport.number,
+                'dateBirthday': passport.dateBirthday,
+                'place': passport.placeOfRegistration,
+
+                # Здесь начинаются поля Курса и группы
+                'name_institute': course_group.course,
+                'group': course_group.group,
+
+                # Здесь начинаются поля Сайт юзера
+                'INN': site_user.INN,
+                'apartment': site_user.apartment,
+                'house': site_user.house,
+                'street': site_user.street,
+                'phoneNumber': site_user.phoneNumber,
+                'patronymic': site_user.patronymic,
+                'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
+                'disability': site_user.disability,
+                'fullStateSupport': site_user.fullStateSupport,
+                'numberTravelCard': site_user.numberTravelCard,
+                'FormOfEducation': site_user.FormOfEducation,
+                'inProfCom': site_user.inProfCom, })
+            if pk == 8:
+                return render(request, 'statements/last_123/material_aid/material_aid.html', context={'form': form})
+            elif pk == 9:
+                return render(request, 'statements/last_123/online_wallet/online_wallet.html', context={'form': form})
+            elif pk == 10:
+                return render(request, 'statements/last_123/social_nutrition/social_nutrition.html', context={'form': form})
     else:
         return render(request, 'index.html')
 
 
-def doc_budget_soc(request):
+def doc_budget_soc(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_budget_soc.docx")
         course = request.POST['course']
@@ -224,7 +210,6 @@ def doc_budget_soc(request):
         certificate = request.POST['numberInsuranceCertificate']
         dateBirthday = request.POST['dateBirthday']
         invalid = request.POST['disability_group']
-        invalid2 = request.POST['disability_group_text']
         answer = request.POST['fullStateSupport']
         surname = request.POST['surname']
         name = request.POST['name']
@@ -238,12 +223,10 @@ def doc_budget_soc(request):
         street = request.POST['street']
         context = {"group": group, "c": course, "starosta": nameHeadman, "name": name_institute,
                    "nomer": number, "series": series, "vidan": place, "inn": INN,
-                   "svidetel": certificate, "dateNumber": dateBirthday, "invalid": invalid, "invalid2": invalid2,
+                   "svidetel": certificate, "dateNumber": dateBirthday, "invalid": invalid,
                    "answer": answer, "numberPhone": numberPhone, "sur": surname, "nam": name, "otchet": patronymic,
                    "in": index, "d": house, "k": apartment, "t": date_day, "m": date_month, "y": date_year,
                    "street": street}
-
-
 
         doc.render(context)
         doc.save("document/documents/Soc.docx")
@@ -263,7 +246,7 @@ def doc_budget_soc(request):
         return response
 
 
-def doc_budget_main(request):
+def doc_budget_main(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_budget_main.docx")
         course = request.POST['course']
@@ -278,7 +261,6 @@ def doc_budget_main(request):
         certificate = request.POST['numberInsuranceCertificate']
         dateBirthday = request.POST['dateBirthday']
         invalid = request.POST['disability_group']
-        invalid2 = request.POST['disability_group_text']
         answer = request.POST['fullStateSupport']
         surname = request.POST['surname']
         name = request.POST['name']
@@ -294,7 +276,7 @@ def doc_budget_main(request):
         textfield2 = request.POST['textfield2']
         context = {"group": group, "c": course, "starosta": nameHeadman, "name": name_institute,
                    "nomer": number, "series": series, "vidan": place, "inn": INN,
-                   "svidetel": certificate, "dateNumber": dateBirthday, "invalid": invalid, "invalid2": invalid2,
+                   "svidetel": certificate, "dateNumber": dateBirthday, "invalid": invalid,
                    "answer": answer, "numberPhone": numberPhone, "sur": surname, "nam": name, "otchet": patronymic,
                    "in": index, "d": house, "k": apartment, "t": date_day, "m": date_month, "y": date_year,
                    "street": street, "tf1": textfield1, "tf2": textfield2}
@@ -316,7 +298,7 @@ def doc_budget_main(request):
         return response
 
 
-def doc_profcom_2(request):
+def doc_profcom_2(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_profcom_2.docx")  # или должен сохранять 3
         group = request.POST['group']
@@ -358,7 +340,7 @@ def doc_profcom_2(request):
         return response
 
 
-def doc_profcom_1(request):
+def doc_profcom_1(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_profcom_1.docx")
         group = request.POST['group']
@@ -422,15 +404,18 @@ class UpdateProfile(UpdateView):
         context['active_client'] = True
         # if 'form' not in context:
         context['form'] = self.form_class(initial={'INN': site_user.INN,
-                                                   'pFact': site_user.pFact,
+                                                   'street': site_user.street,
+                                                   'index': site_user.index,
+                                                   'house': site_user.house,
+                                                   'name': site_user.name,
+                                                   'surname': site_user.surname,
+                                                   'apartment': site_user.apartment,
                                                    'phoneNumber': site_user.phoneNumber,
                                                    'patronymic': site_user.patronymic,
                                                    'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
                                                    'disability': site_user.disability,
                                                    'fullStateSupport': site_user.fullStateSupport,
-                                                   'preferentialCategory': site_user.preferentialCategory,
                                                    'numberTravelCard': site_user.numberTravelCard,
-                                                   'addressOfResidence': site_user.addressOfResidence,
                                                    'FormOfEducation': site_user.FormOfEducation,
                                                    'inProfCom': site_user.inProfCom})
 
@@ -471,7 +456,10 @@ class UpdatePassport(UpdateView):
                                                    'number': passport.number,
                                                    'dateBirthday': passport.dateBirthday,
                                                    'placeOfRegistration': passport.placeOfRegistration,
-                                                   'dateTimeField': passport.dateTimeField, })
+                                                   'date_day': passport.date_day,
+                                                   'date_month': passport.date_month,
+                                                   'date_year': passport.date_year,
+                                                   'place': passport.place})
         context['active_client'] = True
         return context
 
