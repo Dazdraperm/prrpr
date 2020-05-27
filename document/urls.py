@@ -25,7 +25,7 @@ urlpatterns = [
     path('info/<int:pk>/auto_fill', auto_fill, name='auto_fill'),
     path('schedule', schedule, name='schedule'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('profile_list/<int:pk>/', UpdateProfile.as_view(), name='profile_list'),
+    path('profile/<int:pk>/', UpdateProfile.as_view(), name='profile'),
     path('passport/<int:pk>/', UpdatePassport.as_view(), name='passport'),
     path('CourseGroup/<int:pk>/', UpdateCourse.as_view(), name='course_group'),
     path('info/<int:pk>/doc_budget_soc', doc_budget_soc, name='doc_budget_soc'),
