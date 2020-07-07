@@ -110,11 +110,11 @@ class Statement1(models.Model):
     patronymic = models.CharField(max_length=15, blank=True, null=True, verbose_name='Отчество')  # Отчество
     INN = models.CharField(max_length=10, blank=True, null=True, verbose_name='ИНН')  # ИНН
     numberInsuranceCertificate = models.CharField(max_length=11, blank=True, null=True, verbose_name='Страховое свидетельство')  # Страховое свидетельство
-    dateBirthday = models.CharField(max_length=8, blank=True, null=True, verbose_name='Страховое свидетельство')  # День рождения
-    disability_group = models.CharField(max_length=20, blank=True, null=True, verbose_name='Страховое свидетельство')  # группа инвалидности
+    dateBirthday = models.CharField(max_length=8, blank=True, null=True, verbose_name='День рождения')  # День рождения
+    disability_group = models.CharField(max_length=20, blank=True, null=True, verbose_name='Группа инвалидности')  # группа инвалидности
     phoneNumber = models.CharField(max_length=11, blank=True, null=True, verbose_name='Номер телефона')  # Номер телефона
-    fullStateSupport = models.CharField(max_length=3, choices=_STATUS_CHOICES, default='Да', blank=True,
-                                        null=True, verbose_name='ПОлное гос.обеспечение')  # Полное гос. обеспечение
+    fullStateSupport = models.CharField(max_length=3, choices=_STATUS_CHOICES, default=None, blank=True,
+                                        null=True, verbose_name='Полное гос.обеспечение')  # Полное гос. обеспечение
     textfield1 = models.CharField(max_length=175, blank=True, null=True, verbose_name='Просьба')  # Просьба
     textfield2 = models.CharField(max_length=175, blank=True, null=True, verbose_name='Приложение')  # Приложение
 
