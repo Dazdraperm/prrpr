@@ -13,7 +13,7 @@ from docxtpl import DocxTemplate
 
 
 def register(request):
-    if request.user.is_authenticated == False:
+    if not request.user.is_authenticated:
         if request.method == 'POST':
             form = SiteRegistrationForm(request.POST)
             if form.is_valid():
