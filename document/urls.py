@@ -1,5 +1,4 @@
 from django.urls import path, include
-from django.conf.urls import url
 from .views import my_login, my_logout, auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, \
     admin, schedule, consent, survey_questionnaire, statement_of_command, additional_bank, contract, how, \
     conditions, position, material_aid, online_wallet, social_nutrition, UpdateCourse, register, doc_budget_soc, \
@@ -7,7 +6,7 @@ from .views import my_login, my_logout, auto_fill, UpdatePassport, statements, i
 
 urlpatterns = [
     path('register/', register, name='registration'),
-    path('', index, name='index'),
+    path('', statements, name='index'),
     path('statements', statements, name='statements'),
     path('schedule', schedule, name='schedule'),
     path('consent', consent, name='consent'),

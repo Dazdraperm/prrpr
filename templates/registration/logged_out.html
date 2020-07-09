@@ -1,7 +1,17 @@
 {% extends "index.html" %}
 {% block content %}
 
-<p>Вы успешно вышли</p>
+    <div class="container pb-5 pt-5 text-center">
+        <div class="container pl-lg-1 text-center">
+            <div class="card border-primary shadow rounded" style="width: 25rem;">
+                <div class="card-body m-0">
+                    <h5 class="card-title">Вы успешно вышли из аккаунта</h5>
+                    <div class="text-center">
+                        <a href="{% url 'login' %}" class="btn btn-primary shadow">Войти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<a href="{% url 'login'%}">Нажмите сюда, чтобы снова авторизироваться</a>
 {% endblock %}

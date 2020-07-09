@@ -14,7 +14,7 @@ class SiteRegistrationForm(UserCreationForm):
 class PassportForm(ModelForm):
     class Meta:
         model = Passport
-        fields = ('series', 'number', 'code', 'date_year', 'date_month', 'date_day', 'placeOfRegistration', 'dateBirthday', 'place')
+        exclude = 'user',
 
 
 class UserForm(ModelForm):
@@ -57,13 +57,13 @@ class FormProfCom23(ModelForm):
         exclude = ['textfield1', 'textfield2']
 
 
-class Course(ModelForm):
+class CourseForm(ModelForm):
     class Meta:
         model = CourseGroup
-        fields = ('course', 'group', 'nameHeadman', 'nameInstitute')
+        fields = ('course', 'group', 'FIO_headman', 'name_institute')
 
 
 class DisabilityGroupForm(ModelForm):
     class Meta:
         model = DisabilityGroup
-        fields = ['categories', 'documents']
+        fields = ['categories', 'supporting_documents']

@@ -34,7 +34,11 @@
                                 formaction="doc_profcom_1"><b>Скачать</b></button>
                     </div>
                     <div class="container pt-2">
-                        {{ form|as_bootstrap_inline }}
+                        {% for field in form %}
+                                <div class="fieldWrapper">
+                                    {{ field.label_tag }} {{ field }}
+                                </div>
+                            {% endfor %}
                     </div>
                     <div class="container">
                         <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
@@ -59,7 +63,11 @@
                                 formaction="doc_profcom_1"><b>Скачать</b></button>
                     </div>
                     <div class="container pt-2">
-                        {{ form|as_bootstrap_inline }}
+                        {% for field in form %}
+                                <div class="fieldWrapper">
+                                    {{ field.label_tag }} {{ field }}
+                                </div>
+                            {% endfor %}
                     </div>
                     <div class="container">
                         <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
