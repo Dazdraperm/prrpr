@@ -159,8 +159,15 @@
     {% if user.is_authenticated == False %}
         {% if next %}
             {% if user.is_authenticated %}
-                <p>Your account doesn't have access to this page. To proceed,
-                    please login with an account that has access.</p>
+                <div class="container pb-5 pt-5 row-cols-sm-2 text-center">
+                    <div class="container-my pl-5 align-content-center">
+                        <div class="card border-primary shadow rounded" style="width: 25rem;">
+                            <div class="card-body m-0">
+                                <h5 class="card-title font-weight-bold">Ваша учетная запись не имеет доступа к этой странице!</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% else %}
                 <div class="container pb-5 pt-5 row-cols-sm-2 text-center">
                     <div class="container-my pl-5 align-content-center">
