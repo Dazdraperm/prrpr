@@ -1,11 +1,11 @@
 {% extends "index.html" %}
 {% block content %}
 
-    <div class="container pb-5 pt-5 text-center">
-        <div class="container pl-lg-1 text-center">
+    <div class="container pb-5 pt-5 row-cols-sm-2 text-center">
+            <div class="container-my pl-5 align-content-center">
             <div class="card border-primary shadow rounded" style="width: 25rem;">
                 <div class="card-body m-0">
-                    <h5 class="card-title">Вы успешно вышли из аккаунта</h5>
+                    <h5 class="card-title font-weight-bold">Вы успешно вышли из аккаунта!</h5>
                     <div class="text-center">
                         <a href="{% url 'login' %}" class="btn btn-primary shadow">Войти</a>
                     </div>

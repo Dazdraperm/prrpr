@@ -3,26 +3,6 @@
 
 {% block content %}
 
-
-    <div class="container pb-5 pt-5 row-cols-sm-2 text-center">
-        <div class="container-my pr-5 pl-5 align-content-center">
-            <form method="post" class="" action="{% url 'login' %}">
-                {% csrf_token %}
-                <div class="form-group">
-                    {{ form|as_bootstrap_inline }}
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn-sm btn-primary mt-2 shadow p-2 rounded font-weight-bold">Войти
-                    </button>
-                    <input type="hidden" name="next" value="{{ next }}"></div>
-            </form>
-
-        </div>
-
-    </div>
-
-
-
     <style>
 
         .form-horizontal {
@@ -169,6 +149,10 @@
             }
         }
 
+        .shadowtext {
+            text-shadow: 1px 1px 2px black;
+        }
+
     </style>
 
 
@@ -178,60 +162,79 @@
                 <p>Your account doesn't have access to this page. To proceed,
                     please login with an account that has access.</p>
             {% else %}
-                <p>Пожалуйста, авторизируйтесь.</p>
+                <div class="container pb-5 pt-5 row-cols-sm-2 text-center">
+                    <div class="container-my pl-5 align-content-center">
+                        <div class="card border-primary shadow rounded" style="width: 25rem;">
+                            <div class="card-body m-0">
+                                <h5 class="card-title font-weight-bold">Пожалуйста, авторизируйтесь!</h5>
+                                <div class="container">
+                                    <a class="nav-link float-left" href="{% url 'registration' %}">
+                                        <button type="button"
+                                                class="btn btn-outline-primary shadow p-2 mt-0 rounded">
+                                            Регистрация
+                                        </button>
+                                    </a>
+                                    <a class="nav-link float-right" href="{% url 'login' %}">
+                                        <button type="button"
+                                                class="btn btn-outline-primary shadow p-2 mt-0 rounded">
+                                            Авторизация
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         {% endif %}
-        <div class="container ml-5 pl-5 mt-3">
-            <div class="container ml-5 pl-5 ">
-                <div class="container ml-5 pl-5 ">
-                    <div class="container ml-5 pl-5 ">
-                        <div class="container ml-5 p-5">
-                            <div class="row ml-5">
+        <div class="container pb-5 pt-5 row-cols-sm-2 text-center">
+            <div class="container-my pl-5 align-content-center">
+                <div class="row">
 
-                                <div class="col-md-offset-3 col-md-6">
+                    <form method="post" class="form-horizontal border border-primary pb-2 mb-2 rounded-1 shadow-lg"
+                          action="{% url 'login' %}">
+                        <span class="heading p-2"><h2 class="display-4 m-3 p-0 shadowtext">АВТОРИЗАЦИЯ</h2></span>
+                        {% csrf_token %}
+                        {{ form|as_bootstrap_inline }}
 
-                                    <form class="form-horizontal pb-5">
-                                        <span class="heading">АВТОРИЗАЦИЯ</span>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="inputEmail"
-                                                   placeholder="Логин">
-                                            <i class="fa fa-user"></i>
-                                        </div>
-                                        <div class="form-group help">
-                                            <input type="password" class="form-control" id="inputPassword"
-                                                   placeholder="Пароль">
-                                            <i class="fa fa-lock"></i>
-                                            <a href="#" class="fa fa-question-circle"></a>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="main-checkbox">
-                                                <input type="checkbox" value="none" id="checkbox1" name="check"/>
-                                                <label for="checkbox1"></label>
-                                            </div>
-                                            <span class="text">Запомнить</span>
-                                            <button type="submit"
-                                                    class="btn-sm btn-primary float-right mb-3 mt-0 shadow p-2 rounded font-weight-bold">
-                                                Войти
-                                            </button>
-                                        </div>
-                                    </form>
-                                        <a class="nav-link" href="{% url 'registration' %}">
-                                            <button type="submit"
-                                                    class="btn-sm btn-block btn-primary mt-2 shadow p-2 rounded font-weight-bold">
-                                                Зарегистрироваться
-                                            </button>
-                                        </a>
-                                </div>
+                        <button type="submit"
+                                class="btn-sm float-right mr-5 mb-3 m-0 btn-primary shadow pr-5 pl-5 p-2 rounded font-weight-bold">
+                            Войти
+                        </button>
+                        <input type="hidden" name="next" value="{{ next }}">
 
-                            </div>
+                    </form>
+
+                    <div class="container">
+                        <a class="nav-link float-left" href="{% url 'registration' %}">
+                            <button type="button"
+                                    class="btn btn-outline-primary shadow p-2 mt-0 rounded">
+                                Зарегистрироваться
+                            </button>
+                        </a>
+                        <a class="nav-link float-right" href="#">
+                            <button type="button" class="btn btn-outline-primary shadow p-2 mt-0 rounded">Забыли
+                                пароль?
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% else %}
+        <div class="container pb-5 pt-5 row-cols-sm-2 text-center">
+            <div class="container-my pl-5 align-content-center">
+                <div class="card border-primary shadow rounded" style="width: 25rem;">
+                    <div class="card-body m-0">
+                        <h5 class="card-title font-weight-bold">Вы уже авторизированы!</h5>
+                        <div class="text-center">
+                            <a href="{% url 'index' %}" class="btn btn-primary shadow">Вернуться на главную</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    {% else %}
-        <p>Вы уже вошли.</p>
-        <p><a href="{% url 'index' %}" class="text-black">Вернуться на главную</a></p>
     {% endif %}
 
 {% endblock %}

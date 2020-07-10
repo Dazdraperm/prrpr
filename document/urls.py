@@ -6,7 +6,7 @@ from .views import my_login, my_logout, auto_fill, UpdatePassport, statements, i
 
 urlpatterns = [
     path('register/', register, name='registration'),
-    path('', index, name='index'),
+    path('', statements, name='index'),
     path('statements', statements, name='statements'),
     path('schedule', schedule, name='schedule'),
     path('consent', consent, name='consent'),

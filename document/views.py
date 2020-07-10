@@ -4,19 +4,14 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
-
-from document.forms import SiteRegistrationForm, StatementForm6, FormProfCom1, FormProfCom23, SiteUserForm1, \
-    PassportForm, Course
-from document.forms import StatementForm1
-from django.views.generic import UpdateView
 from document.forms import SiteRegistrationForm, StatementForm6, FormProfCom1, FormProfCom23
-from document.forms import StatementForm1, SiteUserForm1, PassportForm, Course
+from document.forms import StatementForm1, SiteUserForm1, PassportForm, CourseForm
 from document.models import SiteUser, CourseGroup, Passport
 from docxtpl import DocxTemplate
 
 
 def register(request):
-    if request.user.is_authenticated == False:
+    if not request.user.is_authenticated:
         if request.method == 'POST':
             form = SiteRegistrationForm(request.POST)
             if form.is_valid():
@@ -115,41 +110,41 @@ def auto_fill(request, pk):
         passport = Passport.objects.get(user=request.user)
         if pk == 1 or 2 or 3 or 4 or 5 or 6 or 7:
             form = StatementForm1(initial={
-                # Здесь начинаются поля Юзера
+                # Юзер
                 'name': site_user.name,
                 'surname': site_user.surname,
 
-                # Здес начинаются поля Пасспорта
-                'code': passport.code,
+                # Пасспорт
+                'unit_code': passport.unit_code,
                 'series': passport.series,
-                'number': passport.number,
-                'dateBirthday': passport.dateBirthday,
-                'place': passport.placeOfRegistration,
-                'date_day': passport.date_day,
-                'date_month': passport.date_month,
-                'date_year': passport.date_year,
+                'number_passport': passport.number_passport,
+                'date_birthday': passport.date_birthday,
+                'place_registration': passport.place_registration,
+                'passport_issue_day': passport.passport_issue_day,
+                'passport_issue_month': passport.passport_issue_month,
+                'passport_issue_year': passport.passport_issue_year,
 
-                # Здесь начинаются поля Курса и группы
+                # Курс и группа
                 'course': course_group.course,
                 'name_institute': course_group.course,
                 'group': course_group.group,
-                'nameHeadman': course_group.nameHeadman,
+                'FIO_headman': course_group.FIO_headman,
                 'number_of_statement': pk,
 
-                # Здесь начинаются поля Сайт юзера
+                # Сайт юзер
                 'INN': site_user.INN,
-                'street': site_user.street,
-                'house': site_user.house,
-                'index': site_user.index,
-                'apartment': site_user.apartment,
-                'phoneNumber': site_user.phoneNumber,
+                'location_street': site_user.location_street,
+                'location_house': site_user.location_house,
+                'post_code': site_user.post_code,
+                'location_apartment': site_user.location_apartment,
+                'phone_number': site_user.phone_number,
                 'patronymic': site_user.patronymic,
-                'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
-                'disability': site_user.disability,
-                'fullStateSupport': site_user.fullStateSupport,
-                'numberTravelCard': site_user.numberTravelCard,
-                'FormOfEducation': site_user.FormOfEducation,
-                'inProfCom': site_user.inProfCom,
+                'number_insurance_certificate': site_user.number_insurance_certificate,
+                'disability_group': site_user.disability_group,
+                'full_state_support': site_user.full_state_support,
+                'number_travel_card': site_user.number_travel_card,
+                'form_education': site_user.form_education,
+                'state_prof_com': site_user.state_prof_com,
             })
             if pk == 6:
                 return render(request, 'statements/first_7/info_6/info_6.html', context={'form': form, 'pk': pk})
@@ -164,33 +159,34 @@ def auto_fill(request, pk):
 
                 # Здес начинаются поля Пасспорта
                 'series': passport.series,
-                'number': passport.number,
-                'dateBirthday': passport.dateBirthday,
-                'place': passport.placeOfRegistration,
+                'number_passport': passport.number_passport,
+                'date_birthday': passport.date_birthday,
+                'place_registration': passport.place_registration,
 
                 # Здесь начинаются поля Курса и группы
-                'name_institute': course_group.course,
+                'name_institute': course_group.name_institute,
                 'group': course_group.group,
 
                 # Здесь начинаются поля Сайт юзера
                 'INN': site_user.INN,
-                'apartment': site_user.apartment,
+                'location_apartment': site_user.location_apartment,
                 'house': site_user.house,
-                'street': site_user.street,
-                'phoneNumber': site_user.phoneNumber,
+                'location_street': site_user.location_street,
+                'phone_number': site_user.phone_number,
                 'patronymic': site_user.patronymic,
-                'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
-                'disability': site_user.disability,
-                'fullStateSupport': site_user.fullStateSupport,
-                'numberTravelCard': site_user.numberTravelCard,
-                'FormOfEducation': site_user.FormOfEducation,
-                'inProfCom': site_user.inProfCom, })
+                'number_insurance_certificate': site_user.number_insurance_certificate,
+                'disability_group': site_user.disability_group,
+                'full_state_support': site_user.full_state_support,
+                'number_travel_card': site_user.number_travel_card,
+                'form_education': site_user.form_education,
+                'state_prof_com': site_user.state_prof_com, })
             if pk == 8:
                 return render(request, 'statements/last_123/material_aid/material_aid.html', context={'form': form})
             elif pk == 9:
                 return render(request, 'statements/last_123/online_wallet/online_wallet.html', context={'form': form})
             elif pk == 10:
-                return render(request, 'statements/last_123/social_nutrition/social_nutrition.html', context={'form': form})
+                return render(request, 'statements/last_123/social_nutrition/social_nutrition.html',
+                              context={'form': form})
     else:
         return render(request, 'index.html')
 
@@ -198,35 +194,35 @@ def auto_fill(request, pk):
 def doc_budget_soc(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_budget_soc.docx")
-        course = request.POST['course']
-        group = request.POST['group']
-        nameHeadman = request.POST['nameHeadman']
-        name_institute = request.POST['name_institute']
-        series = request.POST['series']
-        number = request.POST['number']
-        INN = request.POST['INN']
-        place = request.POST['place']
-        numberPhone = request.POST['phoneNumber']
-        certificate = request.POST['numberInsuranceCertificate']
-        dateBirthday = request.POST['dateBirthday']
-        invalid = request.POST['disability_group']
-        answer = request.POST['fullStateSupport']
-        surname = request.POST['surname']
-        name = request.POST['name']
-        index = request.POST['index']
-        patronymic = request.POST['patronymic']
-        house = request.POST['house']
-        apartment = request.POST['apartment']
-        date_day = request.POST['date_day']
-        date_month = request.POST['date_month']
-        date_year = request.POST['date_year']
-        street = request.POST['street']
-        context = {"group": group, "c": course, "starosta": nameHeadman, "name": name_institute,
-                   "nomer": number, "series": series, "vidan": place, "inn": INN,
-                   "svidetel": certificate, "dateNumber": dateBirthday, "invalid": invalid,
-                   "answer": answer, "numberPhone": numberPhone, "sur": surname, "nam": name, "otchet": patronymic,
-                   "in": index, "d": house, "k": apartment, "t": date_day, "m": date_month, "y": date_year,
-                   "street": street}
+        context = {
+            # Курс
+            "c": request.POST['course'],
+            "group": request.POST['group'],
+            'FIO_headman': request.POST['FIO_headman'],
+            'name_institute': request.POST['name_institute'],
+
+            # Паспорт
+            'series': request.POST['series'],
+            'number': request.POST['number_passport'],
+            'issued_passport': request.POST['issued_passport'],
+            'date_birthday': request.POST['date_birthday'],
+            'passport_issue_day': request.POST['passport_issue_day'],
+            'passport_issue_month': request.POST['passport_issue_month'],
+            'passport_issue_year': request.POST['passport_issue_year'],
+
+            # Основные данные
+            'phone_number': request.POST['phone_number'],
+            'INN': request.POST['INN'],
+            'location_apartment': request.POST['location_apartment'],
+            'location_house': request.POST['location_house'],
+            'location_street': request.POST['location_street'],
+            'number_insurance_certificate': request.POST['number_insurance_certificate'],
+            'disability_group': request.POST['disability_group'],
+            'full_state_support': request.POST['full_state_support'],
+            'surname': request.POST['surname'],
+            'name': request.POST['name'],
+            'post_code': request.POST['post_code'],
+            'patronymic': request.POST['patronymic'], }
 
         doc.render(context)
         doc.save("document/documents/Soc.docx")
@@ -249,37 +245,40 @@ def doc_budget_soc(request, pk):
 def doc_budget_main(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_budget_main.docx")
-        course = request.POST['course']
-        group = request.POST['group']
-        nameHeadman = request.POST['nameHeadman']
-        name_institute = request.POST['name_institute']
-        series = request.POST['series']
-        number = request.POST['number']
-        INN = request.POST['INN']
-        place = request.POST['place']
-        numberPhone = request.POST['phoneNumber']
-        certificate = request.POST['numberInsuranceCertificate']
-        dateBirthday = request.POST['dateBirthday']
-        invalid = request.POST['disability_group']
-        answer = request.POST['fullStateSupport']
-        surname = request.POST['surname']
-        name = request.POST['name']
-        index = request.POST['index']
-        patronymic = request.POST['patronymic']
-        house = request.POST['house']
-        apartment = request.POST['apartment']
-        date_day = request.POST['date_day']
-        date_month = request.POST['date_month']
-        date_year = request.POST['date_year']
-        street = request.POST['street']
-        textfield1 = request.POST['textfield1']
-        textfield2 = request.POST['textfield2']
-        context = {"group": group, "c": course, "starosta": nameHeadman, "name": name_institute,
-                   "nomer": number, "series": series, "vidan": place, "inn": INN,
-                   "svidetel": certificate, "dateNumber": dateBirthday, "invalid": invalid,
-                   "answer": answer, "numberPhone": numberPhone, "sur": surname, "nam": name, "otchet": patronymic,
-                   "in": index, "d": house, "k": apartment, "t": date_day, "m": date_month, "y": date_year,
-                   "street": street, "tf1": textfield1, "tf2": textfield2}
+
+        context = {
+            # Основные
+            'phone_number': request.POST['phone_number'],
+            'INN': request.POST['INN'],
+            'location_apartment': request.POST['location_apartment'],
+            'location_house': request.POST['location_house'],
+            'location_street': request.POST['location_street'],
+            'number_insurance_certificate': request.POST['number_insurance_certificate'],
+            'disability_group': request.POST['disability_group'],
+            'full_state_support': request.POST['full_state_support'],
+            'surname': request.POST['surname'],
+            'name': request.POST['name'],
+            'post_code': request.POST['post_code'],
+            'patronymic': request.POST['patronymic'],
+
+            # Курс
+            "c": request.POST['course'],
+            "group": request.POST['group'],
+            'FIO_headman': request.POST['FIO_headman'],
+            'name_institute': request.POST['name_institute'],
+
+            # Паспорт
+            'series': request.POST['series'],
+            'number': request.POST['number_passport'],
+            'issued_passport': request.POST['issued_passport'],
+            'date_birthday': request.POST['date_birthday'],
+            'passport_issue_day': request.POST['passport_issue_day'],
+            'passport_issue_month': request.POST['passport_issue_month'],
+            'passport_issue_year': request.POST['passport_issue_year'],
+
+            # Уникальные
+            "request": request.POST['request'],
+            "annex": request.POST['annex']}
         doc.render(context)
         doc.save("document/documents/Soc.docx")
 
@@ -301,27 +300,30 @@ def doc_budget_main(request, pk):
 def doc_profcom_2(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_profcom_2.docx")  # или должен сохранять 3
-        group = request.POST['group']
-        name_institute = request.POST['name_institute']
-        series = request.POST['series']
-        number = request.POST['number']
-        INN = request.POST['INN']
-        place = request.POST['place']
-        numberPhone = request.POST['phoneNumber']
-        dateBirthday = request.POST['dateBirthday']
-        surname = request.POST['surname']
-        name = request.POST['name']
-        patronymic = request.POST['patronymic']
-        house = request.POST['house']
-        apartment = request.POST['apartment']
-        date_day = request.POST['date_day']
-        date_month = request.POST['date_month']
-        date_year = request.POST['date_year']
-        street = request.POST['street']
-        context = {"group": group, "name": name_institute, "nomer": number, "series": series, "vidan": place,
-                   "inn": INN, "dateNumber": dateBirthday, "numberPhone": numberPhone, "sur": surname, "nam": name,
-                   "otchet": patronymic, "in": index, "d": house, "k": apartment, "t": date_day,
-                   "m": date_month, "y": date_year, "street": street}
+        context = {
+            # Курс
+            "group": request.POST['group'],
+            'name_institute': request.POST['name_institute'],
+
+            # Паспорт
+            'series': request.POST['series'],
+            'number': request.POST['number_passport'],
+            'issued_passport': request.POST['issued_passport'],
+            'date_birthday': request.POST['date_birthday'],
+            'passport_issue_day': request.POST['passport_issue_day'],
+            'passport_issue_month': request.POST['passport_issue_month'],
+            'passport_issue_year': request.POST['passport_issue_year'],
+
+            # Основа
+            "INN": request.POST['INN'],
+            "number_phone": request.POST['number_phone'],
+            'surname': request.POST['surname'],
+            'name': request.POST['name'],
+            'post_code': request.POST['post_code'],
+            'patronymic': request.POST['patronymic'],
+            'location_apartment': request.POST['location_apartment'],
+            'location_house': request.POST['location_house'],
+            'location_street': request.POST['location_street']}
         doc.render(context)
         doc.save("document/documents/Soc.docx")
 
@@ -343,29 +345,36 @@ def doc_profcom_2(request, pk):
 def doc_profcom_1(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_profcom_1.docx")
-        group = request.POST['group']
-        name_institute = request.POST['name_institute']
-        series = request.POST['series']
-        number = request.POST['number']
-        INN = request.POST['INN']
-        place = request.POST['place']
-        numberPhone = request.POST['phoneNumber']
-        dateBirthday = request.POST['dateBirthday']
-        surname = request.POST['surname']
-        name = request.POST['name']
-        patronymic = request.POST['patronymic']
-        house = request.POST['house']
-        apartment = request.POST['apartment']
-        date_day = request.POST['date_day']
-        date_month = request.POST['date_month']
-        date_year = request.POST['date_year']
-        street = request.POST['street']
         textfield1 = request.POST['textfield1']
         textfield2 = request.POST['textfield2']
-        context = {"group": group, "name": name_institute, "nomer": number, "series": series, "vidan": place,
-                   "inn": INN, "dateNumber": dateBirthday, "numberPhone": numberPhone, "sur": surname, "nam": name,
-                   "otchet": patronymic, "in": index, "d": house, "k": apartment, "t": date_day,
-                   "m": date_month, "y": date_year, "street": street, "tf1": textfield1, "tf2": textfield2}
+        context = {
+            # Курс
+            "group": request.POST['group'],
+            'name_institute': request.POST['name_institute'],
+
+            # Паспорт
+            'series': request.POST['series'],
+            'number': request.POST['number_passport'],
+            'issued_passport': request.POST['issued_passport'],
+            'date_birthday': request.POST['date_birthday'],
+            'passport_issue_day': request.POST['passport_issue_day'],
+            'passport_issue_month': request.POST['passport_issue_month'],
+            'passport_issue_year': request.POST['passport_issue_year'],
+
+            # Основа
+            "INN": request.POST['INN'],
+            "number_phone": request.POST['number_phone'],
+            'surname': request.POST['surname'],
+            'name': request.POST['name'],
+            'post_code': request.POST['post_code'],
+            'patronymic': request.POST['patronymic'],
+            'location_apartment': request.POST['location_apartment'],
+            'location_house': request.POST['location_house'],
+            'location_street': request.POST['location_street'],
+
+            # Уникальные
+            "request": request.POST['request'],
+            "annex": request.POST['annex']}
         doc.render(context)
         doc.save("document/documents/Soc.docx")
 
@@ -404,20 +413,20 @@ class UpdateProfile(UpdateView):
         context['active_client'] = True
         # if 'form' not in context:
         context['form'] = self.form_class(initial={'INN': site_user.INN,
-                                                   'street': site_user.street,
-                                                   'index': site_user.index,
-                                                   'house': site_user.house,
+                                                   'location_street': site_user.location_street,
+                                                   'post_code': site_user.post_code,
+                                                   'location_house': site_user.location_house,
                                                    'name': site_user.name,
                                                    'surname': site_user.surname,
-                                                   'apartment': site_user.apartment,
-                                                   'phoneNumber': site_user.phoneNumber,
+                                                   'location_apartment': site_user.location_apartment,
+                                                   'phone_number': site_user.phone_number,
                                                    'patronymic': site_user.patronymic,
-                                                   'numberInsuranceCertificate': site_user.numberInsuranceCertificate,
-                                                   'disability': site_user.disability,
-                                                   'fullStateSupport': site_user.fullStateSupport,
-                                                   'numberTravelCard': site_user.numberTravelCard,
-                                                   'FormOfEducation': site_user.FormOfEducation,
-                                                   'inProfCom': site_user.inProfCom})
+                                                   'numberInsuranceCertificate': site_user.number_insurance_certificate,
+                                                   'disability_group': site_user.disability_group,
+                                                   'full_state_support': site_user.full_state_support,
+                                                   'number_travel_card': site_user.number_travel_card,
+                                                   'form_education': site_user.form_education,
+                                                   'state_prof_com': site_user.state_prof_com})
 
         context['active_client'] = True
         return context
@@ -426,7 +435,7 @@ class UpdateProfile(UpdateView):
 class UpdateCourse(UpdateView):
     model = CourseGroup
     template_name = 'profile_list/course_group.html'
-    form_class = Course
+    form_class = CourseForm
     success_url = reverse_lazy('index')
 
     def get_context_data(self, **kwargs):
@@ -434,9 +443,9 @@ class UpdateCourse(UpdateView):
         context = super(UpdateCourse, self).get_context_data(**kwargs)
         context['active_client'] = True
         context['form'] = self.form_class(initial={'course': course_group.course,
-                                                   'nameInstitute': course_group.nameInstitute,
+                                                   'name_institute': course_group.name_institute,
                                                    'group': course_group.group,
-                                                   'nameHeadman': course_group.nameHeadman, })
+                                                   'FIO_headman': course_group.FIO_headman, })
         context['active_client'] = True
         return context
 
@@ -451,15 +460,15 @@ class UpdatePassport(UpdateView):
         passport = Passport.objects.get(user=self.request.user)
         context = super(UpdatePassport, self).get_context_data(**kwargs)
         context['active_client'] = True
-        context['form'] = self.form_class(initial={'code': passport.code,
+        context['form'] = self.form_class(initial={'unit_code': passport.unit_code,
                                                    'series': passport.series,
-                                                   'number': passport.number,
-                                                   'dateBirthday': passport.dateBirthday,
-                                                   'placeOfRegistration': passport.placeOfRegistration,
-                                                   'date_day': passport.date_day,
-                                                   'date_month': passport.date_month,
-                                                   'date_year': passport.date_year,
-                                                   'place': passport.place})
+                                                   'number_passport': passport.number_passport,
+                                                   'date_birthday': passport.date_birthday,
+                                                   'place_registration': passport.place_registration,
+                                                   'passport_issue_day': passport.passport_issue_day,
+                                                   'passport_issue_month': passport.passport_issue_month,
+                                                   'passport_issue_year': passport.passport_issue_year,
+                                                   'issued_passport': passport.issued_passport})
         context['active_client'] = True
         return context
 
