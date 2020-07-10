@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
 {% load bootstrap_tags %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
@@ -46,9 +47,9 @@
                     </div>
                     <div class="container pt-2">
                         {% for field in form %}
-                                <div class="fieldWrapper">
-                                    {{ field.label_tag }} {{ field }}
-                                </div>
+                            <div class="">
+                                    {{ field|as_crispy_field }}
+                            </div>
                             {% endfor %}
                     </div>
                     <div class="container">
@@ -75,9 +76,9 @@
                     </div>
                     <div class="container pt-2">
                         {% for field in form %}
-                                <div class="fieldWrapper">
-                                    {{ field.label_tag }} {{ field }}
-                                </div>
+
+                                    {{ field|as_crispy_field }}
+
                             {% endfor %}
                     </div>
                     <div class="container">

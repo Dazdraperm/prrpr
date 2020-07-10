@@ -404,6 +404,13 @@ def admin(request):
 
 
 class UpdateProfile(UpdateView):
+
+    def dispatch(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated:
+            return redirect("/")
+        return super(UpdateProfile, self).dispatch(request, *args, **kwargs)
+
     model = SiteUser
     template_name = 'profile_list/profile.html'
     form_class = SiteUserForm1
@@ -435,6 +442,13 @@ class UpdateProfile(UpdateView):
 
 
 class UpdateCourse(UpdateView):
+
+    def dispatch(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated:
+            return redirect("/")
+        return super(UpdateCourse, self).dispatch(request, *args, **kwargs)
+
     model = CourseGroup
     template_name = 'profile_list/course_group.html'
     form_class = CourseForm
@@ -453,6 +467,13 @@ class UpdateCourse(UpdateView):
 
 
 class UpdatePassport(UpdateView):
+
+    def dispatch(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated:
+            return redirect("/")
+        return super(UpdatePassport, self).dispatch(request, *args, **kwargs)
+
     model = Passport
     template_name = 'profile_list/passport.html'
     form_class = PassportForm
