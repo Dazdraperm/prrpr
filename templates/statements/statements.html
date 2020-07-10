@@ -18,8 +18,14 @@
                         автозаполнения);</p>
                     <p class="text-danger font-weight-bold"><i>Чтобы воспользоваться функцией автозаполнения, нужно
                         заполнить
-                        данные в <a
-                                class="card-link" href="{% url 'profile' request.user.id %}"><b><i>профиле</i></b></a>!</i></p>
+                        данные в
+                        {% if request.user.is_authenticated %}
+                        <a class="card-link" href="{% url 'profile' request.user.id %}"><i>профиле</i></a>
+                        {% else %}
+                            <a class="card-link" href="{% url 'registration' %}"><i>профиле</i></a>
+                        {% endif %}
+                        !</i></p>
+
                     <p class="text-danger font-weight-bold"><i>Проверьте введенные данные после использования
                         автозаполнения!</i></p>
                     <p><b><i>4)</i></b> Приложить к заявлению копии документов, необходимые для подтверждения вашей
