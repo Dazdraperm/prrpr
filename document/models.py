@@ -8,6 +8,16 @@ _STATUS_CHOICES = [
     ('Нет', 'Нет'),
 ]
 
+CHOICES_STATEMENT = [
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+    ('5', '5'),
+    ('6', '6'),
+    ('7', '7'),
+]
+
 
 class Passport(models.Model):
     user = models.OneToOneField(User, name='user', on_delete=models.CASCADE, blank=True, null=True)
@@ -120,7 +130,7 @@ class Statement1(models.Model):
     location_street = models.CharField(max_length=150, blank=True, null=True, verbose_name='Улица')  # Место жительства
     location_apartment = models.CharField(max_length=7, blank=True, null=True, verbose_name='Квартира')  # Квартира
     location_house = models.CharField(max_length=7, blank=True, null=True, verbose_name='Номер Дома')  # Дом
-    number_of_statement = models.CharField(max_length=1, blank=True, null=True,
+    number_of_statement = models.CharField(max_length=1, choices=CHOICES_STATEMENT, default=None, blank=True, null=True,
                                            verbose_name='Номер заявления')  # Номер заявления
     name = models.CharField(max_length=15, blank=True, null=True, verbose_name='Имя')  # Имя
     surname = models.CharField(max_length=15, blank=True, null=True, verbose_name='Фамилия')  # Фамилия

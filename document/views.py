@@ -88,10 +88,10 @@ def informer(request):
 
 def info(request, pk):
     if pk == 6:
-        form = StatementForm6()
+        form = StatementForm6(initial={'number_of_statement': pk})
         return render(request, 'statements/first_7/info_6/info_6.html', context={'form': form, 'pk': pk}, )
     else:
-        form = StatementForm1()
+        form = StatementForm1(initial={'number_of_statement': pk})
     return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form, 'pk': pk}, )
 
 
@@ -222,7 +222,9 @@ def doc_budget_soc(request, pk):
             'surname': request.POST['surname'],
             'name': request.POST['name'],
             'post_code': request.POST['post_code'],
-            'patronymic': request.POST['patronymic'], }
+            'patronymic': request.POST['patronymic'],
+
+            'number_of_statement': request.POST['number_of_statement']}
 
         doc.render(context)
         doc.save("document/documents/Soc.docx")
