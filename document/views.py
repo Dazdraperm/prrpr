@@ -129,7 +129,7 @@ def auto_fill(request, pk):
                 'name_institute': course_group.course,
                 'group': course_group.group,
                 'FIO_headman': course_group.FIO_headman,
-                'number_of_statement': pk,
+                'pk': pk,
 
                 # Сайт юзер
                 'INN': site_user.INN,
@@ -224,7 +224,7 @@ def doc_budget_soc(request, pk):
             'post_code': request.POST['post_code'],
             'patronymic': request.POST['patronymic'],
 
-            'number_of_statement': request.POST['number_of_statement']}
+            'pk': pk}
 
         doc.render(context)
         doc.save("document/documents/Soc.docx")
@@ -280,7 +280,8 @@ def doc_budget_main(request, pk):
 
             # Уникальные
             "request": request.POST['request'],
-            "annex": request.POST['annex']}
+            "annex": request.POST['annex'],
+            'pk': pk}
         doc.render(context)
         doc.save("document/documents/Soc.docx")
 
@@ -347,8 +348,6 @@ def doc_profcom_2(request, pk):
 def doc_profcom_1(request, pk):
     if request.method == "POST":
         doc = DocxTemplate("document/docExample/doc_profcom_1.docx")
-        textfield1 = request.POST['textfield1']
-        textfield2 = request.POST['textfield2']
         context = {
             # Курс
             "group": request.POST['group'],
