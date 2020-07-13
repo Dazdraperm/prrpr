@@ -47,7 +47,7 @@
                     </div>
                     <div class="container pt-2">
                         {% for field in form %}
-                            <div class="">
+                            <div class="form-check-inline">
                                     {{ field|as_crispy_field }}
                             </div>
                             {% endfor %}
@@ -76,9 +76,9 @@
                     </div>
                     <div class="container pt-2">
                         {% for field in form %}
-
+                            <div class="">
                                     {{ field|as_crispy_field }}
-
+                            </div>
                             {% endfor %}
                     </div>
                     <div class="container">
