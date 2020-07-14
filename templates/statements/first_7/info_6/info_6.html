@@ -1,0 +1,120 @@
+{% extends 'index.html' %}
+{% load bootstrap_tags %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+    <div class="card mb-0 border-primary border-top-0 border-right-0 border-left-0">
+        <div class="card-header font-weight-bold shadow-sm">
+            Для получения этого вида материальной помощи нужно:
+        </div>
+        <div class="card-body shadow">
+            <p class="card-text"><b><i>1)</i></b> Определить, к какой категории нуждаемости вы относитесь (посмотреть <a
+                    class="card-link" href="{% url 'category' %}"><b><i>здесь</i></b></a>)</p>
+            <p class="card-text"><b><i>2)</i></b> Заполнить заявление в соответствии с образцом</p>
+            <p class="card-text"><b><i>3)</i></b> Приложить к заявлению копии документов, необходимые для подтверждения
+                вашей
+                категории нуждаемости</p>
+            <p class="card-text"><b><i>4)</i></b> Отнести заявление в профбюро института (график работы можно найти <a
+                    class="card-link" href="{% url 'schedule' %}"><b><i>здесь</i></b></a>)</p>
+        </div>
+    </div>
+
+    <div class="card text-white bg-danger mb-3 mt-3 shadow border-primary border-right-0 border-left-0">
+        <div class="card-header font-weight-bold shadow-sm shadow-sm">Дополнительно приложить к заявлению:</div>
+        <div class="card-body shadow">
+            <p class="card-text"><b><i>1)</i></b> заполнить следующие документы:<br>
+                <i><b>&bull;</b> Согласие (<a class="card-link text-dark"
+                                              href="{% url 'consent' %}"><b>образец</b></a>)</i>
+                <button type="button" class="btn btn-dark btn-sm font-weight-bold ">скачать</button>
+                <br>
+                <i><b>&bull;</b> Опрос-анкета (<a
+                        class="card-link text-dark" href="{% url 'survey_questionnaire' %}"><b>образец</b></a>)</i>
+                <button type="button" class="btn btn-dark btn-sm font-weight-bold">скачать</button>
+                <br>
+                <i><b>&bull;</b> Заявление-распоряжение (<a
+                        class="card-link text-dark" href="{% url 'statement_of_command' %}"><b>образец</b></a>)</i>
+                <button type="button" class="btn btn-dark btn-sm font-weight-bold">скачать</button>
+                <br>
+                <i><b>&bull;</b> Доп. анкета (<a
+                        class="card-link text-dark" href="{% url 'additional_bank' %}"><b>образец</b></a>)</i>
+                <button type="button" class="btn btn-dark btn-sm font-weight-bold">скачать</button>
+                <br>
+                <i><b>&bull;</b> Договор (<a
+                        class="card-link text-dark" href="{% url 'contract' %}"><b>образец</b></a>)</i>
+                <button type="button" class="btn btn-dark btn-sm font-weight-bold">скачать</button>
+            </p>
+            <p class="card-text"><b><i>2)</i></b> Приложить к ним копии ИНН и паспорта;</p>
+            <p class="card-text"><b><i>3)</i></b> Отнести заявление в профбюро нашего института.</p>
+        </div>
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <div class="container-fluid row mt-3 m-0">
+            <div class="col-sm">
+
+                <form>
+                    <div class="container mb-5 ">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Автозаполнение" formaction="auto_fill"><b>Автозаполнение</b></button>
+                    </div>
+                </form>
+                <form method="post" class="post-form align mb-5 pb-5">
+                    <div class="container  pt-5 pb-5">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Скачать"
+                                formaction="doc_budget_soc"><b>Скачать</b></button>
+                    </div>
+                    <div class="container pt-2">
+                        {% for field in form %}
+
+                            {{ field|as_crispy_field }}
+
+                        {% endfor %}
+                    </div>
+                    <div class="container">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Скачать"
+                                formaction="doc_budget_soc"><b>Скачать</b></button>
+                    </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="col-sm pt-5">
+                <img class="shadow rounded" src="{% static 'images/example_6.jpg' %}"
+                     alt="образец">
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid row mt-3 m-0">
+            <div class="col-sm">
+                <form method="post" class="post-form align mb-5 pb-5">
+                    <div class="container mb-5 pt-5 ">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Скачать"
+                                formaction="doc_budget_soc"><b>Скачать</b></button>
+                    </div>
+                    <div class="container pt-2">
+                        {% for field in form %}
+
+                                    {{ field|as_crispy_field }}
+
+                            {% endfor %}
+                    </div>
+                    <div class="container">
+                        <button class="btn float-left btn-block float-left btn-primary shadow p-2 rounded"
+                                value="Скачать"
+                                formaction="doc_budget_soc"><b>Скачать</b></button>
+                    </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+            <div class="col-sm pt-5">
+                <img class="shadow rounded" src="{% static 'images/example_6.jpg' %}"
+                     alt="образец">
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
