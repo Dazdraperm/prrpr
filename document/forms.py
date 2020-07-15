@@ -1,32 +1,69 @@
-from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from document.models import SiteUser, Passport, CourseGroup
+from document.models import SiteUser, Passport, CourseGroup, Statement1, DisabilityGroup, StatementProfCom1
+
+
+class SiteRegistrationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
 
 
 class PassportForm(ModelForm):
     class Meta:
         model = Passport
-        fields = ['Серия', 'number', 'code', 'dateTimeField', 'place']
+        exclude = 'user',
 
 
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name')
 
 
-class SiteUserForm(ModelForm):
+class SiteUserForm1(ModelForm):
     class Meta:
         model = SiteUser
+        exclude = ['user', 'course_Group', 'passport']
+
+
+class StatementForm6(ModelForm):
+    class Meta:
+        model = Statement1
+        exclude = ['textfield1', 'textfield2']
+
+
+class StatementForm1(ModelForm):
+    class Meta:
+        model = Statement1
         fields = (
-            'user', 'passport', 'course_Group', 'INN', 'pFact',
-            'dateBirthday', 'phoneNumber', 'patronymic', 'numberInsuranceCertificate', 'disability',
-            'fullStateSupport', 'preferentialCategory', 'numberTravelCard', 'addressOfResidence', 'FormOfEducation', 'inProfCom')
+            '__all__'
+        )
 
 
-class Course(ModelForm):
+class FormProfCom1(ModelForm):
+    class Meta:
+        model = StatementProfCom1
+        fields = (
+            '__all__'
+        )
+
+
+class FormProfCom23(ModelForm):
+    class Meta:
+        model = StatementProfCom1
+        exclude = ['textfield1', 'textfield2']
+
+
+class CourseForm(ModelForm):
     class Meta:
         model = CourseGroup
-        fields = ('course', 'Group', 'namePraepostor', 'nameInstitute')
+        fields = ('course', 'group', 'FIO_headman', 'name_institute')
+
+
+class DisabilityGroupForm(ModelForm):
+    class Meta:
+        model = DisabilityGroup
+        fields = ['categories', 'supporting_documents']

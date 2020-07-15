@@ -1,0 +1,32 @@
+body,
+nav {
+    background-image: url(https://html5book.ru/wp-content/uploads/2015/06/background28.jpg);
+}
+
+/*body,*/
+/*nav {*/
+/*    background-image: url(https://www.interfax.ru/ftproot/textphotos/2016/10/10/durex700.jpg);*/
+/*}*/
+
+.field {
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+}
+
+.wrap_images img
+{
+    width: 100%;
+    height: auto;
+}
+
+.container-my {
+    max-width: 1260px;
+    position: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
