@@ -405,7 +405,6 @@ def admin(request):
 class UpdateProfile(UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
-
         if not request.user.is_authenticated:
             return redirect("/")
         return super(UpdateProfile, self).dispatch(request, *args, **kwargs)
@@ -443,7 +442,6 @@ class UpdateProfile(UpdateView):
 class UpdateCourse(UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
-
         if not request.user.is_authenticated:
             return redirect("/")
         return super(UpdateCourse, self).dispatch(request, *args, **kwargs)
@@ -468,7 +466,6 @@ class UpdateCourse(UpdateView):
 class UpdatePassport(UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
-
         if not request.user.is_authenticated:
             return redirect("/")
         return super(UpdatePassport, self).dispatch(request, *args, **kwargs)
@@ -501,3 +498,7 @@ def my_logout(request):
 
 def my_login(request):
     return redirect('accounts/login')
+
+
+def my_reset_password(request):
+    return redirect('accounts/re')

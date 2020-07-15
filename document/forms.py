@@ -8,7 +8,7 @@ from document.models import SiteUser, Passport, CourseGroup, Statement1, Disabil
 class SiteRegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username',  'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2')
 
 
 class PassportForm(ModelForm):

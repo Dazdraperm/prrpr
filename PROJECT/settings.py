@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import dj_database_url
-
+import smtplib
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.contrib import staticfiles
 
@@ -25,9 +25,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = 'oam#208c_kl(r_3o%6v87@4!j+ez8$_s*=5+rw8%41)8-erzv!'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -132,7 +131,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "document/static"),
 ]
 
-# Heroku: Update database configuration from $DATABASE_URL.
+# SMTP Configuration
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'djangodocuments@gmail.com'
+EMAIL_HOST_PASSWORD = 'zinnurik123321'

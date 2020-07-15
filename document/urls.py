@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 from .views import my_login, my_logout, auto_fill, UpdatePassport, statements, index, category, info, UpdateProfile, \
     admin, schedule, consent, survey_questionnaire, statement_of_command, additional_bank, contract, how, \
     conditions, position, material_aid, online_wallet, social_nutrition, UpdateCourse, register, doc_budget_soc, \
@@ -41,5 +42,6 @@ urlpatterns = [
     path('admin1', admin, name='admin1'),
     path('login', my_login, name='my_login'),
     path('logout', my_logout, name='my_logout'),
-    path('doc_profcom_1', doc_profcom_1, name='doc_profcom_1')
+    path('doc_profcom_1', doc_profcom_1, name='doc_profcom_1'),
+    path('reset_password/', auth_views.PasswordResetView.as_view(), name='my_reset_password')
 ]

@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+CHOICES_FORM_EDUCATION = [
+    ('Контракт', 'Контракт'),
+    ('Бюджет', 'Бюджет'),
+]
+
 _STATUS_CHOICES = [
     ('Да', 'Да'),
     ('Нет', 'Нет'),
@@ -16,6 +21,13 @@ CHOICES_STATEMENT = [
     ('5', '5'),
     ('6', '6'),
     ('7', '7'),
+]
+
+CHOICES_COURSE = [
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
 ]
 
 
@@ -38,7 +50,7 @@ class Passport(models.Model):
 
 class CourseGroup(models.Model):
     user = models.OneToOneField(User, name='user', on_delete=models.CASCADE, blank=True, null=True)
-    course = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='Курс')  # Курс
+    course = models.PositiveSmallIntegerField(blank=True, choices=CHOICES_COURSE, default=1, null=True, verbose_name='Курс')
     group = models.CharField(max_length=10, blank=True, null=True, verbose_name='Группа')  # Группа
     FIO_headman = models.CharField(max_length=30, blank=True, null=True, verbose_name='ФИО старосты')  # Имя старосты
     name_institute = models.CharField(max_length=30, blank=True, null=True,
@@ -83,8 +95,6 @@ class SiteUser(models.Model):
                                           verbose_name='Есть ли полное гос. обеспечение')  # Полное гос. обеспечение
     number_travel_card = models.PositiveSmallIntegerField(blank=True, null=True,
                                                           verbose_name='Номер проездной карты')  # Номер проездной карты
-    form_education = models.CharField(max_length=1, blank=True, null=True,
-                                      verbose_name='Форма Обучения')  # Форма обучения
     state_prof_com = models.CharField(max_length=10, choices=_STATUS_CHOICES, blank=True,
                                       null=True, verbose_name='Состоите ли вы в профкоме')  # Состоит в профкоме или нет
 
@@ -106,7 +116,7 @@ class DisabilityGroup(models.Model):
 
 class Statement1(models.Model):
     # Курс
-    course = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='Курс')  # Курс
+    course = models.PositiveSmallIntegerField(blank=True, choices=CHOICES_COURSE, default=1, null=True, verbose_name='Курс')  # Курс
     group = models.CharField(max_length=10, blank=True, null=True, verbose_name='Группа')  # Группа
     FIO_headman = models.CharField(max_length=30, blank=True, null=True, verbose_name='ФИО старосты')  # Имя старосты
     name_institute = models.CharField(max_length=30, blank=True, null=True,
