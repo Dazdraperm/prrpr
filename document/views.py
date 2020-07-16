@@ -143,7 +143,6 @@ def auto_fill(request, pk):
                 'disability_group': site_user.disability_group,
                 'full_state_support': site_user.full_state_support,
                 'number_travel_card': site_user.number_travel_card,
-                'form_education': site_user.form_education,
                 'state_prof_com': site_user.state_prof_com,
             })
             if pk == 6:
@@ -432,7 +431,6 @@ class UpdateProfile(UpdateView):
                                                    'disability_group': site_user.disability_group,
                                                    'full_state_support': site_user.full_state_support,
                                                    'number_travel_card': site_user.number_travel_card,
-                                                   'form_education': site_user.form_education,
                                                    'state_prof_com': site_user.state_prof_com})
 
         context['active_client'] = True
