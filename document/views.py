@@ -16,8 +16,9 @@ def register(request):
             form = SiteRegistrationForm(request.POST)
             if form.is_valid():
                 form.save()
-
-            return redirect('my_login')
+                return redirect('my_login')
+            else:
+                return redirect('is_not_valid')
         else:
             form = SiteRegistrationForm()
             return render(request, 'registration/register.html', {'form': form})
@@ -32,6 +33,10 @@ def index(request):
         return render(request, 'index.html', context={'site_user': site_user})
     else:
         return render(request, 'index.html')
+
+
+def is_not_valid(request):
+    return render(request, 'registration/is_not_valid.html')
 
 
 def schedule(request):
