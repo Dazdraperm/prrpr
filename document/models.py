@@ -50,7 +50,7 @@ class Passport(models.Model):
 
 class CourseGroup(models.Model):
     user = models.OneToOneField(User, name='user', on_delete=models.CASCADE, blank=True, null=True)
-    course = models.PositiveSmallIntegerField(blank=True, choices=CHOICES_COURSE, default=1, null=True, verbose_name='Курс')
+    course = models.CharField(max_length=1, blank=True, choices=CHOICES_COURSE, default=1, null=True, verbose_name='Курс')
     group = models.CharField(max_length=10, blank=True, null=True, verbose_name='Группа')  # Группа
     FIO_headman = models.CharField(max_length=30, blank=True, null=True, verbose_name='ФИО старосты')  # Имя старосты
     name_institute = models.CharField(max_length=30, blank=True, null=True,
@@ -114,6 +114,7 @@ class DisabilityGroup(models.Model):
         return '%s %s' % (self.categories, self.supporting_documents)
 
 
+# Модель для 1-7 Заявлений
 class Statement1(models.Model):
     # Курс
     course = models.PositiveSmallIntegerField(blank=True, choices=CHOICES_COURSE, default=1, null=True, verbose_name='Курс')  # Курс
@@ -161,6 +162,7 @@ class Statement1(models.Model):
     annex = models.CharField(max_length=175, blank=True, null=True, verbose_name='Приложение')  # Приложение
 
 
+# Модель для заявлений
 class StatementProfCom1(models.Model):
     # Курс
     group = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='Группа')  # Группа
