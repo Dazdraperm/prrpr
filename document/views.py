@@ -113,7 +113,8 @@ def auto_fill(request, pk):
         site_user = SiteUser.objects.get(user=request.user)
         course_group = CourseGroup.objects.get(user=request.user)
         passport = Passport.objects.get(user=request.user)
-        if pk == 1 or 2 or 3 or 4 or 5 or 6 or 7:
+        if pk in range(1, 8):
+            print(pk + pk)
             form = StatementForm1(initial={
                 # Юзер
                 'name': site_user.name,
@@ -155,7 +156,8 @@ def auto_fill(request, pk):
             else:
                 return render(request, 'statements/first_7/info_123/info_123.html', context={'form': form, 'pk': pk})
 
-        if pk == 8 or 9 or 10:
+        if pk in range(8, 11):
+            print(pk)
             form = FormProfCom1(initial={
                 # Здесь начинаются поля Юзера
                 'name': site_user.name,
@@ -174,7 +176,7 @@ def auto_fill(request, pk):
                 # Здесь начинаются поля Сайт юзера
                 'INN': site_user.INN,
                 'location_apartment': site_user.location_apartment,
-                'house': site_user.house,
+                'house': site_user.location_house,
                 'location_street': site_user.location_street,
                 'phone_number': site_user.phone_number,
                 'patronymic': site_user.patronymic,
@@ -182,15 +184,14 @@ def auto_fill(request, pk):
                 'disability_group': site_user.disability_group,
                 'full_state_support': site_user.full_state_support,
                 'number_travel_card': site_user.number_travel_card,
-                'form_education': site_user.form_education,
                 'state_prof_com': site_user.state_prof_com, })
             if pk == 8:
-                return render(request, 'statements/last_123/material_aid/material_aid.html', context={'form': form})
+                return render(request, 'statements/last_123/material_aid/material_aid.html', context={'form': form, 'pk': pk})
             elif pk == 9:
-                return render(request, 'statements/last_123/online_wallet/online_wallet.html', context={'form': form})
+                return render(request, 'statements/last_123/online_wallet/online_wallet.html', context={'form': form, 'pk': pk}) 
             elif pk == 10:
                 return render(request, 'statements/last_123/social_nutrition/social_nutrition.html',
-                              context={'form': form})
+                              context={'form': form, 'pk': pk})
     else:
         return render(request, 'index.html')
 
@@ -323,7 +324,7 @@ def doc_profcom_2(request, pk):
 
             # Основа
             "INN": request.POST['INN'],
-            "number_phone": request.POST['number_phone'],
+            "number_phone": request.POST['phone_number'],
             'surname': request.POST['surname'],
             'name': request.POST['name'],
             'post_code': request.POST['post_code'],
@@ -368,10 +369,9 @@ def doc_profcom_1(request, pk):
 
             # Основа
             "INN": request.POST['INN'],
-            "number_phone": request.POST['number_phone'],
+            "number_phone": request.POST['phone_number'],
             'surname': request.POST['surname'],
             'name': request.POST['name'],
-            'post_code': request.POST['post_code'],
             'patronymic': request.POST['patronymic'],
             'location_apartment': request.POST['location_apartment'],
             'location_house': request.POST['location_house'],
@@ -418,28 +418,28 @@ class UpdateProfile(UpdateView):
     form_class = SiteUserForm1
     success_url = reverse_lazy('index')
 
-    def get_context_data(self, **kwargs):
-        site_user = SiteUser.objects.get(user=self.request.user)
-        context = super(UpdateProfile, self).get_context_data(**kwargs)
-        context['active_client'] = True
-        # if 'form' not in context:
-        context['form'] = self.form_class(initial={'INN': site_user.INN,
-                                                   'location_street': site_user.location_street,
-                                                   'post_code': site_user.post_code,
-                                                   'location_house': site_user.location_house,
-                                                   'name': site_user.name,
-                                                   'surname': site_user.surname,
-                                                   'location_apartment': site_user.location_apartment,
-                                                   'phone_number': site_user.phone_number,
-                                                   'patronymic': site_user.patronymic,
-                                                   'numberInsuranceCertificate': site_user.number_insurance_certificate,
-                                                   'disability_group': site_user.disability_group,
-                                                   'full_state_support': site_user.full_state_support,
-                                                   'number_travel_card': site_user.number_travel_card,
-                                                   'state_prof_com': site_user.state_prof_com})
-
-        context['active_client'] = True
-        return context
+    # def get_context_data(self, **kwargs):
+    #     site_user = SiteUser.objects.get(user=self.request.user)
+    #     context = super(UpdateProfile, self).get_context_data(**kwargs)
+    #     context['active_client'] = True
+    #     # if 'form' not in context:
+    #     context['form'] = self.form_class(initial={'INN': site_user.INN,
+    #                                                'location_street': site_user.location_street,
+    #                                                'post_code': site_user.post_code,
+    #                                                'location_house': site_user.location_house,
+    #                                                'name': site_user.name,
+    #                                                'surname': site_user.surname,
+    #                                                'location_apartment': site_user.location_apartment,
+    #                                                'phone_number': site_user.phone_number,
+    #                                                'patronymic': site_user.patronymic,
+    #                                                'numberInsuranceCertificate': site_user.number_insurance_certificate,
+    #                                                'disability_group': site_user.disability_group,
+    #                                                'full_state_support': site_user.full_state_support,
+    #                                                'number_travel_card': site_user.number_travel_card,
+    #                                                'state_prof_com': site_user.state_prof_com})
+    #
+    #     context['active_client'] = True
+    #     return context
 
 
 class UpdateCourse(UpdateView):
@@ -454,16 +454,19 @@ class UpdateCourse(UpdateView):
     form_class = CourseForm
     success_url = reverse_lazy('index')
 
-    def get_context_data(self, **kwargs):
-        course_group = CourseGroup.objects.get(user=self.request.user)
-        context = super(UpdateCourse, self).get_context_data(**kwargs)
-        context['active_client'] = True
-        context['form'] = self.form_class(initial={'course': course_group.course,
-                                                   'name_institute': course_group.name_institute,
-                                                   'group': course_group.group,
-                                                   'FIO_headman': course_group.FIO_headman, })
-        context['active_client'] = True
-        return context
+    # def get_context_data(self, **kwargs):
+    #     course_group = CourseGroup.objects.get(user=self.request.user)
+    #     context = super(UpdateCourse, self).get_context_data(**kwargs)
+    #     context['active_client'] = True
+    #     print(course_group.course)
+    #     print(course_group.FIO_headman)
+    #     print(course_group.name_institute)
+    #     context['form'] = self.form_class(initial={'course': course_group.course,
+    #                                                'name_institute': course_group.name_institute,
+    #                                                'group': course_group.group,
+    #                                                'FIO_headman': course_group.FIO_headman})
+    #     context['active_client'] = True
+    #     return context
 
 
 class UpdatePassport(UpdateView):
@@ -478,21 +481,21 @@ class UpdatePassport(UpdateView):
     form_class = PassportForm
     success_url = reverse_lazy('index')
 
-    def get_context_data(self, **kwargs):
-        passport = Passport.objects.get(user=self.request.user)
-        context = super(UpdatePassport, self).get_context_data(**kwargs)
-        context['active_client'] = True
-        context['form'] = self.form_class(initial={'unit_code': passport.unit_code,
-                                                   'series': passport.series,
-                                                   'number_passport': passport.number_passport,
-                                                   'date_birthday': passport.date_birthday,
-                                                   'place_registration': passport.place_registration,
-                                                   'passport_issue_day': passport.passport_issue_day,
-                                                   'passport_issue_month': passport.passport_issue_month,
-                                                   'passport_issue_year': passport.passport_issue_year,
-                                                   'issued_passport': passport.issued_passport})
-        context['active_client'] = True
-        return context
+    # def get_context_data(self, **kwargs):
+    #     passport = Passport.objects.get(user=self.request.user)
+    #     context = super(UpdatePassport, self).get_context_data(**kwargs)
+    #     context['active_client'] = True
+    #     context['form'] = self.form_class(initial={'unit_code': passport.unit_code,
+    #                                                'series': passport.series,
+    #                                                'number_passport': passport.number_passport,
+    #                                                'date_birthday': passport.date_birthday,
+    #                                                'place_registration': passport.place_registration,
+    #                                                'passport_issue_day': passport.passport_issue_day,
+    #                                                'passport_issue_month': passport.passport_issue_month,
+    #                                                'passport_issue_year': passport.passport_issue_year,
+    #                                                'issued_passport': passport.issued_passport})
+    #     context['active_client'] = True
+    #     return context
 
 
 def my_logout(request):

@@ -34,7 +34,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/<int:pk>/', UpdateProfile.as_view(), name='profile'),
     path('passport/<int:pk>/', UpdatePassport.as_view(), name='passport'),
-    path('CourseGroup/<int:pk>/', UpdateCourse.as_view(), name='course_group'),
+    path('course_group/<int:pk>/', UpdateCourse.as_view(), name='course_group'),
     path('info/<int:pk>/doc_budget_soc', doc_budget_soc, name='doc_budget_soc'),
     path('info/<int:pk>/doc_budget_main', doc_budget_main, name='doc_budget_main'),
     path('doc_profcom_1', doc_profcom_1, name='doc_profcom_1'),

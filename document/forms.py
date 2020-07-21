@@ -60,7 +60,7 @@ class FormProfCom23(ModelForm):
 class CourseForm(ModelForm):
     class Meta:
         model = CourseGroup
-        fields = ('course', 'group', 'FIO_headman', 'name_institute')
+        exclude = 'user',
 
 
 class DisabilityGroupForm(ModelForm):
