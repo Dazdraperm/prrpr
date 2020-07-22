@@ -84,7 +84,7 @@ class SiteUser(models.Model):
     location_apartment = models.CharField(max_length=7, blank=True, null=True, verbose_name='Квартира')  # Квартира
     location_house = models.CharField(max_length=7, blank=True, null=True, verbose_name='Номер Дома')  # Дом
     post_code = models.PositiveIntegerField(blank=True, null=True, verbose_name='Индекс')  # Почтовый индекс
-    phone_number = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='Сотовый Телефон')
+    phone_number = models.CharField(max_length=12, blank=True, null=True, verbose_name='Сотовый Телефон')
     number_insurance_certificate = models.PositiveIntegerField(blank=True, null=True, verbose_name='Номер '
                                                                                                    'страхового '
                                                                                                    'свидетельства')
