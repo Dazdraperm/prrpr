@@ -418,6 +418,7 @@ class UpdateProfile(UpdateView):
     form_class = SiteUserForm1
     success_url = reverse_lazy('profile')
 
+
     # def get_context_data(self, **kwargs):
     #     site_user = SiteUser.objects.get(user=self.request.user)
     #     context = super(UpdateProfile, self).get_context_data(**kwargs)
@@ -454,6 +455,7 @@ class UpdateCourse(UpdateView):
     form_class = CourseForm
     success_url = reverse_lazy('course_group')
 
+
     # def get_context_data(self, **kwargs):
     #     course_group = CourseGroup.objects.get(user=self.request.user)
     #     context = super(UpdateCourse, self).get_context_data(**kwargs)
@@ -480,6 +482,7 @@ class UpdatePassport(UpdateView):
     template_name = 'profile_list/passport.html'
     form_class = PassportForm
     success_url = reverse_lazy('passport')
+
 
     # def get_context_data(self, **kwargs):
     #     passport = Passport.objects.get(user=self.request.user)
