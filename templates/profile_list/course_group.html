@@ -3,6 +3,8 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+{% block title %}Профиль{% endblock title %}
+
 {% block content %}
     <style>
         input + button {
@@ -31,9 +33,9 @@
                         <form method="post" class="post-form" action="{% url 'course_group' request.user.id %}">
                             {% csrf_token %}
                             {% for field in form %}
-
-                                {{ field|as_crispy_field }}
-
+                                <div class="form-group row">
+                                    {{ field|as_crispy_field }}
+                                </div>
                             {% endfor %}
                             <label for="check">Согласен на обработку персональных данных</label>
                             <input id="check" type="checkbox">

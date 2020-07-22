@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 
-{% block title %}Statement{% endblock title %}
+{% block title %}Заявления{% endblock title %}
 
 {% block content %}
 
@@ -17,7 +17,8 @@
                     <p><b><i>3)</i></b> Заполнить заявление в соответствии с образцом (либо воспользоваться функцией
                         автозаполнения);</p>
                     <p class="text-danger font-weight-bold"><i>Чтобы воспользоваться функцией автозаполнения, нужно
-                        заполнить данные в
+                        заполнить
+                        данные
                         {% if request.user.is_authenticated %}
                         <a class="card-link" href="{% url 'profile' request.user.id %}"><i>профиле</i></a>
                         {% else %}

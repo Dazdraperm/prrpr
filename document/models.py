@@ -50,7 +50,8 @@ class Passport(models.Model):
 
 class CourseGroup(models.Model):
     user = models.OneToOneField(User, name='user', on_delete=models.CASCADE, blank=True, null=True)
-    course = models.CharField(max_length=1, blank=True, choices=CHOICES_COURSE, default=1, null=True, verbose_name='Курс')
+    course = models.CharField(max_length=1, blank=True, choices=CHOICES_COURSE, default=1, null=True,
+                              verbose_name='Курс')
     group = models.CharField(max_length=10, blank=True, null=True, verbose_name='Группа')  # Группа
     FIO_headman = models.CharField(max_length=30, blank=True, null=True, verbose_name='ФИО старосты')  # Имя старосты
     name_institute = models.CharField(max_length=30, blank=True, null=True,
@@ -85,16 +86,16 @@ class SiteUser(models.Model):
     location_house = models.CharField(max_length=7, blank=True, null=True, verbose_name='Номер Дома')  # Дом
     post_code = models.PositiveIntegerField(blank=True, null=True, verbose_name='Индекс')  # Почтовый индекс
     phone_number = models.CharField(max_length=12, blank=True, null=True, verbose_name='Сотовый Телефон')
-    number_insurance_certificate = models.PositiveIntegerField(blank=True, null=True, verbose_name='Номер '
-                                                                                                   'страхового '
-                                                                                                   'свидетельства')
+    number_insurance_certificate = models.CharField(max_length=14, blank=True, null=True, verbose_name='Номер '
+                                                                                                       'страхового '
+                                                                                                       'свидетельства')
     disability_group = models.CharField(max_length=20, blank=True, null=True,
                                         verbose_name='Группа инвалидности')  # Инвалидность
     full_state_support = models.CharField(max_length=10, choices=_STATUS_CHOICES, blank=True,
                                           null=True,
                                           verbose_name='Есть ли полное гос. обеспечение')  # Полное гос. обеспечение
-    number_travel_card = models.PositiveSmallIntegerField(blank=True, null=True,
-                                                          verbose_name='Номер проездной карты')  # Номер проездной карты
+    number_travel_card = models.CharField(max_length=30, blank=True, null=True,
+                                          verbose_name='Номер проездной карты')  # Номер проездной карты
     state_prof_com = models.CharField(max_length=10, choices=_STATUS_CHOICES, blank=True,
                                       null=True, verbose_name='Состоите ли вы в профкоме')  # Состоит в профкоме или нет
 
@@ -117,7 +118,8 @@ class DisabilityGroup(models.Model):
 # Модель для 1-7 Заявлений
 class Statement1(models.Model):
     # Курс
-    course = models.PositiveSmallIntegerField(blank=True, choices=CHOICES_COURSE, default=1, null=True, verbose_name='Курс')  # Курс
+    course = models.PositiveSmallIntegerField(blank=True, choices=CHOICES_COURSE, default=1, null=True,
+                                              verbose_name='Курс')  # Курс
     group = models.CharField(max_length=10, blank=True, null=True, verbose_name='Группа')  # Группа
     FIO_headman = models.CharField(max_length=30, blank=True, null=True, verbose_name='ФИО старосты')  # Имя старосты
     name_institute = models.CharField(max_length=30, blank=True, null=True,
@@ -125,6 +127,8 @@ class Statement1(models.Model):
 
     # Пасспорт
     series = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='Серия')  # Серия
+    place_registration = models.CharField(max_length=150, blank=True, null=True,
+                                          verbose_name='Место регистрации')  # Место регистрации
     number_passport = models.PositiveIntegerField(blank=True, null=True, verbose_name='Номер паспорта')
     issued_passport = models.CharField(max_length=100, blank=True, null=True, verbose_name='Кем выдан')
     unit_code = models.CharField(max_length=7, blank=True, null=True, verbose_name='Код подразделения')
@@ -148,12 +152,13 @@ class Statement1(models.Model):
     surname = models.CharField(max_length=15, blank=True, null=True, verbose_name='Фамилия')  # Фамилия
     patronymic = models.CharField(max_length=15, blank=True, null=True, verbose_name='Отчество')  # Отчество
     INN = models.PositiveIntegerField(blank=True, null=True, verbose_name='ИНН')  # ИНН
-    number_insurance_certificate = models.PositiveIntegerField( blank=True, null=True,
-                                                               verbose_name='Страховое свидетельство')  # Страховое свидетельство
+    number_insurance_certificate = models.CharField(max_length=14, blank=True, null=True,
+                                                    verbose_name='Страховое свидетельство')  # Страховое
+    # свидетельство
     disability_group = models.CharField(max_length=20, blank=True, null=True,
                                         verbose_name='Группа инвалидности')  # группа инвалидности
-    phone_number = models.PositiveIntegerField(blank=True, null=True,
-                                               verbose_name='Номер телефона')  # Номер телефона
+    phone_number = models.CharField(max_length=12, blank=True, null=True,
+                                    verbose_name='Номер телефона')  # Номер телефона
     full_state_support = models.CharField(max_length=3, choices=_STATUS_CHOICES, default=None, blank=True,
                                           null=True, verbose_name='Полное гос.обеспечение')  # Полное гос. обеспечение
 

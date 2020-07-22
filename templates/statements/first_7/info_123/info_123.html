@@ -3,6 +3,22 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+{% block title %}
+    {% if pk == 1 %}
+        Усиленное питание
+    {% elif pk == 2 %}
+        Выплата за проезд
+    {% elif pk == 3 %}
+        Учебная литература
+    {% elif pk == 4 %}
+        Поездка домой
+    {% elif pk == 5 %}
+        Лекарственные средства
+    {% elif pk == 7 %}
+        Материальная поддержка
+    {% endif %}
+{% endblock title %}
+
 {% block content %}
 
     <div class="card mb-0 border-primary border-top-0 border-right-0 border-left-0">
@@ -47,9 +63,11 @@
                     </div>
                     <div class="container pt-2">
                         {% for field in form %}
-                            <div class="">
+                            {% if field.name == "number_of_statement" %}
+                                {{ field.as_hidden }}
+                            {% else %}
                                 {{ field|as_crispy_field }}
-                            </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                     <div class="container">

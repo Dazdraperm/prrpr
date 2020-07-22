@@ -126,13 +126,14 @@ def auto_fill(request, pk):
                 'number_passport': passport.number_passport,
                 'date_birthday': passport.date_birthday,
                 'place_registration': passport.place_registration,
+                'issued_passport': passport.issued_passport,
                 'passport_issue_day': passport.passport_issue_day,
                 'passport_issue_month': passport.passport_issue_month,
                 'passport_issue_year': passport.passport_issue_year,
 
                 # Курс и группа
                 'course': course_group.course,
-                'name_institute': course_group.course,
+                'name_institute': course_group.name_institute,
                 'group': course_group.group,
                 'FIO_headman': course_group.FIO_headman,
                 'pk': pk,
@@ -186,9 +187,11 @@ def auto_fill(request, pk):
                 'number_travel_card': site_user.number_travel_card,
                 'state_prof_com': site_user.state_prof_com, })
             if pk == 8:
-                return render(request, 'statements/last_123/material_aid/material_aid.html', context={'form': form, 'pk': pk})
+                return render(request, 'statements/last_123/material_aid/material_aid.html',
+                              context={'form': form, 'pk': pk})
             elif pk == 9:
-                return render(request, 'statements/last_123/online_wallet/online_wallet.html', context={'form': form, 'pk': pk}) 
+                return render(request, 'statements/last_123/online_wallet/online_wallet.html',
+                              context={'form': form, 'pk': pk})
             elif pk == 10:
                 return render(request, 'statements/last_123/social_nutrition/social_nutrition.html',
                               context={'form': form, 'pk': pk})
@@ -198,36 +201,38 @@ def auto_fill(request, pk):
 
 def doc_budget_soc(request, pk):
     if request.method == "POST":
-        doc = DocxTemplate("document/docExample/doc_budget_soc.docx")
+        doc = DocxTemplate(
+            "document/docExample/doc_budget_soc.docx")
         context = {
             # Курс
             "c": request.POST['course'],
-            "group": request.POST['group'],
-            'FIO_headman': request.POST['FIO_headman'],
-            'name_institute': request.POST['name_institute'],
+            "g": request.POST['group'],
+            'FIO_h': request.POST['FIO_headman'],
+            'n_i': request.POST['name_institute'],
 
             # Паспорт
-            'series': request.POST['series'],
-            'number': request.POST['number_passport'],
-            'issued_passport': request.POST['issued_passport'],
-            'date_birthday': request.POST['date_birthday'],
-            'passport_issue_day': request.POST['passport_issue_day'],
-            'passport_issue_month': request.POST['passport_issue_month'],
-            'passport_issue_year': request.POST['passport_issue_year'],
+            's': request.POST['series'],
+            'p_r': request.POST['place_registration'],
+            'n_p': request.POST['number_passport'],
+            'i_p': request.POST['issued_passport'],
+            'd_b': request.POST['date_birthday'],
+            'p_i_d': request.POST['passport_issue_day'],
+            'p_i_m': request.POST['passport_issue_month'],
+            'p_i_y': request.POST['passport_issue_year'],
 
             # Основные данные
-            'phone_number': request.POST['phone_number'],
+            'p_n': request.POST['phone_number'],
             'INN': request.POST['INN'],
-            'location_apartment': request.POST['location_apartment'],
-            'location_house': request.POST['location_house'],
-            'location_street': request.POST['location_street'],
-            'number_insurance_certificate': request.POST['number_insurance_certificate'],
-            'disability_group': request.POST['disability_group'],
-            'full_state_support': request.POST['full_state_support'],
-            'surname': request.POST['surname'],
-            'name': request.POST['name'],
-            'post_code': request.POST['post_code'],
-            'patronymic': request.POST['patronymic'],
+            'l_a': request.POST['location_apartment'],
+            'l_h': request.POST['location_house'],
+            'l_s': request.POST['location_street'],
+            'n_i_c': request.POST['number_insurance_certificate'],
+            'd_g': request.POST['disability_group'],
+            'f_s_s': request.POST['full_state_support'],
+            'sur': request.POST['surname'],
+            'n': request.POST['name'],
+            'p_c': request.POST['post_code'],  # Индекс
+            'p': request.POST['patronymic'],
 
             'pk': pk}
 
@@ -251,41 +256,43 @@ def doc_budget_soc(request, pk):
 
 def doc_budget_main(request, pk):
     if request.method == "POST":
-        doc = DocxTemplate("document/docExample/doc_budget_main.docx")
+        doc = DocxTemplate(
+            "document/docExample/doc_budget_main.docx")
 
         context = {
             # Основные
-            'phone_number': request.POST['phone_number'],
+            'p_n': request.POST['phone_number'],
             'INN': request.POST['INN'],
-            'location_apartment': request.POST['location_apartment'],
-            'location_house': request.POST['location_house'],
-            'location_street': request.POST['location_street'],
-            'number_insurance_certificate': request.POST['number_insurance_certificate'],
-            'disability_group': request.POST['disability_group'],
-            'full_state_support': request.POST['full_state_support'],
-            'surname': request.POST['surname'],
-            'name': request.POST['name'],
-            'post_code': request.POST['post_code'],
-            'patronymic': request.POST['patronymic'],
+            'l_a': request.POST['location_apartment'],
+            'l_h': request.POST['location_house'],
+            'l_s': request.POST['location_street'],
+            'nr_i_c': request.POST['number_insurance_certificate'],
+            'd_g': request.POST['disability_group'],
+            'f_s_s': request.POST['full_state_support'],
+            'sur': request.POST['surname'],
+            'n': request.POST['name'],
+            'p_c': request.POST['post_code'],
+            'p': request.POST['patronymic'],
 
             # Курс
             "c": request.POST['course'],
-            "group": request.POST['group'],
-            'FIO_headman': request.POST['FIO_headman'],
-            'name_institute': request.POST['name_institute'],
+            "g": request.POST['group'],
+            'FIO_h': request.POST['FIO_headman'],
+            'n_i': request.POST['name_institute'],
 
             # Паспорт
-            'series': request.POST['series'],
-            'number': request.POST['number_passport'],
-            'issued_passport': request.POST['issued_passport'],
-            'date_birthday': request.POST['date_birthday'],
-            'passport_issue_day': request.POST['passport_issue_day'],
-            'passport_issue_month': request.POST['passport_issue_month'],
-            'passport_issue_year': request.POST['passport_issue_year'],
+            's': request.POST['series'],
+            'n_p': request.POST['number_passport'],
+            'i_p': request.POST['issued_passport'],
+            'd_b': request.POST['date_birthday'],
+            'p_r': request.POST['place_registration'],
+            'p_i_d': request.POST['passport_issue_day'],
+            'p_i_m': request.POST['passport_issue_month'],
+            'p_i_y': request.POST['passport_issue_year'],
 
             # Уникальные
-            "request": request.POST['request'],
-            "annex": request.POST['annex'],
+            "req": request.POST['request'],
+            "an": request.POST['annex'],
             'pk': pk}
         doc.render(context)
         doc.save("document/documents/Soc.docx")
@@ -307,31 +314,31 @@ def doc_budget_main(request, pk):
 
 def doc_profcom_2(request, pk):
     if request.method == "POST":
-        doc = DocxTemplate("document/docExample/doc_profcom_2.docx")  # или должен сохранять 3
+        doc = DocxTemplate(
+            "document/docExample/doc_profcom_2.docx")  # или должен сохранять 3
         context = {
             # Курс
-            "group": request.POST['group'],
-            'name_institute': request.POST['name_institute'],
+            "g": request.POST['group'],
+            'n_i': request.POST['name_institute'],
 
             # Паспорт
-            'series': request.POST['series'],
-            'number': request.POST['number_passport'],
-            'issued_passport': request.POST['issued_passport'],
-            'date_birthday': request.POST['date_birthday'],
-            'passport_issue_day': request.POST['passport_issue_day'],
-            'passport_issue_month': request.POST['passport_issue_month'],
-            'passport_issue_year': request.POST['passport_issue_year'],
+            's': request.POST['series'],
+            'n_p': request.POST['number_passport'],
+            'i_p': request.POST['issued_passport'],
+            'd_b': request.POST['date_birthday'],
+            'p_i_d': request.POST['passport_issue_day'],
+            'p_i_m': request.POST['passport_issue_month'],
+            'p_i_y': request.POST['passport_issue_year'],
 
             # Основа
             "INN": request.POST['INN'],
-            "number_phone": request.POST['phone_number'],
-            'surname': request.POST['surname'],
-            'name': request.POST['name'],
-            'post_code': request.POST['post_code'],
-            'patronymic': request.POST['patronymic'],
-            'location_apartment': request.POST['location_apartment'],
-            'location_house': request.POST['location_house'],
-            'location_street': request.POST['location_street']}
+            "p_n": request.POST['phone_number'],
+            'sur': request.POST['surname'],
+            'n': request.POST['name'],
+            'p': request.POST['patronymic'],
+            'l_ap': request.POST['location_apartment'],
+            'l_h': request.POST['location_house'],
+            'l_s': request.POST['location_street']}
         doc.render(context)
         doc.save("document/documents/Soc.docx")
 
@@ -352,34 +359,35 @@ def doc_profcom_2(request, pk):
 
 def doc_profcom_1(request, pk):
     if request.method == "POST":
-        doc = DocxTemplate("document/docExample/doc_profcom_1.docx")
+        doc = DocxTemplate(
+            "document/docExample/doc_profcom_1.docx")
         context = {
             # Курс
             "group": request.POST['group'],
             'name_institute': request.POST['name_institute'],
 
             # Паспорт
-            'series': request.POST['series'],
-            'number': request.POST['number_passport'],
-            'issued_passport': request.POST['issued_passport'],
-            'date_birthday': request.POST['date_birthday'],
-            'passport_issue_day': request.POST['passport_issue_day'],
-            'passport_issue_month': request.POST['passport_issue_month'],
-            'passport_issue_year': request.POST['passport_issue_year'],
+            's': request.POST['series'],
+            'n_p': request.POST['number_passport'],
+            'i_p': request.POST['issued_passport'],
+            'd_b': request.POST['date_birthday'],
+            'p_i_d': request.POST['passport_issue_day'],
+            'p_i_m': request.POST['passport_issue_month'],
+            'p_i_y': request.POST['passport_issue_year'],
 
             # Основа
             "INN": request.POST['INN'],
-            "number_phone": request.POST['phone_number'],
-            'surname': request.POST['surname'],
-            'name': request.POST['name'],
-            'patronymic': request.POST['patronymic'],
-            'location_apartment': request.POST['location_apartment'],
-            'location_house': request.POST['location_house'],
-            'location_street': request.POST['location_street'],
+            "p_n": request.POST['phone_number'],
+            'sur': request.POST['surname'],
+            'n': request.POST['name'],
+            'p': request.POST['patronymic'],
+            'l_ap': request.POST['location_apartment'],
+            'l_h': request.POST['location_house'],
+            'l_s': request.POST['location_street'],
 
             # Уникальные
-            "request": request.POST['request'],
-            "annex": request.POST['annex']}
+            "req": request.POST['request'],  # Запрос
+            "an": request.POST['annex']}  # Приложение
         doc.render(context)
         doc.save("document/documents/Soc.docx")
 

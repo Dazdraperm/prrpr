@@ -1,14 +1,29 @@
 {% extends "index.html" %}
+
+{% block title %}Выход{% endblock title %}
+
 {% block content %}
 
     <div class="container pb-5 pt-5 row-cols-sm-2 text-center">
-            <div class="container-my pl-5 align-content-center">
+        <div class="container-my pl-5 align-content-center">
             <div class="card border-primary shadow rounded" style="width: 25rem;">
                 <div class="card-body m-0">
-                    <h5 class="card-title font-weight-bold">Вы успешно вышли из аккаунта!</h5>
+                    <h5 class="card-title font-weight-bold m-4">Вы успешно вышли из аккаунта!</h5>
+
                     <div class="text-center">
-                        <a href="{% url 'login' %}" class="btn btn-primary shadow">Войти</a>
+                        <a href="{% url 'statements' %}">
+                            <button type="button"
+                                    class="float-left btn btn-outline-primary shadow p-2 mt-0 rounded">
+                                На главную
+                            </button>
+                        </a>
+                        <a href="{% url 'login' %}">
+                            <button style="width: 30%" class="float-right btn btn-outline-primary shadow p-2 mt-0 rounded">
+                                Войти
+                            </button>
+                        </a>
                     </div>
+
                 </div>
             </div>
         </div>
