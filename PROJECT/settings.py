@@ -124,8 +124,10 @@ STATIC_URL = '/static/'
 # SMTP Configuration
 EMAIL_BACKEND =  'django.core.mail.backends.smtp.EmailBackend'
 LOGIN_REDIRECT_URL = '/'
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = 'documentsdjango@yandex.ru'
-EMAIL_HOST_PASSWORD = 'qwertyuiop12345'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_HOST_USER = 'django.documents@mail.ru'
+EMAIL_HOST_PASSWORD = 'Zinnurik123321'
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'django.documents@mail.ru'
+SERVER_EMAIL = 'django.documents@mail.ru'
 EMAIL_USE_TLS = True

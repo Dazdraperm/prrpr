@@ -6,22 +6,12 @@
 {% block title %}Профиль{% endblock title %}
 
 {% block content %}
-    <style>
-        input + button {
-            display: none;
-        }
 
-        input:checked + button {
-            display: inline;
-        }
+    <link rel="stylesheet" href="{% static 'css/profile_style.css' %}">
 
-        input:checked + button + button {
-            display: none;
-        }
-    </style>
     <div class="container bootstrap snippet mb-5">
         <div class="col-sm">
-            <div class="text-center p-3"><h1>{{ request.user.first_name }}</h1></div>
+            <div class="text-center p-3"><h1>{{ request.user.nickname }}</h1></div>
         </div>
         <div class="row">
             <div class="col-sm-3">
@@ -34,13 +24,30 @@
                             {% csrf_token %}
                             {% for field in form %}
                                 <div class="form-group row">
-                                    {{ field|as_crispy_field }}
+                                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="inputPassword"
+                                               placeholder="Password">
+                                    </div>
+                                </div>
+
+                                <div class="container p-0 inline_label">
+                                    <b>
+                                        {{ field|as_crispy_field }}
+                                    </b>
                                 </div>
                             {% endfor %}
-                            <label for="check">Согласен на обработку персональных данных</label>
-                            <input id="check" type="checkbox">
-                            <button>Сохранить</button>
-                            <button disabled="disabled">Сохранить</button>
+                            <div class="container p-0">
+                                <label for="check"><b>Согласен на обработку персональных данных</b></label>
+                                <input id="check" type="checkbox">
+                                <button type="submit"
+                                        class="btn-outline-primary shadow p-2 mt-0 rounded float-right">Сохранить
+                                </button>
+                                <button type="submit"
+                                        class="btn btn-outline-primary shadow p-2 mt-0 rounded float-right"
+                                        disabled="disabled">Сохранить
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

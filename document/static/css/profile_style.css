@@ -1,0 +1,11 @@
+input + button {
+    display: none;
+}
+
+input:checked + button {
+    display: inline;
+}
+
+input:checked + button + button {
+    display: none;
+}
